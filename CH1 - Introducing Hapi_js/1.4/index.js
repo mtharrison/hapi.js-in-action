@@ -1,7 +1,11 @@
 var Hapi = require('hapi');
 
+// Creating a Hapi server
+
 var server = new Hapi.Server();
 server.connection({port: 4000});
+
+// Setting up routes
 
 server.route([{
     method: 'GET',
@@ -17,6 +21,8 @@ server.route([{
     }
 }]);
 
+// Registering the Good plugin
+
 server.register({
     register: require('good'),
     options: {
@@ -30,7 +36,9 @@ server.register({
     if (err) {
         console.log(err);
         return;
-    } 
+    }
+
+    // Starting the server
 
     server.start(function () {
         console.log('Server running at:', server.info.uri);
