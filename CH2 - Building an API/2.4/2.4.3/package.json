@@ -7,8 +7,6 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "hapi": "^7.5.2",
-    "mysql": "^2.5.3",
-    "node-mysql": "^0.4.1"
+    "hapi": "^8.0.0"
   }
 }

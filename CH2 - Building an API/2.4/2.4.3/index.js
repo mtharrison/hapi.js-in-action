@@ -5,7 +5,6 @@ var server = new Hapi.Server();
 server.connection({port: 4000});
 
 server.method('search', function(query, next) {
-
     var results = [];
 
     if (query.cuisine) {
@@ -24,39 +23,26 @@ server.method('search', function(query, next) {
 
 }, {});
 
-server.method('retrieve', function(params, next) {
-
-    var recipe;
-    var id = params.id;
-    
-    if (recipes.hasOwnProperty(id)) {
-        recipe = recipes[id];
-    }
-
-    next(null, recipe);
-
-}, {});
-
 server.route([{
     method: 'GET',
     path: '/recipes',
     handler: function(request, reply) {
-        server.methods.search(request.query, function(err, recipes){
-            reply(recipes);
+        server.methods.search(request.query, function(err, results){
+            reply(results);
         });
     }
 }, {
     method: 'GET',
     path: '/recipes/{id}',
     handler: function(request, reply) {
-        server.methods.retrieve(request.params, function(err, recipe){
-            
-            if (recipe) {
-                reply(recipe);
-            } else {
-                reply('Recipe not found').code(404);
-            }
-        });
+
+        var id = request.params.id;
+
+        if (recipes.hasOwnProperty(id)) {
+            reply(recipes[id]);
+        } else {
+            reply("Recipe not found").code(404);
+        }
     }
 }]);
 
