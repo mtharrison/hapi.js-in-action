@@ -1,6 +1,5 @@
 var Hapi = require('hapi');
 var mysql = require('mysql');
-var Bcrypt = require('bcrypt');
 var recipes = require('./recipes');
 
 var server = new Hapi.Server();
@@ -64,15 +63,13 @@ server.method('star', function (recipe_id, awarded_by, next) {
     });
 }, {});
 
-// Route definitions
+// Routing
 
-var routes = [{
+server.route([{
     method: 'GET',
     path: '/recipes',
-    config: {
-        auth: 'api'
-    },
     handler: function (request, reply) {
+        
         server.methods.search(request.query.cuisine, function (err, results) {
 
             if (err) {
@@ -86,6 +83,7 @@ var routes = [{
     method: 'GET',
     path: '/recipes/{id}',
     handler: function (request, reply) {
+
         server.methods.retrieve(request.params.id, function (err, recipe) {
 
             if (err) {
@@ -131,42 +129,8 @@ var routes = [{
             reply({status: 'ok'});
         });
     }
-}];
+}]);
 
-// Plugin registration
-
-server.register(require('hapi-auth-basic'), function (err) {
-
-    if (err) {
-        throw err;
-    }
-
-    server.auth.strategy('api', 'basic', { 
-        validateFunc: function (username, password, callback) {
-
-            connection.query('SELECT * FROM users WHERE username = ?', [username], function (err, results) {
-
-                if (err) {
-                    return callback(err, false);
-                }
-
-                if (results.length !== 1) {
-                    return callback(null, false);                    
-                }
-
-                var user = results[0];
-
-                Bcrypt.compare(password, user.password, function (err, isValid) {
-                    callback(err, isValid, { id: user.id, username: user.username });
-                });
-
-            });
-        }
-    });
-
-    server.route(routes);
-
-    server.start(function () {
-        console.log('Server listening at:', server.info.uri);
-    });
+server.start(function () {
+    console.log('Server listening at:', server.info.uri);
 });

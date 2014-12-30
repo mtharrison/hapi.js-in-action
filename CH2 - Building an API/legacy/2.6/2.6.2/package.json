@@ -7,9 +7,9 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^0.8.0",
     "hapi": "^8.0.0",
-    "hapi-auth-basic": "^2.0.0",
-    "mysql": "^2.5.4"
+    "hapi-auth-basic": "^2.0.0-rc1",
+    "mysql": "^2.5.3",
+    "node-mysql": "^0.4.1"
   }
 }

@@ -6,10 +6,10 @@ var server = new Hapi.Server();
 server.connection({port: 4000});
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'dindin'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'dindin'
 });
 
 // Server methods

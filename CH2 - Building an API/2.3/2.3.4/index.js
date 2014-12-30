@@ -4,7 +4,7 @@ var recipes = require('./recipes');
 var server = new Hapi.Server();
 server.connection({port: 4000});
 
-server.method('search', function(query, next) {
+server.method('search', function (query, next) {
 
     var results = [];
 
@@ -24,7 +24,7 @@ server.method('search', function(query, next) {
 
 }, {});
 
-server.method('retrieve', function(params, next) {
+server.method('retrieve', function (params, next) {
 
     var recipe;
     var id = params.id;
@@ -40,16 +40,25 @@ server.method('retrieve', function(params, next) {
 server.route([{
     method: 'GET',
     path: '/recipes',
-    handler: function(request, reply) {
+    handler: function (request, reply) {
         server.methods.search(request.query, function(err, recipes){
+
+            if (err) {
+                throw err;
+            }
+
             reply(recipes);
         });
     }
 }, {
     method: 'GET',
     path: '/recipes/{id}',
-    handler: function(request, reply) {
+    handler: function (request, reply) {
         server.methods.retrieve(request.params, function(err, recipe){
+
+            if (err) {
+                throw err;
+            }
             
             if (recipe) {
                 reply(recipe);
@@ -60,6 +69,6 @@ server.route([{
     }
 }]);
 
-server.start(function(){
+server.start(function () {
     console.log('Server listening at:', server.info.uri);
 });

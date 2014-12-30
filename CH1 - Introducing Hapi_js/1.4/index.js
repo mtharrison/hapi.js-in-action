@@ -10,13 +10,13 @@ server.connection({port: 4000});
 server.route([{
     method: 'GET',
     path: '/',
-    handler: function(request, reply) {
+    handler: function (request, reply) {
         reply('Hello World!');
     }
 }, {
     method: 'GET',
     path: '/json',
-    handler: function(request, reply) {
+    handler: function (request, reply) {
         reply({hello: 'World'});
     }
 }]);
