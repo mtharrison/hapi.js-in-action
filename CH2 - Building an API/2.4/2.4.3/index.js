@@ -1,6 +1,5 @@
 var Hapi = require('hapi');
 var mysql = require('mysql');
-var recipes = require('./recipes');
 
 var server = new Hapi.Server();
 server.connection({port: 4000});
@@ -37,39 +36,7 @@ server.method('retrieve', function (id, next) {
 
 // Routing
 
-server.route([{
-    method: 'GET',
-    path: '/recipes',
-    handler: function (request, reply) {
-        
-        server.methods.search(request.query.cuisine, function (err, results) {
-
-            if (err) {
-                throw err;
-            }
-
-            reply(results);
-        });
-    }
-}, {
-    method: 'GET',
-    path: '/recipes/{id}',
-    handler: function (request, reply) {
-
-        server.methods.retrieve(request.params.id, function (err, recipe) {
-
-            if (err) {
-                throw err;
-            }
-            
-            if (recipe) {
-                reply(recipe);
-            } else {
-                reply('Recipe not found').code(404);
-            }
-        });
-    }
-}]);
+server.route(require('./routes'));
 
 server.start(function () {
     console.log('Server listening at:', server.info.uri);
