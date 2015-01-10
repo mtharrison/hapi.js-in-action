@@ -37,7 +37,7 @@ server.method('retrieve', function (id, next) {
 
 server.method('create', function (recipe, next) {
     
-    var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, difficulty, cuisine, chef) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
     connection.query(sql, 
         [
@@ -45,20 +45,20 @@ server.method('create', function (recipe, next) {
             recipe.cooking_time,
             recipe.prep_time,
             recipe.serves,
-            recipe.difficulty,
             recipe.cuisine,
-            recipe.chef,
+            recipe.ingredients,
+            recipe.user_id,
         ], 
         function (err, results) {
             next(err, results);
         });
 }, {});
 
-server.method('star', function (recipe_id, awarded_by, next) {
+server.method('star', function (id, next) {
 
-    var sql = 'INSERT INTO stars (recipe_id, awarded_by) VALUES (?,?)';
+    var sql = 'UPDATE recipes SET stars = stars + 1 WHERE id = ?';
 
-    connection.query(sql, [recipe_id, awarded_by], function (err, results) {
+    connection.query(sql, [id], function (err, results) {
         next(err, results);
     });
 }, {});
