@@ -29,9 +29,10 @@ server.method('search', function (cuisine, next) {
 }, {});
 
 server.method('retrieve', function (id, next) {
-    connection.query('SELECT * FROM recipes WHERE id = ?', [id], function (err, results) {
-        next(err, results ? results[0] : null);       
-    });
+    connection.query('SELECT * FROM recipes WHERE id = ?', [id], 
+        function (err, results) {
+            next(err, results ? results[0] : null);       
+        });
 }, {});
 
 // Routing

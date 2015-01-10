@@ -40,6 +40,7 @@ module.exports = [{
         }
     },
     handler: function (request, reply) {
+        
         request.server.methods.create(request.payload, function (err, results){
 
             if(err) {
@@ -53,7 +54,8 @@ module.exports = [{
     method: 'POST',
     path: '/recipes/{id}/star',
     handler: function (request, reply) {
-        request.server.methods.star(request.params.id, 1, function (err, results){
+
+        request.server.methods.star(request.params.id, function (err, results){
 
             if(err) {
                 throw err;
