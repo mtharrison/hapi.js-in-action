@@ -27,12 +27,12 @@ server.method('search', function (query, next) {
 server.method('retrieve', function (params, next) {
 
     var recipe;
-    var id = params.id;
-    
-    if (recipes.hasOwnProperty(id)) {
-        recipe = recipes[id];
-    }
+    var id = parseInt(params.id);
 
+    if ((id - 1) in recipes) {
+        recipe = recipes[id - 1];
+    } 
+    
     next(null, recipe);
 
 }, {});

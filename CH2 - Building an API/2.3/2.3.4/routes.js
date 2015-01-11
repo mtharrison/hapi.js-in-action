@@ -27,10 +27,10 @@ module.exports = [{
     path: '/recipes/{id}',
     handler: function (request, reply) {
 
-        var id = request.params.id;
+        var id = parseInt(request.params.id);
 
-        if (recipes.hasOwnProperty(id)) {
-            reply(recipes[id]);
+        if ((id - 1) in recipes) {
+            reply(recipes[id - 1]);
         } else {
             reply("Recipe not found").code(404);
         }
