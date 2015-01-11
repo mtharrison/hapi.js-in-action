@@ -37,7 +37,7 @@ server.method('retrieve', function (id, next) {
 
 server.method('create', function (recipe, next) {
     
-    var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
     connection.query(sql, 
         [
@@ -47,6 +47,7 @@ server.method('create', function (recipe, next) {
             recipe.serves,
             recipe.cuisine,
             recipe.ingredients,
+            recipe.directions,
             recipe.user_id,
         ], 
         function (err, results) {

@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `recipes` (
   `serves` INT NULL,
   `cuisine` VARCHAR(255) NULL,
   `ingredients` TEXT NULL,
+  `directions` TEXT NULL,
   `stars` INT NOT NULL DEFAULT 0,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
