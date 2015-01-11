@@ -35,7 +35,7 @@ module.exports = [{
         payload: {
             parse: true,
             output: 'data'
-        }    
+        },
         auth: 'api'
     },
     handler: function (request, reply) {
