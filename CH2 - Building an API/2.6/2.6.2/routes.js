@@ -1,9 +1,6 @@
 module.exports = [{
     method: 'GET',
     path: '/recipes',
-    config: {
-        auth: 'api'
-    },
     handler: function (request, reply) {
         request.server.methods.search(request.query.cuisine, function (err, results) {
 
@@ -38,7 +35,8 @@ module.exports = [{
         payload: {
             parse: true,
             output: 'data'
-        }
+        }    
+        auth: 'api'
     },
     handler: function (request, reply) {
         request.server.methods.create(request.payload, function (err, results){
