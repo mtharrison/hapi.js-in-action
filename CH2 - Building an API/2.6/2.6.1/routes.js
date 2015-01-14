@@ -1,64 +1,80 @@
-module.exports = [{
-    method: 'GET',
-    path: '/recipes',
-    handler: function (request, reply) {
-        request.server.methods.search(request.query.cuisine, function (err, results) {
+module.exports = function (connection) {
 
-            if (err) {
-                throw err;
+    return [{
+        method: 'GET',
+        path: '/recipes',
+        handler: function (request, reply) {
+
+            var sql = 'SELECT * FROM recipes';
+            var params = [];
+
+            if (request.query.cuisine) {
+                sql += ' WHERE cuisine = ?';
+                params.push(request.query.cuisine);
             }
 
-            reply(results);
-        });
-    }
-}, {
-    method: 'GET',
-    path: '/recipes/{id}',
-    handler: function (request, reply) {
-        request.server.methods.retrieve(request.params.id, function (err, recipe) {
+            connection.query(sql, params, function (err, results) {
 
-            if (err) {
-                throw err;
+                if (err) {
+                    throw err;
+                }
+
+                reply(results);
+            });
+        }
+    }, {
+        method: 'GET',
+        path: '/recipes/{id}',
+        handler: function (request, reply) {
+
+            request.server.methods.retrieve(request.params.id, function (err, result) {
+
+                if (err) {
+                    throw err;
+                }
+
+                if (result) {
+                    reply(result);
+                } else {
+                    reply('Not found').code(404);
+                }
+
+            });
+        }
+    }, {
+        method: 'POST',
+        path: '/recipes',
+        config: {
+            auth: 'api',
+            payload: {                  
+                output: 'data',
+                parse: true
             }
-            
-            if (recipe) {
-                reply(recipe);
-            } else {
-                reply('Recipe not found').code(404);
-            }
-        });
-    }
-}, {
-    method: 'POST',
-    path: '/recipes',
-    config: {
-        payload: {
-            parse: true,
-            output: 'data'
         },
-        auth: 'api'
-    },
-    handler: function (request, reply) {
-        request.server.methods.create(request.payload, function (err, results){
+        handler: function (request, reply) {
 
-            if(err) {
-                throw err;
-            }
+            var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
-            reply({status: 'ok'});
-        });
-    }
-}, {
-    method: 'POST',
-    path: '/recipes/{id}/star',
-    handler: function (request, reply) {
-        request.server.methods.star(request.params.id, function (err, results){
+            connection.query(sql, 
+            [
+                request.payload.name,
+                request.payload.cooking_time,
+                request.payload.prep_time,
+                request.payload.serves,
+                request.payload.cuisine,
+                request.payload.ingredients,
+                request.payload.directions,
+                request.auth.credentials.id,
+            ], 
+            function (err, results) {
 
-            if(err) {
-                throw err;
-            }
+                if(err) {
+                    throw err;
+                }
 
-            reply({status: 'ok'});
-        });
-    }
-}];
+                reply({status: 'ok'});
+            });
+        }
+    }];
+
+};

@@ -40,40 +40,6 @@ module.exports = function (connection) {
                 }
             });
         }
-    }, {
-        method: 'POST',
-        path: '/recipes',
-        config: {
-            auth: 'api',
-            payload: {                  
-                output: 'data',
-                parse: true
-            }
-        },
-        handler: function (request, reply) {
-
-            var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-
-            connection.query(sql, 
-            [
-                request.payload.name,
-                request.payload.cooking_time,
-                request.payload.prep_time,
-                request.payload.serves,
-                request.payload.cuisine,
-                request.payload.ingredients,
-                request.payload.directions,
-                request.auth.credentials.id,
-            ], 
-            function (err, results) {
-
-                if(err) {
-                    throw err;
-                }
-
-                reply({status: 'ok'});
-            });
-        }
     }];
 
 };
