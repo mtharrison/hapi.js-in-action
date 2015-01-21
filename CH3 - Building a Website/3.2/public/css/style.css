@@ -1,0 +1,39 @@
+body {
+	font-family: arial, helvetica, sans-serif;
+	margin: 30px;
+	background: #1E1E20;
+}
+
+header {
+	padding: 30px;
+}
+
+#logo {
+	text-align: center;
+	display: block;
+	text-decoration: none;
+}
+
+h1, h2, h3, h3 a {
+	color: #D9CB9E;
+}
+
+h2 {
+	text-align: center;
+}
+
+.recipe {
+	padding: 20px;
+	margin-bottom: 20px;
+	background: #374140;
+}
+
+.recipe-link {
+	width: 80%;
+}
+
+.stars {
+	float: right;
+	width: 20%
+	text-align:right;
+}
