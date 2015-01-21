@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DinDin Mobile Website</title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<header>
+		<a id="logo" href="/"><h1>DinDin</h1></a>
+	</header>
+
+	<h2 class="intro">A website for finding and sharing recipes</h2>
+
+	{{#each recipes}}
+		<div class="recipe">
+			<h3>
+				<a class="recipe-link" href="/recipes/{{id}}">{{name}}</a> 
+				<span class="stars">{{stars}} stars</span>
+			</h3>
+		</div>
+	{{/each}}
+
+</body>
+</html>
