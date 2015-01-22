@@ -1,9 +1,20 @@
 var Hapi = require('hapi');
-var Wreck = require('wreck');
 var Path = require('path');
 
 var server = new Hapi.Server();
 server.connection({port: 4000});
+
+server.views({
+    engines: {
+        hbs: require('handlebars')
+    },
+    path: Path.join(__dirname, 'views'),
+    layoutPath: './views/layout',
+    layout: true,
+    isCached: false,
+    partialsPath: './views/partials',
+    helpersPath: './views/helpers',
+});
 
 server.register(require('dindin-api'),
     function (err) {
@@ -12,38 +23,7 @@ server.register(require('dindin-api'),
         throw err;
     }
 
-    server.views({
-        engines: {
-            hbs: require('handlebars')
-        },
-        path: Path.join(__dirname, 'views')
-    });
-
-    server.route([{
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-            Wreck.get('http://localhost:4000/api/recipes', {json: true}, function (err, res, payload) {
-                reply.view('index', {recipes: payload});
-            });
-        }
-    }, {
-        method: 'GET',
-        path: '/recipes/{id}',
-        handler: function (request, reply) {
-            Wreck.get('http://localhost:4000/api/recipes/' + request.params.id, function (err, res, payload) {
-                reply.view('single', {recipe: payload});
-            });
-        }
-    }, {
-        method: 'GET',
-        path: '/{param*}',
-        handler: {
-            directory: {
-                path: 'public'
-            }
-        }
-    }]);
+    server.route(require('./routes'));
 
     server.start(function () {
         console.log('Started server at', server.info.uri);
