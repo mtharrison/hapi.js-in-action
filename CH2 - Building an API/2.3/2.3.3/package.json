@@ -8,6 +8,6 @@
   "license": "MIT",
   "dependencies": {
     "hapi": "^8.0.0",
-    "mysql": "^2.5.4"
+    "sqlite3": "^3.0.4"
   }
 }

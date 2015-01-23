@@ -31,6 +31,26 @@ module.exports = [{
         reply.view('create');
     }
 }, {
+    method: 'POST',
+    path: '/create',
+    config: {
+        payload: {
+            output: 'data',
+            parse: false
+        },
+    },
+    handler: function (request, reply) {
+
+        var apiUrl = API_BASE_URL + '/recipes';
+
+        Wreck.post(apiUrl, {
+            payload: request.payload
+        }, function (err, res, payload) {
+            debugger;
+            reply.redirect(WEB_BASE_URL);
+        });
+    }
+}, {
     method: 'GET',
     path: '/recipes/{id}',
     handler: function (request, reply) {

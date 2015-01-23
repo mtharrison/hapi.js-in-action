@@ -1,22 +1,17 @@
 var Hapi = require('hapi');
-var Mysql = require('mysql');
+var Sqlite3 = require('sqlite3');
 
-var connection = Mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'dindin'
-});
+var db = new Sqlite3.Database('../../dindin.sqlite');
 
 var server = new Hapi.Server();
 server.connection({port: 4000});
 
 server.route([{
     method: 'GET',
-    path: '/recipes',
+    path: '/api/recipes',
     handler: function (request, reply) {
       
-        connection.query('SELECT * FROM recipes', function (err, results) {
+        db.all('SELECT * FROM recipes', function (err, results) {
 
             if (err) {
                 throw err;

@@ -4,6 +4,8 @@ var Path = require('path');
 var server = new Hapi.Server();
 server.connection({port: 4000});
 
+// View setup
+
 server.views({
     engines: {
         hbs: require('handlebars')
@@ -23,7 +25,11 @@ server.register(require('dindin-api'),
         throw err;
     }
 
+    // Register routes
+
     server.route(require('./routes'));
+
+    // Start server
 
     server.start(function () {
         console.log('Started server at', server.info.uri);

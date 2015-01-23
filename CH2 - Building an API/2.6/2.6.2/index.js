@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
 var Sqlite3 = require('sqlite3');
+var Bcrypt = require('bcrypt');
 
 var db = new Sqlite3.Database('../../dindin.sqlite');
 
@@ -38,9 +39,7 @@ server.register(require('hapi-auth-basic'), function (err) {
         throw err;
     }
 
-    server.auth.strategy('api', 'basic', { 
-        validateFunc: validate
-    });
+    server.auth.strategy('api', 'basic', { validateFunc: validate });
 
     server.route(require('./routes'));
 

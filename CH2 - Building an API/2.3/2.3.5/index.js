@@ -1,19 +1,14 @@
 var Hapi = require('hapi');
-var Mysql = require('mysql');
+var Sqlite3 = require('sqlite3');
 
-var connection = Mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'dindin'
-});
+var db = new Sqlite3.Database('../../dindin.sqlite');
 
 var server = new Hapi.Server();
 server.connection({port: 4000});
 
 server.route([{
     method: 'GET',
-    path: '/recipes',
+    path: '/api/recipes',
     handler: function (request, reply) {
 
         var sql = 'SELECT * FROM recipes';
@@ -24,7 +19,7 @@ server.route([{
             params.push(request.query.cuisine);
         }
 
-        connection.query(sql, params, function (err, results) {
+        db.all(sql, params, function (err, results) {
 
             if (err) {
                 throw err;
@@ -35,16 +30,17 @@ server.route([{
     }
 }, {
     method: 'GET',
-    path: '/recipes/{id}',
+    path: '/api/recipes/{id}',
     handler: function (request, reply) {
-        connection.query('SELECT * FROM recipes WHERE id = ?', [request.params.id], function (err, results) {
+
+        db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], function (err, result) {
 
             if (err) {
                 throw err;
             }
 
-            if (results[0]) {
-                reply(results[0]);
+            if (typeof result !== 'undefined') {
+                reply(result);
             } else {
                 reply('Not found').code(404);
             }
