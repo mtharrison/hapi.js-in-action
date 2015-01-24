@@ -8,9 +8,9 @@ server.connection({port: 4000});
 
 server.bind({db: db});
 
-var validate = function (username, password, callback) {
+var validateFunc = function (token, callback) {
 
-    db.get('SELECT * FROM users WHERE username = ?', [username], function (err, result) {
+    db.get('SELECT * FROM users WHERE token = ?', [token], function (err, result) {
 
         if (err) {
             return callback(err, false);
@@ -19,27 +19,25 @@ var validate = function (username, password, callback) {
         var user = result;
 
         if (!user) {
-            return callback(null, false);                    
+            return callback(null, false);
         }
 
-        Bcrypt.compare(password, user.password, function (err, isValid) {
-            callback(err, isValid, { 
-                id: user.id, 
-                username: user.username 
-            });
+        callback(null, true, { 
+            id: user.id, 
+            username: user.username 
         });
 
     });
 };
 
-server.register(require('hapi-auth-basic'), function (err) {
+server.register(require('hapi-auth-bearer-token'), function (err) {
 
     if (err) {
         throw err;
     }
 
-    server.auth.strategy('api', 'basic', { 
-        validateFunc: validate
+    server.auth.strategy('api', 'bearer-access-token', { 
+        validateFunc: validateFunc
     });
 
     server.route(require('./routes'));
