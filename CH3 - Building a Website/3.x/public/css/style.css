@@ -10,6 +10,7 @@ body {
 
 header {
 	margin-bottom: 20px;
+	overflow: hidden;
 }
 
 footer {
@@ -17,14 +18,12 @@ footer {
 	text-align: center;
 }
 
-.login-button {
+.header-button {
 	background: #374140;
 	padding: 10px;
 	float: right;
 	overflow: hidden;
-	position: absolute;
-	top: 20px;
-	right: 20px;
+	margin-left: 10px;
 }
 
 /*Home page styles*/

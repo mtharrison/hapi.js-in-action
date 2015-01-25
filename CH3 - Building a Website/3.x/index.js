@@ -10,7 +10,8 @@ server.views({
     engines: {
         hbs: require('handlebars')
     },
-    path: Path.join(__dirname, 'views'),
+    relativeTo: __dirname,
+    path: './views',
     layoutPath: './views/layout',
     layout: true,
     isCached: false,
@@ -18,7 +19,20 @@ server.views({
     helpersPath: './views/helpers',
 });
 
-server.register(require('dindin-api'),
+server.register([
+        {
+            register: require('dindin-api')
+        },
+        {
+            register: require('yar'),
+            options: {
+                cookieOptions: {
+                    password: 'password',
+                    isSecure: false
+                }
+            }
+        },
+    ],
     function (err) {
 
     if (err) {

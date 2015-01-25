@@ -7,7 +7,7 @@ module.exports = [{
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        
+
         var apiUrl = API_BASE_URL + '/recipes';
 
         if (request.query.cuisine) {
@@ -15,39 +15,12 @@ module.exports = [{
         }
 
         Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
-            reply.view('index', {recipes: payload});
-        });
-    }
-}, {
-    method: 'GET',
-    path: '/login',
-    handler: function (request, reply) {
-        reply.view('login');
-    }
-}, {
-    method: 'GET',
-    path: '/create',
-    handler: function (request, reply) {
-        reply.view('create');
-    }
-}, {
-    method: 'POST',
-    path: '/create',
-    config: {
-        payload: {
-            output: 'data',
-            parse: false
-        },
-    },
-    handler: function (request, reply) {
 
-        var apiUrl = API_BASE_URL + '/recipes';
-
-        Wreck.post(apiUrl, {
-            payload: request.payload
-        }, function (err, res, payload) {
-            debugger;
-            reply.redirect(WEB_BASE_URL);
+            reply.view('index', {
+                recipes: payload,
+                user: request.session.get('user'),
+                search: request.query.cuisine
+            });
         });
     }
 }, {
@@ -58,7 +31,92 @@ module.exports = [{
         var apiUrl = API_BASE_URL + '/recipes/' + request.params.id;
 
         Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
-            reply.view('single', {recipe: payload});
+
+            reply.view('single', {
+                recipe: payload,
+                user: request.session.get('user')
+            });
+        });
+    }
+}, {
+    method: 'GET',
+    path: '/create',
+    handler: function (request, reply) {
+
+        reply.view('create', {
+            user: request.session.get('user')
+        });
+    }
+}, {
+    method: 'GET',
+    path: '/login',
+    handler: function (request, reply) {
+
+        reply.view('login');
+    }
+}, {
+    method: 'GET',
+    path: '/logout',
+    handler: function (request, reply) {
+
+        request.session.clear('user');
+        reply.redirect(WEB_BASE_URL);
+    }
+}, {
+    method: 'POST',
+    path: '/login',
+    config: {
+        payload: {
+            output: 'data',
+            parse: true
+        },
+    },
+    handler: function (request, reply) {
+
+        var apiUrl = API_BASE_URL + '/login';
+
+        Wreck.post(apiUrl, {
+            payload: JSON.stringify(request.payload),
+            json: true
+        }, function (err, res, payload) {
+
+            if (err) {
+                throw err;
+            }
+
+            if (res.statusCode !== 200) {
+                reply.redirect(WEB_BASE_URL + '/login');
+            } else {
+                request.session.set('user', {
+                    loggedIn: true, 
+                    token: payload.token
+                });
+                reply.redirect(WEB_BASE_URL);
+            }
+
+        });
+
+    }
+}, {
+    method: 'POST',
+    path: '/create',
+    config: {
+        payload: {
+            output: 'data'
+        },
+    },
+    handler: function (request, reply) {
+
+        var apiUrl = API_BASE_URL + '/recipes';
+
+        Wreck.post(apiUrl, {
+            payload: JSON.stringify(request.payload),
+            headers: {
+                'Authorization': 'Bearer ' + request.session.get('user').token
+            }
+        }, function (err, res, payload) {
+
+            reply.redirect(WEB_BASE_URL);
         });
     }
 }, {
@@ -69,6 +127,7 @@ module.exports = [{
         var apiUrl = API_BASE_URL + '/recipes/' + request.params.id + '/star';
 
         Wreck.post(apiUrl, function (err, res, payload) {
+            
             reply.redirect(WEB_BASE_URL + '/recipes/' + request.params.id);
         });
     }
