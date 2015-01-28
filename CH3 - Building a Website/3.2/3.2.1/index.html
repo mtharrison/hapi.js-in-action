@@ -1,0 +1,1210 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Play Triple Play Draw Poker</title>
+<meta name="description" content=" " />
+<meta name="keywords" content=" " />
+<link rel="shortcut icon" href="http://videopoker.com/faviconvp.ico">
+<script src="http://videopoker.com/scripts/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="http://videopoker.com/scripts/jquery/jquery.scrollTo-min.js"></script>
+
+<script src="http://videopoker.com/scripts/gameroll9.js"></script><script type="text/javascript" src="http://videopoker.com/swfobject22/swfobject.js"></script>
+<link href="http://videopoker.com/styles/master.css?v=026" rel="stylesheet" type="text/css" />
+<link href="http://videopoker.com/styles/awards.css?v=014" rel="stylesheet" type="text/css" />
+<link href="http://videopoker.com/styles/loggedin.css" rel="stylesheet" type="text/css" /><link href="http://videopoker.com/styles/gold.css?v=002" rel="stylesheet" type="text/css" /><link href="http://videopoker.com/styles/themes/ladies/style.css?v=003" rel="stylesheet" type="text/css" /><!-- Custom head elements for this page -->
+<script language="javascript">
+
+$(window).on("orientationchange",function(){
+    //redraw game
+    //LANDSCAPE
+    //Calc view height
+    //Calc width % at 640/480
+    //If width% > 80{
+    //  set width to 80%, then set height
+    //}
+    //Calc area to right
+    //  position menu
+    //  position hands
+    //  scale ad
+    window.scrollTo(0,1);
+    //resize();
+      
+}); 
+</script>
+
+<link href="http://videopoker.com/styles/gameplay.css?v=020" rel="stylesheet" type="text/css" />
+<link href="http://games.videopoker.com/style.min.css" rel="stylesheet" type="text/css" />
+<script language="javascript">
+//prevent from opening safari window on iphone
+
+window.vpSessionID = '';
+var isChallenge = 0;
+var contestHands = 0;
+var flashvars = {};
+var chatParams = {
+  menu: "false",
+  wmode: "transparent",
+  scale: "showall",
+  bgcolor: "#000000"
+};
+var chatAttributes = {
+  id: "chatAppSwf",
+  name: "chatAppSwf"
+};
+var cbust = "";
+
+var jsDeals;
+var jsScore;
+jsDeals = 0;
+jsScore = 0;
+
+function scrFace(vps_d, vps_s, vps_resets, vps_recorded, chMax){
+    jsDeals = vps_d;
+    jsScore = vps_s;
+}
+
+
+
+var prefRefresh = 0;
+var scrViewType = "";
+var pauseCyc = 1; //pause after 3 refreshes
+var prevUser = [0,0];
+var prevScore = [0,0];
+var veepVal;
+var prevLeader;
+var cyclesToPause = 5;//8
+var scrRefreshRate = 11400;
+function performRefresh(autotrggr, resettimer){ //display top ten scoreboard
+    if(jsDeals > prefRefresh) pauseCyc = 1;
+    if(pauseCyc <= cyclesToPause || autotrggr == 1){
+        if(isChallenge == 0){
+            $.ajax({
+               type: "GET",
+               url: "/scores/js/",
+               data: "g=17&u=180894&s=" + curPlayerScore,
+               dataType: 'json',
+               success: function(data){
+                   //var scorea = scoring.veep;  
+                   if(data.veep != veepVal || data.uscores[0].userid != prevLeader){
+                        veepVal = data.veep;
+                        leadThumb(data.uscores[0].userid);
+                        prevLeader = data.uscores[0].userid;
+                        if(data.veep != ""){
+                            $('#scoreboardD #theVeep').html(data.veep);
+                            $('#scoreboardD #theVeep').addClass("hasVeep");
+                        } else {
+                            $('#scoreboardD #theVeep').removeClass("hasVeep");
+                            $('#scoreboardD #theVeep').html("");
+                        }
+                   }
+                   for(i=0;i<10;i++){
+                    var j=i+1;
+                    $('#scoreboardD #score' + j).removeClass("playing");
+                    if(data.uscores[i].userid != prevUser[i] || data.uscores[i].score != prevScore[i]){
+                        $('#scoreboardD #score' + j).addClass("playing");
+                        $('#scoreboardD #score' + j + ' .uname').html(data.uscores[i].uname);
+                        $('#scoreboardD #score' + j + ' .score').html(data.uscores[i].score);
+                    }
+                    prevUser[i] = data.uscores[i].userid;
+                    prevScore[i] = data.uscores[i].score;
+                   }
+                  if(jsDeals > 0) getRank(data.urank);
+                  $('#scoreboardD #updateTime').html(data.time);
+                  if(resettimer == 1) refreshCycle();
+                 }, //success
+                 error: function(data) {
+                     if(resettimer == 1) refreshCycle();
+                 }
+               });//ajax
+               prefRefresh = jsDeals;
+               pauseCyc++;
+        }
+        if(isChallenge == 1){
+            $.ajax({
+               type: "POST",
+               timeout: 10000,
+               url: "/scores/challenge/",
+               data: "cid=0&v=" + scrViewType,
+               success: function(data){
+                 $('#topTen').html(data);
+               }
+             });
+            
+            prefRefresh = jsDeals;
+            pauseCyc++;
+            if(resettimer == 1) refreshCycle();
+        }
+    }
+    if(pauseCyc >= cyclesToPause && resettimer == 1) refreshCycle(); 
+}
+function leadThumb(inp){
+    $.ajax({
+       type: "GET",
+       url: "/scores/js/thumb/",
+       data: "u=" + inp,
+       dataType: 'html',
+       success: function(data){
+           $('#scoreboardD #thumb').html(data);
+       }
+    });//ajax
+}
+var curPlyRank = 0;
+var prevPlyRank = 0;
+function getRank(inp){
+    if(inp != ""){
+         curPlyRank = inp;
+         $('#curRank').html(inp + ")");
+         $('#curRankB').html(inp + ")");
+         if(curPlyRank == "1" && prevPlyRank != "1"){
+             $("#yourStuff").show();
+             $("#yourStuffA").hide();
+             $("#yourStuffB").hide();
+         } 
+         if(curPlyRank != "1" && prevPlyRank == "1"){
+             $("#yourStuff").hide();
+             $("#yourStuffA").show();
+             $("#yourStuffB").show();
+         } 
+         prevPlyRank = curPlyRank;
+    }
+}
+var scrFresh
+function refreshCycle(){
+    clearTimeout(scrFresh);
+    scrFresh = setTimeout("performRefresh(0,1)",scrRefreshRate);
+}
+var prevVeep = "";
+function storeVeep(){
+    if(document.getElementById("veep").value != ''){
+        prevVeep = document.getElementById("veep").value;
+        $.ajax({
+               type: "POST",
+               url: "/veep/send/",
+               timeout: 10000,
+               data: "g=17&sc=" + curPlayerScore + "&msg=" + prevVeep,
+               error: function(request,error) {
+                  if (error == "timeout") {
+                   alert("The Veep request timed out, please resubmit.");
+                  }
+                  else {
+                   alert("Veep ERROR: " + error);
+                  }
+               },
+               success: function(dataC){
+                 if(curPlyRank == "1") performRefresh(1,0);
+               }
+         });    
+    } else {
+        document.getElementById("veep").value = prevVeep;
+    }
+    $('#addComment').html("Add VEEP!");
+}
+
+
+function switchGameModeSimple(inpMode){
+    document.trackingForm.t.value = "0";
+    document.trackingForm.sl.value = "0";
+    if(inpMode == 1){
+                            document.trackingForm.t.value="1";
+            }
+    if(inpMode == 2){
+                    document.trackingForm.sl.value = "1";
+                    }
+    if(inpMode == 3){
+                sendChallenge('17');
+        return false;
+    }
+
+    document.trackingForm.action = document.trackingForm.action + "?g=1&pmode=" + inpMode + "&mt=&pgame=";
+    document.trackingForm.submit();
+    return false;
+}
+function sendChallenge(gameId){
+    MM_openBrWindow('/top_scores/users/?c=1&game=' + gameId,'member','width=600,height=250')
+    return false;
+}
+
+function setPayTable(f,s,h){
+    document.ptForm.pt_f.value=f;
+    document.ptForm.pt_s.value=s;
+    document.ptForm.pt_h.value=h;
+    document.ptForm.submit();
+    return false;
+}
+function showPayOptions(){
+        $.ajax({
+           type: "POST",
+           url: "/play/pays/",
+           data: "g=17&t=",
+           success: function(data){
+               $('#displayPays').html(data);
+              
+           }
+         });
+}
+
+var pcaddrem = 9923;
+var pcdamx = 29684;
+var nbgg = "jho";
+var nbgf = "tal";
+var nbgh = "ore";
+var nbgd = "fel";
+var initHandsB; var curPlayerScore = 0;
+var curPlayerScrCmp = 0;
+var dayStart = 0;
+var pclubStart = 24734;
+var pclubDisp;
+var rsndStr;
+var scrckckck = 0;
+var cchk = 0; var cchki = 0; var hvya = 0;
+var tempg, tempa;
+var shwtrytm;
+
+var maxPtSent = 0;
+function maxPtNote(){
+        if(maxPtSent == 0){
+        alert("You have reached the maximum of 5,000 Players Club points per day.\nYou can keep playing as much as you'd like, of course!\nPoints will resume counting after midnight Pacific.");
+    }
+        maxPtSent = 1;
+}
+
+var pageSessDeals = 0;
+function vpInterface(state){
+    if(state == 2){         pageSessDeals++; 
+        jsDeals = pageSessDeals;//revised jsDeals, might need back for challenge
+        alrtChkIdle = 0;
+        msgChkIdle = 0;
+        hvya = 0; 
+        cchki = 1;
+                if(pageSessDeals == 1){
+            $.ajax({
+               type: "POST",
+               url: "/play/ucnt/",
+               data: "u=180894&g=17",
+               success: function(data){
+                 //
+               }
+             });
+        }
+        pclubDisp = pclubStart + (1*pageSessDeals);
+        if(pclubDisp > pcdamx){
+            pclubDisp = pcdamx;
+            maxPtNote();
+        }
+        $('#pClubVal').html(formatNumStr(pclubDisp + pcaddrem));
+        setVpPrm('pClubCk', pclubDisp);
+    }
+    if(state == 3){         curPlayerScore = Game.credits - sc_day_start - co_diff;
+        $('#playerScore').html(addCommas(curPlayerScore));
+        $('#playerScoreB').html(addCommas(curPlayerScore));
+    }
+    if(state == 1){         if(pageSessDeals == 0){
+            //Game.checkCredits();
+        }
+        isRcvd(jsDeals);
+        curPlayerScore = Game.credits - sc_day_start - co_diff;
+        $('#playerScore').html(addCommas(curPlayerScore));
+        $('#playerScoreB').html(addCommas(curPlayerScore));
+        if(Game.credits < 700) lowCredits();
+        //alert(Game.toSource());
+        vpHasBeenWarned = 1;//temp to disable
+    }
+    VPInfo.endDraw  = function() {
+        uDeals = VPInfo.deals_played;
+        uWAmt = VPInfo.winnings.win_total;
+        var autocapture = 0;
+        for (index = 0; index < VPInfo.winnings.hand_data.length; ++index) {
+            var indwin = VPInfo.winnings.hand_data[index].winAmount;
+                if(indwin >= 4000) autocapture = 1;
+        }
+        //if(VPInfo.winnings.win_total >= 1000) autocapture = 1;
+        if (uDeals == 0) autocapture = 0;
+        if(autocapture == 1) setTimeout(function(){goScreen()}, 1);
+    }
+}
+var capturingScreen = 0;
+var screenStored = 0;
+function goScreen(){
+    capturingScreen = 1;
+    screenStored = 0;
+    getScreenshot(
+        function(img) {
+            var encimg;
+            encimg =  encodeURIComponent(img);
+            $.ajax({
+               type: "POST",
+               url: "/ui/",
+               data: "v=" + encimg + 
+                     "&cid=0" + 
+                     "&g=17" + 
+                     "&unid=" + cursess + 
+                     "&hid=" + uDeals +  
+                     "&w=" + uWAmt + 
+                     "&c=Mobile" + 
+                     "&z=1",
+               success: function(data){
+                   screenStored = 1;
+                   capturingScreen = 0;
+               }
+             });
+            
+        }, 
+        640
+    );
+}
+function lowCredits(){  
+    $('#overlayBg').css("display","block");
+    $('#addCPop').css("display","block");
+    $('#addCMsg').css("display","block");
+    $('#addCLink').css("display","block");
+}
+function restoreLow(){
+        $('#addCLink').css("display","none");
+    $.ajax({
+       type: "POST",
+       url: "/score/add/",
+       data: "game=17",
+       timeout: 10000,
+       success: function(msg){
+           if(msg == "1"){
+               co_diff = co_diff + 10000;
+                Game.checkCredits();
+               $('#overlayBg').css("display","none");
+               $('#addCPop').css("display","none");
+               $('#addCMsg').css("display","none");
+           } else {
+                alert(msg);   
+           }
+       }
+     });
+         }
+
+
+
+
+
+var recVal = 0;
+function isRcvd(inpVar){
+    recVal = inpVar;
+}
+
+function toggleFull(togvar){
+    if(togvar == 1){
+        //$('head').append('<link href="http://videopoker.com/styles/fullscreen.css" rel="stylesheet" id="fsCss" />');
+        var extraH = 0;
+        var lmarg = 170;
+        lmarg = 0;
+        var rmarg = 165;
+        var extraW = lmarg+rmarg;
+        var aspratio = 640/480;
+        var screenratio = ($(window).width()-extraW) / ($(window).height()-extraH);
+        var neww;
+        var newh;
+        if(aspratio > screenratio){
+            neww = $(window).width()-extraW-0;
+            newh = ($(window).width()-extraW) / aspratio-0;
+            //alert("1." + neww + "," + newh);
+        } else {
+            neww = ($(window).height()-extraH) * aspratio-0;
+            newh = $(window).height()-extraH-0;
+            //alert("2." + neww + "," + newh);
+        }
+        neww=Math.round(neww);
+        newh=Math.round(newh);
+        $("#gameDisplay").css("width", neww);
+        $("#gameDisplay").css("height", newh);
+        $("#gameDisplay").css("left", Math.round(($(window).width()/2)-((neww+lmarg+rmarg)/2)+lmarg));
+        $("#goldRCol").css("left",    Math.round(($(window).width()/2)-((neww+lmarg+rmarg)/2)+neww+lmarg));
+        $("#lCol").css("left",        Math.round(($(window).width()/2)-((neww+lmarg+rmarg)/2)));
+        
+    }
+    if(togvar == 0){
+        // jQuery('#fsCss').remove();
+        //$("#gameDisplay").css("width", 640);
+        //$("#gameDisplay").css("height", 480);
+        
+    }
+    return false;   
+}
+
+function getInternetExplorerVersion() {
+    var rv = -1; // Return value assumes failure.
+    if (navigator.appName == 'Microsoft Internet Explorer') {
+        var ua = navigator.userAgent;
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        if (re.exec(ua) != null)
+            rv = parseFloat(RegExp.$1);
+    }
+    return rv;
+}
+var promptIEVer = 0;
+var promptCanvasSupport = 0;
+window.vpUserName = 'Goldilucks';
+$.ajaxSetup({ cache: false });
+$(document).ready(function() { 
+            $('#tapper').click(function() {
+        $( "#rmenu" ).show();
+         $( "#rmenu" ).animate({
+            right: "+=600"
+            }, 500, function() {
+            // Animation complete.
+            $("#rmenu").css("right","-10px"); 
+            });
+    });
+    $('#mobileLogo').click(function() {
+        $( "#rmenu" ).show();
+         $( "#rmenu" ).animate({
+            right: "+=600"
+            }, 500, function() {
+            // Animation complete.
+            $("#rmenu").css("right","-10px"); 
+            });
+    });
+    $('#tapclose').click(function() {
+         $( "#rmenu" ).animate({
+            right: "-=600"
+            }, 500, function() {
+            $("#rmenu").css("right","-610px");
+            $( "#rmenu" ).hide();
+            });
+    });
+    
+            var ver = getInternetExplorerVersion();
+    if (ver > -1 && ver < 9.0) {
+         promptIEVer = 1;
+    }
+    function isCanvasSupported(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    }
+    if(!isCanvasSupported() || promptIEVer == 1) promptCanvasSupport = 1;
+        if(promptCanvasSupport == 0){
+        sessInit();
+    } else {
+        $('#game-container').html($('#canvasPrompt').html());
+    }
+    refreshChckIn();
+        performRefresh(1,1); //force scoreboard refresh on first load
+    setTimeout("checkAlerts()",2000);
+    setTimeout("checkMsg()",400);
+     $('#msgD').click( function() {
+        window.location.href="http://videopoker.com/my_account/messages/";
+    });
+});     
+var noPlyGnDblClck = 0; //double-click protect
+var cursess = 0;
+
+var initHandsA = 0;
+
+var co_diff = 0;
+var sc_day_start = 0;
+var sc_deal_start = 0;
+var getGgo = 0;
+function sessInit(){
+    if(noPlyGnDblClck == 0){
+        noPlyGnDblClck = 1;
+        // Make sure jQuery allows cross domain
+        $.support.cors = true;
+
+            sess = {
+sessionId: 897820,
+game: null,
+hfsf: null,
+chid: null,
+cd: 0,
+cr: 0,
+cs: 10000,
+ds: 0
+};
+
+                if(getGgo == 0){ 
+                    getGgo = 1;
+                                        window.vpSessionID = sess.sessionId;
+                    cursess = sess.sessionId;
+                    if(cursess == "") alert("Empty session id");
+                    if (typeof trackJs !== 'undefined' && trackJs.hasOwnProperty('configure')) {
+                        trackJs.configure({
+                          sessionId: cursess.toString(),
+                          userId : '180894'
+                        });
+                    }
+                    initHandsA = sess.cd;
+                    sc_day_start = sess.ds;
+                    sc_deal_start = sess.cd;
+                    co_diff = (10000 * sess.cr);
+                    $.ajax({
+                            xhrFields: {
+                                withCredentials: true
+                             }, 
+                             dataType: 'html',
+                            url: 'http://staging.vpplatform.com/getGames?game=3-5-10&hfsf=all&training=false&sessionId=' + cursess,
+                            success: function(data) {
+                                        // Place returned data into a game container div
+                                        $('#game-container').html(data);
+                                        //noPlyGnDblClck = 0;
+                            },
+                            error: function(data) {
+                                alert(data);
+                            }
+                    }); //ajax
+                }
+
+    }//noPlyGnDblClck
+}   
+        
+var checkLoadedInterval = window.setInterval(function() {
+    if(typeof(VPNodeGameUtils) != 'undefined')
+    {
+        window.clearInterval(checkLoadedInterval);
+        var dealStartedCallback = function(state) {
+            vpInterface(state);
+            // alert('state changed to' + state); 
+        }
+        VPNodeGameUtils.on('setGameState', dealStartedCallback);
+    }
+}, 20); 
+swfobject.embedSWF("http://videopoker.com/chat/vpChat_21.swf?un=Goldilucks&v=2_1&vpChatRoom=Game Chat", "chatApp", "165", "504", "9.0.0", "/swfobject22/expressInstall.swf", flashvars, chatParams, chatAttributes);
+var nbgj = "sc";
+
+</script>
+<!-- Custom head elements for this page -->
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<script language="JavaScript" src="http://videopoker.com/scripts/gameplay.js?v=002"></script>
+<script language="JavaScript" src="http://videopoker.com/scripts/jquery/jquery.xdomainrequest.min.js"></script>
+<style type="text/css">
+<!--
+
+-->
+</style>
+<!-- End Custom head elements for this page -->
+<script language="javascript">
+
+showLeaders = function(){
+    $("#mobleaders").show();
+         $( "#mobleaders" ).animate({
+            right: "+=600"
+            }, 500, function() {
+            // Animation complete.
+            $("#mobleaders").css("right","-10px"); 
+            }); 
+    $.ajax({
+           type: "POST",
+           url: "scores/",
+           data: "c=&u=180894&ig=1&is=0&g=17&r=1",
+           success: function(data){
+               $('#theboard').html(data);
+             
+           }
+         });
+    return false;
+}
+hideLeaders = function(){
+    $("#rmenu" ).hide();
+    $("#mobleaders" ).hide();
+    $("#rmenu").css("right","-610px");
+    $("#mobleaders").css("right","-610px");
+    return false;
+}
+showBug = function(){
+    $.ajax({
+           type: "POST",
+           url: "/m/beta/",
+           data: "x=1",
+           success: function(data){
+                $("#rmenu" ).hide();
+                $("#rmenu").css("right","-610px");
+                $('#xtraWin').html(data);
+                $("#xtraWin" ).show();
+                //spacekeyDisable = 0;
+           }
+         });
+    return false;
+}
+hideBug = function(){
+    $("#rmenu" ).hide();
+    $("#xtraWin" ).hide();
+    //spacekeyDisable = 1;
+    window.scrollTo(0,1);
+    return false;
+}
+
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+});
+</script>
+<link href="http://videopoker.com/styles/m/non.css?v=001" rel="stylesheet" type="text/css" />
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="http://videopoker.com/styles/ie7_fix.css" /><![endif]--><script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+  // pre-load
+  var _trackJs = { 
+    userId : '180894'
+  };
+</script>
+
+<div id="vp">
+  <div id="header">
+      <div id="goldIconT"><a href="http://videopoker.com/join/benefits/"><img src="http://videopoker.com/i/icons/head_gold.png" width="69" height="69" border="0" /></a></div>                   <div id="vpStats">
+      <div class="line"><div class="view"><a href="http://videopoker.com/players_club/">View</a></div><div class="cat">Players Club:</div><div id="pClubVal" class="num">34,657</div></div>
+      <div class="line"><div class="view"><a href="http://videopoker.com/achievements/">View</a></div><div class="cat">Achievements:</div><div id="achVal" class="num">3</div></div>
+      <div class="line"><div class="view"><a href="http://videopoker.com/stars/">View</a></div><div class="cat">Star Level:</div><div id="pStarVal" class="num">
+            <img src="http://videopoker.com/i/graphics/stars/full_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" /><img src="http://videopoker.com/i/graphics/stars/trans_15.png" width="15" height="15" />        </div></div>
+      </div>
+                <div id="alertD"></div>
+              <div id="headThumb"><img src="http://videopoker.com/usr/profile/180894/180894_150115021417_t.jpg" height=120 width=120 border=0></div>
+      <div id="urlinks">
+        <div class="loggedInAs">Hello <strong>Goldilucks</strong></div>
+        <div class="items"><a href="http://videopoker.com/my_account/" id="headPP">My Player Page<br /></a>
+        <a href="http://videopoker.com/logout/">Log out</a>
+        </div>
+      </div>
+                  <div id="logo"><a href="http://videopoker.com/"><img src="http://videopoker.com/i/graphics/logo.png" width="174" height="82" alt="VideoPoker.com" border="0" /></a></div>
+            </div>
+
+
+ 
+  <div id="nav">    <div id="memCnt">Current membership <strong>343,378</strong></div>
+    <div id="follow"><div id="earn_tr"><a href="http://videopoker.com/players_club/"><img src="http://videopoker.com/i/icons/earn_points.png" width="64" height="23" border="0" /></a></div><div id="msgD"><div id="msgCnt"></div></div><a href="http://www.facebook.com/VideoPokerDotCom" target="_blank"><img src="http://videopoker.com/i/icons/facebook.png" width="26" height="26" border="0" /></a>&nbsp;<a href="http://www.twitter.com/videopoker1" target="_blank"><img src="http://videopoker.com/i/icons/twitter.png" width="26" height="26" border="0" /></a></div>
+    <div id="vpNav" style="padding: 0 0 0 30px;"><ul>
+  <li><a href="http://videopoker.com/play_games/"><img src="http://videopoker.com/i/nav/play.png" width="82" height="25" alt="PLAY" border="0" /></a><ul>
+      <li><a href="http://videopoker.com/play_games/">Play Video Poker</a></li>
+      <li><a href="http://videopoker.com/play_keno/">Play Keno</a></li>
+      <li><a href="http://videopoker.com/contests/">Contests</a></li>
+      <li><a href="http://videopoker.com/challenge/">Personal Challenge</a></li>
+      <li><a href="http://videopoker.com/challenge/">Group Challenge</a></li>
+      <li><a href="http://videopoker.com/apps/">Mobile Apps</a></li>
+      <li><a href="http://videopoker.com/gamesNearYou/">Find in Casinos</a></li>
+      <li><a href="http://videopoker.com/players_club/">Players Club</a></li>
+      <li><a href="http://pokerroom.videopoker.com/" target="_blank">Poker Room</a></li>
+      </ul>
+      </li>
+  <li><a href="http://videopoker.com/learn/"><img src="http://videopoker.com/i/nav/learn.png" width="93" height="25" alt="LEARN" border="0" /></a><ul>
+      <li><a href="http://videopoker.com/learn/">Intro to Video Poker</a></li>
+      <li><a href="http://videopoker.com/announcements/">Current Newsletter</a></li>
+      <li><a href="http://videopoker.com/learn/pay_tables/">Pay Tables</a></li>
+      <li><a href="http://videopoker.com/learn/superstitions/">Superstitions</a></li>
+      <li><a href="http://videopoker.com/learn/do_and_dont/">Do's and Don'ts</a></li>
+      <li><a href="http://videopoker.com/learn/statistics/">Statistics</a></li>
+      <li><a href="http://videopoker.com/learn/bob_dancer_answers/">Dancer's Answers</a></li>
+      <li><a href="http://videopoker.com/store/">Training Software</a></li>
+      <li><a href="http://videopoker.com/training/">Training Mode</a></li>
+      <li><a href="http://videopoker.com/learn/books/">Books</a></li>
+      <li><a href="http://videopoker.com/test/">Test Your Skills</a></li>
+      </ul>
+      </li>
+  <li><a href="http://videopoker.com/my_account/"><img src="http://videopoker.com/i/nav/interact.png" width="139" height="25" alt="INTERACT" border="0" /></a><ul>
+      <li><a href="http://videopoker.com/my_account/">My Player Page</a></li>
+      <li><a href="http://videopoker.com/my_account/messages/">My Message Center</a></li>
+      <li><a href="http://videopoker.com/players_club/">My Players Club</a></li>
+      <li><a href="http://videopoker.com/my_account/update/">Edit Profile</a></li>
+      <li><a href="http://videopoker.com/forum/">Video Poker Forum</a></li>
+      <li><a href="http://videopoker.com/challenge/">Personal Challenges</a></li>
+      <li><a href="http://videopoker.com/challenge/">Group Challenges</a></li>
+      <li><a href="http://videopoker.com/top_scores/">View Top Scores</a></li>
+      <li><a href="http://videopoker.com/players/">Player Directory</a></li>
+      <li><a href="http://www.facebook.com/VideoPokerDotCom" target="_blank">Our Facebook Page</a></li>
+      </ul>
+      </li>
+  <li><a href="http://videopoker.com/store/"><img src="http://videopoker.com/i/nav/shop.png" width="83" height="25" alt="SHOP" border="0" /></a><ul>
+            <li><a href="http://videopoker.com/store/gold/">Membership Gifts</a></li>
+      <li><a href="http://videopoker.com/store/">Training Software</a></li>
+      <li><a href="http://videopoker.com/apps/">Mobile Apps</a></li>
+      <li><a href="http://videopoker.com/shop/offers/">Special Offers</a></li>
+      <li><a href="http://videopoker.com/learn/books/">Books</a></li>
+      <li><a href="http://videopoker.com/store/">Merchandise / Apparel</a></li>
+      </ul>
+      </li>
+  <li><a href="http://videopoker.com/support/" target="_blank"><img src="http://videopoker.com/i/nav/help.png" width="78" height="25" alt="HELP" border="0" /></a><ul>
+      <li><a href="http://videopoker.com/about/">About VideoPoker.com</a></li>
+      <li><a href="http://videopoker.com/guide/">Site User Guide</a></li>
+      <li><a href="http://videopoker.com/support/" target="_blank">FAQ &amp; Support</a></li>
+      <li><a href="http://videopoker.com/subscribe/">Subscribe to Email</a></li>
+      <li><a href="http://videopoker.com/my_account/status/">Cancel GOLD / Silver</a></li>
+      <li><a href="http://videopoker.com/my_account/settings/">Account Settings</a></li>
+      <li><a href="http://videopoker.com/contact/">Contact Us</a></li>
+      </ul>
+      </li>
+    </ul></div>
+  </div>
+  
+  <div id="content_gameplay" style="overflow:hidden;">
+                            <div id="goldRCol">
+      <div class="glass"><img src="http://videopoker.com/i/glass/triple_play_160.jpg" width="160" height="80" border="0" /></div>
+            <div id="scoreboardD">
+        <div id="topSec">
+                    <h1>Top scores today</h1>
+          <div id="topTen">
+           <div id="leader">
+             <div id="score1">
+               <div id="thumb"></div>
+               <div id="leadRank">1)</div>
+               <div class="uname"></div>
+               <div class="score"></div>
+             </div>
+          </div>
+          <div id="veepHolder">
+             <div id="theVeep"></div>
+           </div>
+          <div id="topList">
+  <table border="0" cellspacing="0" cellpadding="0" class="scoreList">
+      <tr id="score2">
+      <td class="rank">2)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score3">
+      <td class="rank">3)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score4">
+      <td class="rank">4)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score5">
+      <td class="rank">5)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score6">
+      <td class="rank">6)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score7">
+      <td class="rank">7)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score8">
+      <td class="rank">8)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score9">
+      <td class="rank">9)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        <tr id="score10">
+      <td class="rank">10)</td>
+      <td class="uhold"><div class="uname"></div></td>
+      <td class="score"></td>
+    </tr>
+        </table>
+</div>
+<div id="scoreUpdated">Updated: <span id="updateTime">14:26:17</span> &nbsp; <a href="#" onClick="performRefresh(1,0);return false;">refresh</a></div>
+          </div>
+                              
+        </div>
+                <div id="yourStuff" style="display: none;">
+          <h1>Your score today</h1>
+          <div id="thumb">
+            <a href="#" onClick="return playerProfile(180894,17);"><img src="http://videopoker.com/usr/profile/180894/180894_150115021417_m.jpg" height=48 width=48 border=0></a>          </div>
+          <div id="curRank">&nbsp;</div>
+          <div id="yourName">
+            Goldilucks          </div>
+          <div id="playerScore">&nbsp;</div>
+                    <div id="addComment">Add VEEP!</div>
+          <div id="veepArea" class="inactive">
+            <textarea name="veep" rows="3" class="inactive" id="veep">Say something here about your score for others to see if you are in the lead!</textarea>
+          </div>
+                  </div>
+        <div id="yourStuffA">
+                 <h1>Yesterday's Best</h1>
+         <table border="0" cellspacing="0" cellpadding="0" class="scoreList">
+         <tr>
+      <td class="rank">1) </td>
+      <td nowrap="nowrap"><div class="uName"><a href="#" onClick="return playerProfile(78102,17);">
+          judyp125          </a></div></td>
+      <td class="score"><div align="right"><strong>
+          2,025          </strong></div></td>
+    </tr>
+         </table>
+                </div>
+        <div id="yourStuffB">
+          <h1>Your score today</h1>
+          <div id="curRankB">&nbsp;</div>
+          <div id="yourName">
+            Goldilucks          </div>
+          <div id="playerScoreB">&nbsp;</div>
+        </div>
+                      </div>
+          </div>
+            <div id="lCol">
+      <div id="chatHolder"><div class="chat" id="chatApp"></div></div>
+    </div>
+        <div id="cCol">
+      <div id="inlineErrWin" style="display: none;"></div>      <div id="tSec"><a class="btnA" href="./?game=17&title=Triple Play Draw Poker">Tracking</a> <a class="btnA" href="./?game=17&title=Triple Play Draw Poker&training=1">Training</a>         <div class="lnk"><a href="http://videopoker.com/play_games/free/?game=17&name=Triple Play Draw Poker">Game Info</a>  | <a href="http://videopoker.com/gamesNearYou/?game=3%252F5%252F10%2BPlay%25A0Poker" target="_blank">Find</a>  | <a href="#" onClick="return showTutorial(17)">Tutorial</a> | <a href="http://videopoker.com/top_scores/?game=17">Top Scores</a><!-- | <a href="http://videopoker.com/play/?game=17&title=Triple%20Play%20Draw%20Poker&flash=1">PLAY IN FLASH</a>--></div>
+      </div>
+      <div id="displayPays" style="display: none;height:480px;margin-bottom: -484px;"></div>
+      <div id="connErrWin" style="display: none;height:380px;margin-bottom: -484px;"></div>      
+      <div id="gameWin">
+        <div id="gameDisplay" style="background-color:#00019F;overflow:hidden;"><div id="game-container"><br />
+<br />
+Preparing game...<br>
+<br>
+If game does not begin to load, please press <strong>Ctrl+R</strong> on your keyboard to reload the page.<br>
+(hold down the Ctrl key and then press R)<br />
+<br />
+</div></div>
+<div style="position: relative;top: -30px;height: 20px;margin-bottom: -20px; overflow: hidden;z-index:1;text-align:right;padding: 0 20px 0 0;">
+      <input id="gameFocusizer" name="gameFocusizer" type="text" style="height: 10px;width: 11px;margin: 0;background-color: #000;border:none;padding: 0;"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="thePromoBar"><img src="http://videopoker.com/i/promo/1000_beta_1.png" width="1000" height="70" alt="BETA" border="0" usemap="#promoBarMapBeta" /></div>
+<map name="promoBarMapBeta">
+  <area shape="rect" coords="690,12,785,35" href="http://videopoker.com/beta/?title=Triple Play Draw Poker" target="_blank">
+</map>
+            <div id="favGamesBot">
+    <h2>My Favorite Games</h2>
+               <div id="favScrollArea">
+                            <div class="game"><a href="http://videopoker.com/play/?game=28&title=Crazy Times Pay Poker"><img src="http://videopoker.com/i/glass/crazy_times_pay_poker_160.jpg" width="160" height="80" /></a></div>
+                                    <div class="game"><a href="http://videopoker.com/play/?game=27&title=Hyper Bonus Poker"><img src="http://videopoker.com/i/glass/hyper_bonus_poker_160.jpg" width="160" height="80" /></a></div>
+                                    <div class="game"><a href="http://videopoker.com/play/?game=29&title=Multi-Streak Poker"><img src="http://videopoker.com/i/glass/multistreak_poker_160.jpg" width="160" height="80" /></a></div>
+                                    <div class="game"><a href="http://videopoker.com/play/?game=4&title=Super Times Pay Poker"><img src="http://videopoker.com/i/glass/super_times_pay_160.jpg" width="160" height="80" /></a></div>
+                        </div>
+        <div id="mngFav"><a href="http://videopoker.com/my_account/favorites/" onClick="return manageFavorites();">Manage favorites</a></div>
+   </div>
+       <div style="display: none;"><img src="http://videopoker.com/i/usr/veep_top_a.gif" /><img src="http://videopoker.com/i/usr/veep_top.gif" /><img src="http://videopoker.com/i/usr/veep_top_ia.gif" />
+    <form id="ptForm" name="ptForm" method="post" action="/play/?game=17">
+      <input name="pt_h" type="hidden" value="" />
+      <input name="pt_s" type="hidden" value="" />
+      <input name="pt_f" type="hidden" value="" />
+    </form>
+  </div>
+      <div id="addCPop">
+<div id="addCMsg"><strong>You're running low on credits!</strong> <br />
+<br />
+We'll add another 10,000 to your coin bank so you can keep playing. <br />
+This won't affect your overall score today.<div id="addCLink">&nbsp;<br />
+<strong><a href="#" onClick="restoreLow();return false;">Add Credits</a></strong></div></div></div>
+<div id="canvasPrompt" style="display:none;">
+<div id="ie8prompt">
+<p align="center"><img src="../i/graphics/logo.png" width="174" height="82" /></p>
+  <p>The web browser you are using is out of date and is missing some important features and security updates to play games and browse the web safely.</p>
+  <p>We highly recommend <a href="https://www.google.com/intl/en/chrome/browser/">Google Chrome</a> (available for free) for browsing the web and playing our games.</p>
+  <p>Download  Chrome <a href="https://www.google.com/intl/en/chrome/browser/">here</a>. </p>
+  <p><a href="https://www.google.com/intl/en/chrome/browser/"><img src="http://videopoker.com/ie8/chrome_logo_2x.png" width="123" height="40" border="0" /></a></p>
+  <p>You may also use <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCAQFjAA&url=https%3A//www.mozilla.org/en-US/firefox/new/&ei=ZOIuVL3rDM2xogSMr4B4&usg=AFQjCNGc42h2rlNgWWejMo_x7qNo8UnUFQ&sig2=KbG4ayPD2598Jc3Dh24xNA&bvm=bv.76802529,d.cGU">Firefox</a> or  <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Internet Explorer</a> <strong>9</strong> or greater, with the proper settings.</p>
+</div>
+</div>
+  <audio id="awardSound" preload="none">
+    <source src="http://videopoker.com/snd/topaward.mp3">
+    <source src="http://videopoker.com/snd/topaward.ogg">
+    </audio>
+
+<div id="footGames">
+  <div class="grp">
+    <div class="pump">
+      <div class="head">New Arrivals</div>
+      <div class="item"><a href="http://videopoker.com/play/?game=115&amp;title=Hot%20Roll%20Poker"><img src="http://videopoker.com/i/glass/hot_roll_poker.jpg" alt="Hot Roll Poker" width="140" height="70" border="0" /></a></div>
+      <div class="item"><a href="http://videopoker.com/play/?game=31&title=Rack Em Up Poker"><img src="http://videopoker.com/i/glass/rack_em_up_160.jpg" alt="Rack Em Up Poker" width="140" height="70" border="0" /></a></div>
+      <div class="item"><a href="http://videopoker.com/play/?game=30&title=Stack%20%27Em%20Bonus%20Poker"><img src="http://videopoker.com/i/glass/stack_em_bonus_160.jpg" alt="Stack Em Bonus Poker" width="141" height="70" border="0" /></a></div>
+      
+      
+    </div>
+    <div class="pump">
+      <div class="head">Member Favorites</div>
+      <div class="item"><a href="http://videopoker.com/play/?game=41&title=Spin Poker Deluxe"><img src="http://videopoker.com/i/glass/spin_deluxe_160.jpg" alt="Spin Poker Deluxe" width="140" height="70" border="0" /></a></div>
+      <div class="item"><a href="http://videopoker.com/play/?game=4&title=Super%20Times%20Pay%20Poker"><img src="http://videopoker.com/i/glass/super_times_pay_160.jpg" alt="Super Times Pay Poker" width="140" height="70" border="0" /></a></div>
+      <div class="item"><a href="http://videopoker.com/play/?game=69&title=Ultimate X Poker"><img src="http://videopoker.com/i/glass/ultimate_x_160.jpg" alt="Ultimate X Poker" width="140" height="70" border="0" /></a></div>
+    </div>
+  </div>
+  <div class="grp">
+    <div class="col withSep shList">
+      <div class="head">Single Hand Video Poker</div>
+      <ul>
+                <li><a href="http://videopoker.com/play/?game=65&title=Classic Single Hand (Game King)" title="Classic Single Hand (Game King)" class="vpGameRollTrigger" rel="65,Gold,R">
+          Classic Single Hand (Game King)          </a></li>
+                <li><a href="http://videopoker.com/play/?game=22&title=Double Down Stud Poker" title="Double Down Stud Poker" class="vpGameRollTrigger" rel="22,Gold,R">
+          Double Down Stud Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=97&title=Double Pay Poker" title="Double Pay Poker" class="vpGameRollTrigger" rel="97,Gold,R">
+          Double Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=95&title=Double Super Times Pay Poker" title="Double Super Times Pay Poker" class="vpGameRollTrigger" rel="95,Gold,R">
+          Double Super Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=96&title=Dream Card Poker" title="Dream Card Poker" class="vpGameRollTrigger" rel="96,Gold,R">
+          Dream Card Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=93&title=Good Times Pay Poker" title="Good Times Pay Poker" class="vpGameRollTrigger" rel="93,Gold,R">
+          Good Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=79&title=Quick Quads Poker" title="Quick Quads Poker" class="vpGameRollTrigger" rel="79,Gold,R">
+          Quick Quads Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=71&title=Random Rewards Poker" title="Random Rewards Poker" class="vpGameRollTrigger" rel="71,Gold,R">
+          Random Rewards Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=98&title=Super Times Pay Poker" title="Super Times Pay Poker" class="vpGameRollTrigger" rel="98,Gold,R">
+          Super Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=73&title=Ultimate 4 of a Kind Bonus " title="Ultimate 4 of a Kind Bonus " class="vpGameRollTrigger" rel="73,Gold,R">
+          Ultimate 4 of a Kind Bonus           </a></li>
+                <li><a href="http://videopoker.com/play/?game=94&title=Ultimate X Poker" title="Ultimate X Poker" class="vpGameRollTrigger" rel="94,Gold,R">
+          Ultimate X Poker          </a></li>
+              </ul>
+      <div class="head"><br>
+Keno</div>
+      <ul>
+                <li><a href="http://videopoker.com/play/?game=113&title=Classic Keno" title="Classic Keno" class="vpGameRollTrigger" rel="113,Gold,R">
+          Classic Keno          </a></li>
+                <li><a href="http://videopoker.com/play/?game=114&title=Four Card Keno" title="Four Card Keno" class="vpGameRollTrigger" rel="114,Gold,R">
+          Four Card Keno          </a></li>
+                <li><a href="http://videopoker.com/play/?game=112&title=Multi-Card Keno" title="Multi-Card Keno" class="vpGameRollTrigger" rel="112,Gold,R">
+          Multi-Card Keno          </a></li>
+                <li><a href="http://videopoker.com/play/?game=111&title=Power Keno" title="Power Keno" class="vpGameRollTrigger" rel="111,Gold,R">
+          Power Keno          </a></li>
+                <li><a href="http://videopoker.com/play/?game=100&title=Caveman Keno" title="Caveman Keno" class="vpGameRollTrigger" rel="100,Gold,R">
+          Caveman Keno          </a></li>
+                <li><a href="http://videopoker.com/play/?game=99&title=Cleopatra Keno" title="Cleopatra Keno" class="vpGameRollTrigger" rel="99,Gold,R">
+          Cleopatra Keno          </a></li>
+              </ul>
+    </div>
+    <div class="col">
+      <div class="head">Multi Hand Video Poker</div>
+      <ul>
+                <li><a href="http://videopoker.com/play/?game=57&title=Ace Invaders" title="Ace Invaders" class="vpGameRollTrigger" rel="57,Gold,R">
+          Ace Invaders          </a></li>
+                <li><a href="http://videopoker.com/play/?game=82&title=Anything's Wild" title="Anything's Wild" class="vpGameRollTrigger" rel="82,Gold,R">
+          Anything's Wild          </a></li>
+                <li><a href="http://videopoker.com/play/?game=68&title=Big Times Draw Poker" title="Big Times Draw Poker" class="vpGameRollTrigger" rel="68,Gold,R">
+          Big Times Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=24&title=Black Jack Bonus Poker" title="Black Jack Bonus Poker" class="vpGameRollTrigger" rel="24,Gold,R">
+          Black Jack Bonus Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=105&title=Build a Wheel Poker" title="Build a Wheel Poker" class="vpGameRollTrigger" rel="105,Gold,R">
+          Build a Wheel Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=13&title=Chase the Royal" title="Chase the Royal" class="vpGameRollTrigger" rel="13,Gold,R">
+          Chase the Royal          </a></li>
+                <li><a href="http://videopoker.com/play/?game=28&title=Crazy Times Pay Poker" title="Crazy Times Pay Poker" class="vpGameRollTrigger" rel="28,Gold,R">
+          Crazy Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=102&title=Deal Draw Poker" title="Deal Draw Poker" class="vpGameRollTrigger" rel="102,Gold,R">
+          Deal Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=47&title=Double Down Stud Poker" title="Double Down Stud Poker" class="vpGameRollTrigger" rel="47,Gold,R">
+          Double Down Stud Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=62&title=Double Pay Poker" title="Double Pay Poker" class="vpGameRollTrigger" rel="62,Gold,R">
+          Double Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=56&title=Double Pay Spin Poker" title="Double Pay Spin Poker" class="vpGameRollTrigger" rel="56,Gold,R">
+          Double Pay Spin Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=88&title=Double Super Times Pay Poker" title="Double Super Times Pay Poker" class="vpGameRollTrigger" rel="88,Gold,R">
+          Double Super Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=74&title=Dream Card Poker" title="Dream Card Poker" class="vpGameRollTrigger" rel="74,Gold,R">
+          Dream Card Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=101&title=Extra Action Poker" title="Extra Action Poker" class="vpGameRollTrigger" rel="101,Gold,R">
+          Extra Action Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=23&title=Extra Draw Frenzy Poker" title="Extra Draw Frenzy Poker" class="vpGameRollTrigger" rel="23,Gold,R">
+          Extra Draw Frenzy Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=15&title=Fifty Play Draw Poker" title="Fifty Play Draw Poker" class="vpGameRollTrigger" rel="15,Gold,R">
+          Fifty Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=87&title=Fifty Play with Quick Quads" title="Fifty Play with Quick Quads" class="vpGameRollTrigger" rel="87,Gold,R">
+          Fifty Play with Quick Quads          </a></li>
+                <li><a href="http://videopoker.com/play/?game=91&title=Fifty Play with Super Times Pay" title="Fifty Play with Super Times Pay" class="vpGameRollTrigger" rel="91,Gold,R">
+          Fifty Play with Super Times Pay          </a></li>
+                <li><a href="http://videopoker.com/play/?game=3&title=Five Aces Poker" title="Five Aces Poker" class="vpGameRollTrigger" rel="3,Gold,R">
+          Five Aces Poker          </a></li>
+        </ul></div><div class="col"><div class="head">&nbsp;</div><ul>        <li><a href="http://videopoker.com/play/?game=46&title=Five Play Draw Poker" title="Five Play Draw Poker" class="vpGameRollTrigger" rel="46,Gold,R">
+          Five Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=19&title=Five Play Multi-Strike Poker" title="Five Play Multi-Strike Poker" class="vpGameRollTrigger" rel="19,Gold,R">
+          Five Play Multi-Strike Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=70&title=Good Times Pay Poker" title="Good Times Pay Poker" class="vpGameRollTrigger" rel="70,Gold,R">
+          Good Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=115&title=Hot Roll Poker" title="Hot Roll Poker" class="vpGameRollTrigger" rel="115,Gold,R">
+          Hot Roll Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=20&title=Hundred Play Draw Poker" title="Hundred Play Draw Poker" class="vpGameRollTrigger" rel="20,Gold,R">
+          Hundred Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=86&title=Hundred Play with Quick Quads" title="Hundred Play with Quick Quads" class="vpGameRollTrigger" rel="86,Gold,R">
+          Hundred Play with Quick Quads          </a></li>
+                <li><a href="http://videopoker.com/play/?game=90&title=Hundred Play with Super Times Pay" title="Hundred Play with Super Times Pay" class="vpGameRollTrigger" rel="90,Gold,R">
+          Hundred Play with Super Times Pay          </a></li>
+                <li><a href="http://videopoker.com/play/?game=27&title=Hyper Bonus Poker" title="Hyper Bonus Poker" class="vpGameRollTrigger" rel="27,Gold,R">
+          Hyper Bonus Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=29&title=Multi-Streak Poker" title="Multi-Streak Poker" class="vpGameRollTrigger" rel="29,Gold,R">
+          Multi-Streak Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=8&title=Multi-Strike Poker" title="Multi-Strike Poker" class="vpGameRollTrigger" rel="8,Gold,R">
+          Multi-Strike Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=103&title=Multi-Strike Poker Ultra Deluxe" title="Multi-Strike Poker Ultra Deluxe" class="vpGameRollTrigger" rel="103,Gold,R">
+          Multi-Strike Poker Ultra Deluxe          </a></li>
+                <li><a href="http://videopoker.com/play/?game=61&title=Multi-Strike Super Times Pay" title="Multi-Strike Super Times Pay" class="vpGameRollTrigger" rel="61,Gold,R">
+          Multi-Strike Super Times Pay          </a></li>
+                <li><a href="http://videopoker.com/play/?game=66&title=Quick Quads Poker" title="Quick Quads Poker" class="vpGameRollTrigger" rel="66,Gold,R">
+          Quick Quads Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=31&title=Rack 'Em Up Poker" title="Rack 'Em Up Poker" class="vpGameRollTrigger" rel="31,Gold,R">
+          Rack 'Em Up Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=72&title=Random Rewards Poker" title="Random Rewards Poker" class="vpGameRollTrigger" rel="72,Gold,R">
+          Random Rewards Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=104&title=Spin Fever Poker" title="Spin Fever Poker" class="vpGameRollTrigger" rel="104,Gold,R">
+          Spin Fever Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=14&title=Spin Poker" title="Spin Poker" class="vpGameRollTrigger" rel="14,Gold,R">
+          Spin Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=41&title=Spin Poker Deluxe" title="Spin Poker Deluxe" class="vpGameRollTrigger" rel="41,Gold,R">
+          Spin Poker Deluxe          </a></li>
+                <li><a href="http://videopoker.com/play/?game=80&title=Spin Poker with Dream Card" title="Spin Poker with Dream Card" class="vpGameRollTrigger" rel="80,Gold,R">
+          Spin Poker with Dream Card          </a></li>
+        </ul></div><div class="col"><div class="head">&nbsp;</div><ul>        <li><a href="http://videopoker.com/play/?game=30&title=Stack 'Em Bonus Poker" title="Stack 'Em Bonus Poker" class="vpGameRollTrigger" rel="30,Gold,L">
+          Stack 'Em Bonus Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=4&title=Super Times Pay Poker" title="Super Times Pay Poker" class="vpGameRollTrigger" rel="4,Gold,L">
+          Super Times Pay Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=55&title=Super Times Pay Spin Poker" title="Super Times Pay Spin Poker" class="vpGameRollTrigger" rel="55,Gold,L">
+          Super Times Pay Spin Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=59&title=Super Triple Play Poker" title="Super Triple Play Poker" class="vpGameRollTrigger" rel="59,Gold,L">
+          Super Triple Play Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=16&title=Ten Play Draw Poker" title="Ten Play Draw Poker" class="vpGameRollTrigger" rel="16,Gold,L">
+          Ten Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=11&title=Trade Up Poker" title="Trade Up Poker" class="vpGameRollTrigger" rel="11,Gold,L">
+          Trade Up Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=17&title=Triple Play Draw Poker" title="Triple Play Draw Poker" class="vpGameRollTrigger" rel="17,Gold,L">
+          Triple Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=25&title=Triple Play Keno Draw Poker" title="Triple Play Keno Draw Poker" class="vpGameRollTrigger" rel="25,Gold,L">
+          Triple Play Keno Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=110&title=Triple Play with Match Card" title="Triple Play with Match Card" class="vpGameRollTrigger" rel="110,Gold,L">
+          Triple Play with Match Card          </a></li>
+                <li><a href="http://videopoker.com/play/?game=84&title=Triple Spin Poker" title="Triple Spin Poker" class="vpGameRollTrigger" rel="84,Gold,L">
+          Triple Spin Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=108&title=Twenty Five Play Draw Poker" title="Twenty Five Play Draw Poker" class="vpGameRollTrigger" rel="108,Gold,L">
+          Twenty Five Play Draw Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=107&title=Twenty Five Play Super Times Pay" title="Twenty Five Play Super Times Pay" class="vpGameRollTrigger" rel="107,Gold,L">
+          Twenty Five Play Super Times Pay          </a></li>
+                <li><a href="http://videopoker.com/play/?game=106&title=Ultimate 4 of a Kind Bonus " title="Ultimate 4 of a Kind Bonus " class="vpGameRollTrigger" rel="106,Gold,L">
+          Ultimate 4 of a Kind Bonus           </a></li>
+                <li><a href="http://videopoker.com/play/?game=26&title=Ultimate Aces Poker" title="Ultimate Aces Poker" class="vpGameRollTrigger" rel="26,Gold,L">
+          Ultimate Aces Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=69&title=Ultimate X Poker" title="Ultimate X Poker" class="vpGameRollTrigger" rel="69,Gold,L">
+          Ultimate X Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=78&title=Wheel Poker" title="Wheel Poker" class="vpGameRollTrigger" rel="78,Gold,L">
+          Wheel Poker          </a></li>
+                <li><a href="http://videopoker.com/play/?game=83&title=Wheel Poker Deluxe" title="Wheel Poker Deluxe" class="vpGameRollTrigger" rel="83,Gold,L">
+          Wheel Poker Deluxe          </a></li>
+                <li><a href="http://videopoker.com/play/?game=85&title=Wheel Poker with Quick Quads" title="Wheel Poker with Quick Quads" class="vpGameRollTrigger" rel="85,Gold,L">
+          Wheel Poker with Quick Quads          </a></li>
+              </ul>
+      
+    </div>
+  </div>
+</div>
+<div id="footMap">
+  <div class="grp">
+    <div class="col">
+      <div class="head">Play</div>
+      <div class="desc">Play authentic video poker just like the casino</div>
+      <div class="links"><a href="http://videopoker.com/play_games/">Play video poker</a><br />
+        <a href="http://videopoker.com/play_keno/">Play keno</a><br />
+        <a href="http://videopoker.com/contests/">Free contests</a><br />
+        <a href="http://videopoker.com/challenge/">Personal challenge</a><br />
+        <a href="http://videopoker.com/challenge/">Group challenge</a><br />
+        <a href="http://videopoker.com/apps/">Mobile Apps</a><br />
+        <a href="http://videopoker.com/gamesNearYou/">Find in casinos</a><br />
+        <a href="http://videopoker.com/players_club/">Players Club</a></div>
+    </div>
+    <div class="col">
+      <div class="head">Learn</div>
+      <div class="desc">Make the most of your casino experience</div>
+      <div class="links"><a href="http://videopoker.com/learn/">Intro to video poker</a><br />
+        <a href="http://videopoker.com/announcements/">Current newsletter</a><br />
+        <a href="http://videopoker.com/learn/pay_tables/">Pay tables</a><br />
+        <a href="http://videopoker.com/learn/superstitions/">Superstitions</a><br />
+        <a href="http://videopoker.com/learn/do_and_dont/">Do's and don'ts</a><br />
+        <a href="http://videopoker.com/learn/statistics/">Statistics</a><br />
+        <a href="http://videopoker.com/learn/bob_dancer_answers/">Dancer's Answers</a><br />
+        <a href="http://videopoker.com/store/">Training software</a><br />
+        <a href="http://videopoker.com/training/">Training Mode</a><br />
+        <a href="http://videopoker.com/learn/books/">Books</a><br />
+        <a href="http://videopoker.com/test/">Test your skills </a></div>
+    </div>
+    <div class="col">
+      <div class="head">Interact</div>
+      <div class="desc">Share your experiences with other VP players</div>
+      <div class="links"><a href="http://videopoker.com/my_account/">My player page</a><br />
+        <a href="http://videopoker.com/my_account/messages/">My message center</a><br />
+        <a href="http://videopoker.com/players_club/">My Players Club</a><br />
+        <a href="http://videopoker.com/my_account/update/">Edit profile</a><br />
+        <a href="http://forum.videopoker.com/forum/">Video poker forum</a><br />
+        <a href="http://videopoker.com/challenge/">Personal challenges</a><br />
+        <a href="http://videopoker.com/challenge/">Group challenges</a><br />
+        <a href="http://videopoker.com/top_scores/">View top scores</a><br />
+        <a href="http://videopoker.com/players/">Player directory</a><br />
+        <a href="http://www.facebook.com/VideoPokerDotCom" target="_blank">Our Facebook page</a></div>
+    </div>
+    <div class="col">
+      <div class="head">Shop</div>
+      <div class="desc">Play authentic video poker just like the casino</div>
+      <div class="links"><a href="http://videopoker.com/join/benefits/">Membership upgrade</a><br />
+        <a href="http://videopoker.com/store/gold/">Membership gifts</a><br />
+        <a href="http://videopoker.com/store/">Training software</a><br />
+        <a href="http://videopoker.com/apps/">Mobile Apps</a><br />
+        <a href="http://videopoker.com/shop/offers/">Special offers</a><br />
+        <a href="http://videopoker.com/learn/books/">Books</a><br />
+        <a href="http://videopoker.com/store/">Merchandise / apparel</a></div>
+    </div>
+    <div class="col">
+      <div class="head">Help</div>
+      <div class="desc">Discover new features, <br />
+        get technical support</div>
+      <div class="links"><a href="http://videopoker.com/about/">About VideoPoker.com</a><br />
+        <a href="#" onClick="userGuide();">Site User Guide</a><br />
+        <a href="http://videopoker.com/support/" target="_blank">FAQ &amp; support</a><br />
+        <a href="http://videopoker.com/subscribe/">Subscribe to email</a><br />
+                <a href="https://www.videopoker.com/my_account/status/">Cancel GOLD / Silver</a><br />
+                <a href="http://videopoker.com/my_account/settings/">Account settings</a><br />
+        <a href="http://videopoker.com/contact/">Contact us</a><br />
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footCopy">&copy;
+  2015  Action Gaming, Inc. All Rights Reserved.<a href="http://videopoker.com/privacy/">Privacy Policy</a> <a href="http://videopoker.com/terms/">Terms</a> <a href="http://videopoker.com/advertise/">Advertise</a> <a href="http://www.videopokeraffiliate.com/" target="_blank">Become an Affiliate</a> <a href="http://videopoker.com/responsibleGambling/">Responsible Gambling</a> </div>
+  </div>
+<div id="overlayBg" class="overlayBg"></div>
+<div id="remotePop" class="remotePop"></div>
+<!-- Quantcast Tag -->
+<script type="text/javascript">
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push({
+qacct:"p-fbxq0DwxEBDac"
+});
+</script>
+
+<noscript>
+<div style="display:none;">
+<img src="http://videopoker.com//pixel.quantserve.com/pixel/p-fbxq0DwxEBDac.gif" border="0" height="1" width="1" alt="Quantcast"/>
+</div>
+</noscript>
+<!-- End Quantcast tag -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1771087-1']);
+  
+  _gaq.push(['_setCustomVar',
+      1,                  
+      'indUser',    
+      '180894',           
+      3  
+   ]);
+  _gaq.push(['_setCustomVar',
+      2,                  
+      'memberType',    
+      'Gold',           
+      3  
+   ]);
+    _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script><script>var setVpPrm=function(){};var trackJs=function(){};trackJs.configure=function(){};var vpInterface=function(){};var formatNumStr=function(){};var checkAlerts=function(){};var checkMsg=function(){};var addCommas=function(){};window.onerror=function(){};</script><script>var __adroll = document.createElement('div');</script></body>
+</html>
