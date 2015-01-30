@@ -9,7 +9,11 @@ server.views({
     },
     relativeTo: __dirname,
     path: './views',
-    isCached: false
+    layoutPath: './views/layout',
+    layout: true,
+    isCached: false,
+    helpersPath: './views/helpers',
+    partialsPath: './views/partials'
 });
 
 server.register(require('dindin-api'), function (err) {

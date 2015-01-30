@@ -1,0 +1,10 @@
+<div id="search-form">
+    <form action="/" method='get'>
+        <input name="cuisine" type="text" value="">
+        <input type="submit" value="Search">
+    </form>
+</div>
+
+{{#each recipes}}
+   {{> summary}}
+{{/each}}

@@ -1,0 +1,11 @@
+<div class="recipe-detail">
+	<h3 class="recipe-summary-name">{{recipe.name}} ({{recipe.cuisine}})</h3> 
+	<span class="stars">{{recipe.stars}} ★</span>
+	<p class="recipe-info">Serves: {{recipe.serves}} | Prep: {{recipe.prep_time}} | Cooking: {{recipe.cooking_time}}</p>
+	<h4>Ingredients</h4>
+	<p>{{breaklines recipe.ingredients}}</p>
+	<h4>Directions</h4>
+	<p>{{breaklines recipe.directions}}</p>
+
+	<a class="star-button" href="/recipes/{{recipe.id}}/star">★ Star this recipe ★</a>
+</div>

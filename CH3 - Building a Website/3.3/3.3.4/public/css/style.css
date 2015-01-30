@@ -1,0 +1,195 @@
+/*Layout styles*/
+
+body {
+	font-family: arial, helvetica, sans-serif;
+	margin: 30px;
+	background: #1E1E20;
+	color: #D9CB9E;
+	line-height: 1.5em;
+}
+
+header {
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+footer {
+	clear: both;
+	text-align: center;
+}
+
+.header-button {
+	background: #374140;
+	padding: 10px;
+	float: right;
+	overflow: hidden;
+	margin-left: 10px;
+}
+
+/*Home page styles*/
+
+#logo {
+	display: block;
+	text-decoration: none;
+	margin: auto;
+	width: 200px;
+}
+
+h1, h2, h3, a {
+	color: #D9CB9E;
+	text-decoration: none;
+}
+
+.recipe-summary {
+	padding: 20px;
+	margin-bottom: 20px;
+	background: #374140;
+	clear: both;
+	display: block;
+	overflow: hidden;
+}
+
+.recipe-summary-name {
+	width: 90%;
+	float: left;
+	font-size: 18px;
+	margin-bottom: 5px;
+}
+
+.stars {
+	float: right;
+	width: 10%;
+	text-align:right;
+	font-size: 24px;
+}
+
+#search-form {
+	margin: 20px 0;
+	background: #374140;
+	padding: 10px;
+	float: left;
+	overflow: hidden;
+	clear: both;
+}
+
+#search-form input {
+	background: #1E1E20;
+	border: 0;
+	color: #D9CB9E;
+	padding: 5px;
+	height: 20px;
+	-moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+#search-form input[type=text] {
+}
+
+#search-form input[type=submit] {
+	font-size: 15px;
+	width: 60px;
+}
+
+/*Single recipe styles*/
+
+.recipe-detail {
+	padding: 20px;
+	margin-bottom: 20px;
+	background: #374140;
+	clear: both;
+	display: block;
+	overflow: hidden;
+}
+
+.recipe-info {
+	clear: both;
+	font-size: 14px;
+}
+
+.star-button {
+	width: 150px;
+	text-align: center;
+	margin: auto;
+	background: #D9CB9E;
+	display: block;
+	padding: 10px;
+	color: #1E1E20;
+	margin-top: 50px;
+}
+
+.recipe h3 {
+	overflow: hidden;
+}
+
+.intro {
+	clear: both;
+}
+
+.recipe-link {
+	width: 80%;
+	float: left;
+	display: block;
+}
+
+/*Login page styles*/
+
+#login-form {
+	background: #374140;
+	padding: 20px;
+}
+
+#login-form .form-control {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+#login-form form {
+	margin: auto;
+}
+
+#login-form label {
+	width: 120px;
+	display: block;
+	float: left;
+	-moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+#login-form input {
+	width: 300px;
+	background: #1E1E20;
+	border: 0;
+	display: block;
+	color: #D9CB9E;
+	float: left;
+	-moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 10px;
+    padding: 10px;
+}
+
+#login-form textarea {
+	width: 300px;
+	background: #1E1E20;
+	height: 100px;
+	border: 0;
+	display: block;
+	color: #D9CB9E;
+	float: left;
+	-moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 10px;
+}
+
+#login-form input[type=submit] {
+	font-size: 15px;
+	width: 60px;
+	margin-top: 20px;
+	line-height: 12px;
+}

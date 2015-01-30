@@ -11,6 +11,7 @@
   "dependencies": {
     "dindin-api": "^1.5.1",
     "handlebars": "^2.0.0",
-    "hapi": "^8.1.0"
+    "hapi": "^8.1.0",
+    "wreck": "^5.1.0"
   }
 }
