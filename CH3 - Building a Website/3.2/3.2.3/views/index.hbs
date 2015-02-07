@@ -13,13 +13,6 @@
         <a class="header-button" href="/login">Login</a>
     </header>
 
-    <div id="search-form">
-        <form action="/" method='get'>
-            <input name="cuisine" type="text" value="">
-            <input type="submit" value="Search">
-        </form>
-    </div>
-
     {{#each recipes}}
         <a class="recipe-summary" href="/recipes/{{id}}">
             <h3 class="recipe-summary-name">{{name}} ({{cuisine}})</h3> 

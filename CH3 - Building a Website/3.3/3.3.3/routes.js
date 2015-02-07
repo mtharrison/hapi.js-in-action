@@ -31,6 +31,10 @@ module.exports = [{
 
         Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
 
+            if (err) {
+                throw err;
+            }
+
             reply.view('single', {
                 recipe: payload
             });

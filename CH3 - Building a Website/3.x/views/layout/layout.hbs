@@ -7,11 +7,22 @@
 </head>
 <body>
 
-	{{> header}}
+	<header>
+			<a id="logo" href="/"><img src="/images/logo.png" alt="DinDin"></a>
+					
+			{{#if user.loggedIn}}
+				<a class="header-button" href="/logout">Logout</a>
+				<a class="header-button" href="/create">Create +</a>
+			{{else}}
+				<a class="header-button" href="/login">Login</a>
+			{{/if}}
+	</header>
  
 	{{{content}}}
 
-	{{> footer}}
+	<footer>
+			<p>&copy; 2015 DinDin</p>
+	</footer>
 
 </body>
 </html>

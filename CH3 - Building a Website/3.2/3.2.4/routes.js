@@ -5,7 +5,7 @@ module.exports = [{
 
         var recipes = [{
             id: 1,
-            name: 'Example recipe 1',
+            name: 'Silicate soup',
             cuisine: 'Martian',
             stars: 100,
             serves: 1,
@@ -14,7 +14,7 @@ module.exports = [{
         },
         {
             id: 2,
-            name: 'Example recipe 2',
+            name: 'Methane trifle',
             cuisine: 'Neptunian',
             stars: 200,
             serves: 1,
