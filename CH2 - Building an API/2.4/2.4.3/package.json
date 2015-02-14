@@ -1,0 +1,13 @@
+{
+  "name": "dindin",
+  "version": "0.0.0",
+  "description": "A social network for food",
+  "main": "index.js",
+  "author": "Matt Harrison",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^8.0.0",
+    "sqlite3": "^3.0.4"
+  }
+}
