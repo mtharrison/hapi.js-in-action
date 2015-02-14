@@ -34,8 +34,7 @@ server.register({
 }, function (err) {
 
     if (err) {
-        console.log(err);
-        return;
+        throw err;
     }
 
     // Starting the server

@@ -1,0 +1,18 @@
+{
+  "name": "dindin-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dindin-api": "^1.5.1",
+    "handlebars": "^2.0.0",
+    "hapi": "^8.1.0",
+    "wreck": "^5.1.0",
+    "yar": "^3.0.3"
+  }
+}
