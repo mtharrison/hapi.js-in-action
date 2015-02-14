@@ -1,5 +1,4 @@
 var Hapi = require('hapi');
-var Path = require('path');
 
 var server = new Hapi.Server();
 server.connection({port: 4000});
@@ -19,27 +18,30 @@ server.views({
     helpersPath: './views/helpers',
 });
 
-server.register([
-        {
-            register: require('dindin-api')
-        },
-        {
-            register: require('yar'),
-            options: {
-                cookieOptions: {
-                    password: 'password',
-                    isSecure: false
-                }
-            }
-        },
-    ],
-    function (err) {
+server.bind({
+    API_BASE_URL: 'http://localhost:4000/api',
+    WEB_BASE_URL: 'http://localhost:4000/'
+});
+
+// Register plugins
+
+server.register([{
+    register: require('dindin-api')
+}, {
+    register: require('yar'),
+    options: {
+        cookieOptions: {
+            password: 'password',
+            isSecure: false
+        }
+    }
+}], function (err) {
 
     if (err) {
         throw err;
     }
 
-    // Register routes
+    // Add routes
 
     server.route(require('./routes'));
 
