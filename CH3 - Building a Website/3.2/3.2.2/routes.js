@@ -1,12 +1,8 @@
-var WEB_BASE_URL = 'http://localhost:4000/';
-var API_BASE_URL = 'http://localhost:4000/api';
+var Pages = require('./handlers/pages');
+var Assets = require('./handlers/assets');
 
 module.exports = [{
     method: 'GET',
     path: '/{param*}',
-    handler: {
-        directory: {
-            path: 'public'
-        }
-    }
+    handler: Assets.servePublicDirectory
 }];

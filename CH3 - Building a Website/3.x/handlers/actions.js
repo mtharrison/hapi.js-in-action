@@ -4,7 +4,7 @@ exports.login = function (request, reply) {
 
 	var self = this;
 
-    var apiUrl = this.API_BASE_URL + '/login';
+    var apiUrl = this.apiBaseUrl + '/login';
 
     Wreck.post(apiUrl, {
         payload: JSON.stringify(request.payload),
@@ -16,13 +16,13 @@ exports.login = function (request, reply) {
         }
 
         if (res.statusCode !== 200) {
-            reply.redirect(self.WEB_BASE_URL + '/login');
+            reply.redirect(self.webBaseUrl + '/login');
         } else {
             request.session.set('user', {
                 loggedIn: true, 
                 token: payload.token
             });
-            reply.redirect(self.WEB_BASE_URL);
+            reply.redirect(self.webBaseUrl);
         }
 
     });
@@ -32,14 +32,14 @@ exports.login = function (request, reply) {
 exports.logout = function (request, reply) {
 
     request.session.clear('user');
-    reply.redirect(this.WEB_BASE_URL);
+    reply.redirect(this.webBaseUrl);
 };
 
 exports.create = function (request, reply) {
 
 	var self = this;
 
-    var apiUrl = this.API_BASE_URL + '/recipes';
+    var apiUrl = this.apiBaseUrl + '/recipes';
 
     Wreck.post(apiUrl, {
         payload: JSON.stringify(request.payload),
@@ -48,7 +48,7 @@ exports.create = function (request, reply) {
         }
     }, function (err, res, payload) {
 
-        reply.redirect(self.WEB_BASE_URL);
+        reply.redirect(self.webBaseUrl);
     });
 };
 
@@ -56,11 +56,11 @@ exports.star = function (request, reply) {
 
 	var self = this;
 
-    var apiUrl = this.API_BASE_URL + '/recipes/' + request.params.id + '/star';
+    var apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id + '/star';
 
     Wreck.post(apiUrl, function (err, res, payload) {
         
-        reply.redirect(self.WEB_BASE_URL + '/recipes/' + request.params.id);
+        reply.redirect(self.webBaseUrl + '/recipes/' + request.params.id);
     });
 };
 

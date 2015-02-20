@@ -2,7 +2,7 @@ var Wreck = require('wreck');
 
 exports.home = function (request, reply) {
 
-    var apiUrl = this.API_BASE_URL + '/recipes';
+    var apiUrl = this.apiBaseUrl + '/recipes';
 
     if (request.query.cuisine) {
         apiUrl += '?cuisine=' + request.query.cuisine;
@@ -10,17 +10,13 @@ exports.home = function (request, reply) {
 
     Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
 
-        reply.view('index', {
-            recipes: payload,
-            user: request.session.get('user'),
-            search: request.query.cuisine
-        });
+        reply.view('index');
     });
 };
 
 exports.viewRecipe = function (request, reply) {
 
-    var apiUrl = this.API_BASE_URL + '/recipes/' + request.params.id;
+    var apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id;
 
     Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
 

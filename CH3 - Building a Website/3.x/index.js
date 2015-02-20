@@ -16,17 +16,26 @@ server.views({
     isCached: false,
     partialsPath: './views/partials',
     helpersPath: './views/helpers',
+    context: function (request) {
+      return {
+        credentials: {
+          suchAThing: 'Hiii!'
+        },
+      }
+    }
 });
 
 server.bind({
-    API_BASE_URL: 'http://localhost:4000/api',
-    WEB_BASE_URL: 'http://localhost:4000/'
+    apiBaseUrl: 'http://localhost:4000/api',
+    webBaseUrl: 'http://localhost:4000/'
 });
 
 // Register plugins
 
 server.register([{
     register: require('dindin-api')
+}, {
+    register: require('hapi-context-credentials')
 }, {
     register: require('yar'),
     options: {
