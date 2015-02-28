@@ -1,5 +1,5 @@
 {
-  "name": "dindin-web",
+  "name": "4.1.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dindin-api": "1.7.0",
-    "handlebars": "^2.0.0",
-    "hapi": "^8.1.0"
+    "joi": "^5.1.0"
   }
 }
