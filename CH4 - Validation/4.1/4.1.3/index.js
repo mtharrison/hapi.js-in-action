@@ -1,12 +1,21 @@
 var Joi = require('joi');
 
-var report = {
+var goodReport = {
     station: 'Taipei',
     datetime: new Date('Wed Jul 22 2015 12:00:00 GMT+0000 (GMT)'),
     temperature: 34,
     humidity: 95,
     precipitation: false,
     windDirection: 'E',
+};
+
+var badReport = {
+    station: 'Taipei',
+    datetime: new Date('Wed Jul 22 2015 12:00:00 GMT+0000 (GMT)'),
+    temperature: 34,
+    humidity: 95,
+    precipitation: false,
+    windDirection: 'WE',		//Invalid
 };
 
 var schema = {
@@ -19,4 +28,5 @@ var schema = {
 		.valid(['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
 };
 
-Joi.assert(report, schema);
+Joi.assert(goodReport, schema);
+Joi.assert(badReport, schema);
