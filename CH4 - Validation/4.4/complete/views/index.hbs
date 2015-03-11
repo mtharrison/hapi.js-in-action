@@ -12,25 +12,25 @@
 
 <form class="form-horizontal" action="/" method="POST">
   <div class="form-group {{formClass errors 'name'}}">
-    <label for="inputEmail3" class="col-sm-2 control-label">Your name</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="name" value="{{values.name}}">
     </div>
   </div>
   <div class="form-group {{formClass errors 'email'}}">
-    <label for="inputEmail3" class="col-sm-2 control-label">Your email address</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">Email address</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="email" value="{{values.email}}">
     </div>
   </div>
   <div class="form-group {{formClass errors 'age'}}">
-    <label for="inputEmail3" class="col-sm-2 control-label">Your age</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">Age</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="age" value="{{values.age}}">
     </div>
   </div>
   <div class="form-group {{formClass errors 'coffee'}}">
-    <label for="inputEmail3" class="col-sm-2 control-label">Favorite coffee</label>
+    <label for="inputEmail3" class="col-sm-2 control-label">Coffee preference</label>
     <div class="col-sm-10">
       <select class="form-control" name="coffee" value="{{values.coffee}}">
         <option disabled selected> -- select an option -- </option>
@@ -39,12 +39,6 @@
         <option {{isSelected values.coffee 'capuccino'}} value="capuccino">Capuccino</option>
         <option {{isSelected values.coffee 'americano'}} value="americano">Americano</option>
       </select>
-    </div>
-  </div>
-  <div class="form-group {{formClass errors 'password'}}">
-    <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" name="password" value="{{values.password}}">
     </div>
   </div>
   <div class="form-group">

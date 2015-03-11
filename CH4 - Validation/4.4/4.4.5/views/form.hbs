@@ -1,0 +1,44 @@
+<div class="row" id="formErrors">
+    <div class="col-sm-10 col-sm-offset-2">
+        {{#each errors}}
+            <p class="bg-danger">{{this}}</p>
+        {{/each}}
+    </div>
+</div>
+
+<form action="/" class="form-horizontal" method="post">
+    <div class="form-group {{#if errors.name}}has-error{{/if}}">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="name" type="text" value="{{values.name}}">
+        </div>
+    </div>
+
+    <div class="form-group {{#if errors.email}}has-error{{/if}}">
+        <label class="col-sm-2 control-label">Email address</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="email" type="text" value="{{values.email}}">
+        </div>
+    </div>
+
+    <div class="form-group {{#if errors.age}}has-error{{/if}}">
+        <label class="col-sm-2 control-label">Age</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="age" type="text" value="{{values.age}}">
+        </div>
+    </div>
+
+    <div class="form-group {{#if errors.coffee}}has-error{{/if}}">
+        <label class="col-sm-2 control-label">Coffee preference</label>
+        <div class="col-sm-10">
+            <input class="form-control" name="coffee" type="text" value="{{values.coffee}}">
+            <p class="help-block">Choose from latte, cappuccino, flat white, americano</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
