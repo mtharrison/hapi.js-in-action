@@ -15,8 +15,8 @@ module.exports = [{
                 name: Joi.string().required(),
                 email: Joi.string().email().required(),
                 age: Joi.number().required(),
-                coffee: Joi.string().required()
-                    .valid(['flat_white','latte','cappuccino','americano']),
+                tshirt: Joi.string().required()
+                    .valid(['S','M','L','XL']),
                 password: Joi.string().required().min(6).max(32),
             },
             options: {
