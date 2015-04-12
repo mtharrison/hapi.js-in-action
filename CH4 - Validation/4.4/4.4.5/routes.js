@@ -33,8 +33,6 @@ module.exports = [{
                     }
                 }
 
-                console.log(errors);
-
                 reply.view('form', {
                     errors: errors,
                     values: request.payload
