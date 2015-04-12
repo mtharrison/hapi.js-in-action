@@ -10,7 +10,6 @@ server.views({
         hbs: require('handlebars')
     },
     path: Path.join(__dirname, 'views'),
-    helpersPath: Path.join(__dirname, 'views/helpers'),
     layoutPath: Path.join(__dirname, 'views/layouts'),
     isCached: false,
     layout: true
