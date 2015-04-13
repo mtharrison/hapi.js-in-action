@@ -1,5 +1,5 @@
 {
-  "name": "4.2.3",
+  "name": "sidebar1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^8.2.0",
     "joi": "^6.0.0"
   }
 }

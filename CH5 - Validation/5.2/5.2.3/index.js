@@ -1,50 +1,31 @@
-var Hapi = require('hapi');
 var Joi = require('joi');
 
-var server = new Hapi.Server();
-server.connection({ port: 4000 });
+// String => Number
 
-var schema = {
-    firstName: Joi.string().required(),
-    lastName: Joi.string().required(),
-    age: Joi.number().required(),
-    location: Joi.string().required(),
-    dob: Joi.date().required(),
-};
+var numberString = "16";
+console.log(typeof numberString);
 
-server.route({
-    method: 'GET',
-    path: '/people/{id}',
-    handler: function (request, reply) {
-
-        var people = {
-            1: {
-                firstName: 'Xiang',
-                lastName: 'Zheng',
-                age: 48,
-                location: 'Singapore',
-                dob: '1967-03-02'
-            }, 
-            2: {
-                firstName: 'Ioannis',
-                lastName: 'Michelakakis',
-                age: 'Middle-aged',
-                location: 'Athens',
-                dob: '1964-03-02'
-            }
-        };
-
-        reply(people[request.params.id]);
-
-    },
-    config: {
-        response: {
-            schema: schema
-        }
-    }
+Joi.validate(numberString, Joi.number(), function (err, value) {
+    console.log(typeof value);
 });
 
-server.start(function () {
+// String => Buffer
 
-    console.log('Started server');
+var string = "I'm a string";
+
+Joi.validate(string, Joi.binary(), function (err, value) {
+        
+    console.log(value);
+    console.log(value instanceof Buffer);
+})
+
+// No convert   
+
+var numberString = "16";
+
+Joi.validate(numberString, Joi.number(), {convert: false}, function (err, value) {
+    
+    if (err) {
+        throw err;
+    }
 });
