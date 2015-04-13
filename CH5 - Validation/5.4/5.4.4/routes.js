@@ -19,8 +19,7 @@ module.exports = [{
                     .valid(['S','M','L','XL'])
             },
             options: {
-                abortEarly: false,
-                convert: false
+                abortEarly: false
             },
             failAction: function (request, reply, source, error) {
 
