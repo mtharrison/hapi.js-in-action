@@ -1,4 +1,4 @@
-hapi.js-in-action
+hapi.js in Action
 =================
 
 Code package for hapi.js in Action by Matt Harrison (Manning 2015 ISBN: 978-1-63343-021-1)
