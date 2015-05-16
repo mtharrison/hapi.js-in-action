@@ -17,7 +17,7 @@ Joi.validate(string, Joi.binary(), function (err, value) {
         
     console.log(value);
     console.log(value instanceof Buffer);
-})
+});
 
 // No convert   
 

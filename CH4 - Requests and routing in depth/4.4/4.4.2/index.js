@@ -8,7 +8,7 @@ server.route({
     method: 'GET',
     path: '/image.png',
     handler: function (request, reply) {
-        debugger;
+        
         reply.file(Path.join(__dirname , 'image.png'));
     },
     config: {

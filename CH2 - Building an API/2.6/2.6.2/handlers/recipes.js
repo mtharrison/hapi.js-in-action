@@ -57,4 +57,4 @@ exports.create = function (request, reply) {
 
         reply({status: 'ok'});
     });
-}
+};

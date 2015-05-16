@@ -27,7 +27,7 @@ server.method('getArticle', getArticle, {
         staleTimeout: 100
     },
     generateKey: function (options) {
-        return options.q + ':' + options.sort
+        return options.q + ':' + options.sort;
     }
 });
 

@@ -6,7 +6,7 @@ server.connection({ port: 4000 });
 
 var getNewestArticle = function (search, next) {
 
-    var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=XXX&sort=newest&q=' + search
+    var url = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=XXX&sort=newest&q=' + search;
 
     Wreck.get(url, { json: true }, function (err, res, payload) {
 
