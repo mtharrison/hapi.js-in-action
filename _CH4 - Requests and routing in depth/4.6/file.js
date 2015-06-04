@@ -1,4 +1,5 @@
 var Hapi = require('hapi');
+var Path = require('path');
 var Fs = require('fs');
 
 var server = new Hapi.Server();
@@ -9,15 +10,22 @@ server.route({
     path: '/upload',
     handler: function (request, reply) {
 
-        var write = Fs.createWriteStream(request.payload.upload.hapi.filename);
-        request.payload.upload.pipe(write);
-        
-        reply('ok');
+        var targetPath = Path.join(__dirname, request.payload.upload.filename);
+        var tempPath = request.payload.upload.path;
+
+        Fs.rename(tempPath, targetPath, function (err) {
+
+            if (err) {
+                throw err;
+            }
+
+            reply('ok');
+        });
     },
     config: {
         payload: {
             parse: true,
-            output: 'stream'
+            output: 'file'
         }
     }
 });

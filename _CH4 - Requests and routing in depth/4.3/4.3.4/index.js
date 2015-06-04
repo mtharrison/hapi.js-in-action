@@ -8,7 +8,8 @@ server.connection({ port: 4000 });
 var getArticle = function (options, next) {
 
     var baseUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json';
-    var url = baseUrl + '?' + Qs.stringify(options);
+    var queryString = Qs.stringify(options);
+    var url = baseUrl + '?' + queryString;
 
     Wreck.get(url, { json: true }, function (err, res, payload) {
 
