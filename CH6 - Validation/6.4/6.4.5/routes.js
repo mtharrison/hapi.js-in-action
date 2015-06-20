@@ -14,7 +14,15 @@ module.exports = [{
             payload: {
                 name: Joi.string().required(),
                 email: Joi.string().email().required(),
-                age: Joi.number().required(),
+                age: Joi.string().required().regex(/^[1-9][0-9]+/).options({
+                    language: {
+                        string: {
+                            regex: {
+                                base: 'should be a numeric string with no leading zeros'
+                            }
+                        }
+                    }
+                }),
                 tshirt: Joi.string().required()
                     .valid(['S','M','L','XL'])
             },

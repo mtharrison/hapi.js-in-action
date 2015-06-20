@@ -1,0 +1,15 @@
+{
+  "name": "8.2.3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "catbox": "^4.3.0",
+    "catbox-memory": "^1.1.1"
+  }
+}
