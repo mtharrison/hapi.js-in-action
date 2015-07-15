@@ -1,43 +1,56 @@
 var Catbox = require('catbox');
 var CatboxMemory = require('catbox-memory');
+var Wreck = require('wreck');
 
-var client = new Catbox.Client(CatboxMemory);
+var search = function (id, next) {
 
-var CACHE_KEY = { id: 'getValue', segment: 'default' };
-var TTL = 2000;
+    var baseUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch';
+    var apiKey = 'API_KEY';
+    var query = 'Node.js';
 
-var getValue = function (callback) {
+    var url = baseUrl + '.json?q=' + query + '&api-key=' + apiKey;
 
-    client.get(CACHE_KEY, function (err, cached) {
+    Wreck.get(url, { json: true }, function (err, res, payload) {
 
         if (err) {
             throw err;
         }
 
-        if (cached) {
-            return callback(cached.item);
-        }
-
-        var value = Math.floor(Math.random() * 100);
-
-        client.set(CACHE_KEY, value, TTL, function (err) {
-
-            if (err) {
-                throw err;
-            }
-
-            callback(value);
-        });
+        var numArticles = payload.response.meta.hits;
+        next(err, numArticles);
     });
 };
 
-client.start(function () {
+var loop = function () {
 
-    setInterval(function () {
+    var startTime = Date.now();
 
-        getValue(function (value) {
+    policy.get('node.js', function (err, value, cached, report) {
 
-            console.log(value);
-        });
-    }, 1000);
+        if (err) {
+            throw err;
+        }
+
+        var endTime = Date.now() - startTime;
+        console.log('Found %d articles in %dms %s', value , endTime, cached ? '(CACHED)' : '');
+    });
+
+};
+
+var client = new Catbox.Client(CatboxMemory);
+
+var options = {
+    expiresIn: 4000,
+    generateFunc: search
+};
+
+var policy = new Catbox.Policy(options, client, 'default');
+
+client.start(function (err) {
+
+    if (err) {
+        throw err;
+    }
+    
+    setInterval(loop, 3000);
 });

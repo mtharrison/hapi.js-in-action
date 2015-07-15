@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "catbox": "^4.3.0",
-    "catbox-memory": "^1.1.1"
+    "catbox-memory": "^1.1.1",
+    "wreck": "^6.0.0"
   }
 }

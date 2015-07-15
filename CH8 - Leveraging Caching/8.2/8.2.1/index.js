@@ -1,13 +1,38 @@
-var getValue = function (callback) {
+var Wreck = require('wreck');
 
-    var value = Math.floor(Math.random() * 100);
-    callback(value);
+var search = function (id, next) {
+
+    var baseUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch';
+    var apiKey = 'API_KEY';
+    var query = 'Node.js';
+
+    var url = baseUrl + '.json?q=' + query + '&api-key=' + apiKey;
+
+    Wreck.get(url, { json: true }, function (err, res, payload) {
+
+        if (err) {
+            throw err;
+        }
+
+        var numArticles = payload.response.meta.hits;
+        next(err, numArticles);
+    });
 };
 
-setInterval(function () {
+var loop = function () {
 
-    getValue(function (value) {
+    var startTime = Date.now();
 
-        console.log(value);
+    search('node.js', function (err, value) {
+
+        if (err) {
+            throw err;
+        }
+
+        var endTime = Date.now() - startTime;
+        console.log('Found %d articles in %dms', value , endTime);
     });
-}, 1000);
+
+};
+
+setInterval(loop, 3000);

@@ -1,43 +1,46 @@
 var Catbox = require('catbox');
 var CatboxMemory = require('catbox-memory');
 
-var client = new Catbox.Client(CatboxMemory);
+var client = new Catbox.Client(CatboxMemory, { partition: 'default' });
 
-var CACHE_KEY = { id: 'getValue', segment: 'default' };
-var TTL = 2000;
+var getDate = function (next) {
 
-var getValue = function (callback) {
+    next(new Date().toString());
+};
 
-    client.get(CACHE_KEY, function (err, cached) {
+client.start(function (err) {
 
-        if (err) {
-            throw err;
+    if (err) {
+        throw err;
+    }
+
+    var options = {
+        expiresIn: 2000,
+        generateFunc: function (id, next) {
+
+            if (id === 'getDate') {
+                getDate(function (value) {
+
+                    next(null, value);
+                })
+            } else {
+                next(new Error('Unknown key!'));
+            }
+
         }
+    };
 
-        if (cached) {
-            return callback(cached.item);
-        }
+    var policy = new Catbox.Policy(options, client, 'default');
 
-        var value = Math.floor(Math.random() * 100);
+    setInterval(function () {
 
-        client.set(CACHE_KEY, value, TTL, function (err) {
+        policy.get('getDate', function (err, value, cached, report) {
 
             if (err) {
                 throw err;
             }
 
-            callback(value);
-        });
-    });
-};
-
-client.start(function () {
-
-    setInterval(function () {
-
-        getValue(function (value) {
-
-            console.log(value);
+            console.log(value + (cached ? ' (cached)' : ''));
         });
     }, 1000);
 });
