@@ -1,5 +1,5 @@
 {
-  "name": "8.2.2",
+  "name": "8.3.2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "catbox": "^4.3.0",
-    "catbox-memory": "^1.1.1",
+    "catbox-redis": "^1.0.5",
+    "hapi": "^8.8.0",
+    "qs": "^4.0.0",
     "wreck": "^6.0.0"
   }
 }

@@ -5,7 +5,7 @@ var Wreck = require('wreck');
 var search = function (id, next) {
 
     var baseUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch';
-    var apiKey = 'API_KEY';
+    var apiKey = '6e4deaad56fa6f8bbb47dcc4fa700ba6:5:72077307';
     var query = 'Node.js';
 
     var url = baseUrl + '.json?q=' + query + '&api-key=' + apiKey;
@@ -13,7 +13,7 @@ var search = function (id, next) {
     Wreck.get(url, { json: true }, function (err, res, payload) {
 
         if (err) {
-            throw err;
+            return next(err, null);
         }
 
         var numArticles = payload.response.meta.hits;
@@ -40,7 +40,7 @@ var loop = function () {
 var client = new Catbox.Client(CatboxMemory);
 
 var options = {
-    expiresIn: 4000,
+    expiresIn: 2000,
     generateFunc: search
 };
 
@@ -52,5 +52,5 @@ client.start(function (err) {
         throw err;
     }
     
-    setInterval(loop, 3000);
+    setInterval(loop, 2000);
 });
