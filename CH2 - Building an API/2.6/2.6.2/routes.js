@@ -13,7 +13,7 @@ module.exports = [{
     path: '/api/recipes',
     config: {
         auth: 'api',
-        payload: {                  
+        payload: {
             output: 'data'
         }
     },

@@ -1,0 +1,32 @@
+{
+  "name": "hapi.js-in-action",
+  "version": "1.0.0",
+  "description": "hapi.js in Action =================",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "dindin-api": "^1.0.0",
+    "good": "^6.1.0",
+    "good-console": "^5.0.0",
+    "gulp": "^3.8.10",
+    "gulp-jshint": "^1.9.0",
+    "hapi": "^8.1.0",
+    "lab": "^5.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtharrison/Hapi.js-in-action.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtharrison/Hapi.js-in-action/issues"
+  },
+  "homepage": "https://github.com/mtharrison/Hapi.js-in-action#readme"
+}

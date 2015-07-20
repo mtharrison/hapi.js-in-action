@@ -8,7 +8,7 @@ exports.find = function (request, reply) {
         params.push(request.query.cuisine);
     }
 
-    this.db.all(sql, params, function(err, results) {
+    this.db.all(sql, params, function (err, results) {
 
         if (err) {
             throw err;
@@ -20,7 +20,7 @@ exports.find = function (request, reply) {
 
 exports.findOne = function (request, reply) {
 
-    this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], function(err, result) {
+    this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], function (err, result) {
 
         if (err) {
             throw err;
@@ -38,7 +38,7 @@ exports.create = function (request, reply) {
 
     var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
-    this.db.run(sql, 
+    this.db.run(sql,
     [
         request.payload.name,
         request.payload.cooking_time,
@@ -47,14 +47,14 @@ exports.create = function (request, reply) {
         request.payload.cuisine,
         request.payload.ingredients,
         request.payload.directions,
-        request.auth.credentials.id,
-    ], 
+        request.auth.credentials.id
+    ],
     function (err) {
 
-        if(err) {
+        if (err) {
             throw err;
         }
 
-        reply({status: 'ok'});
+        reply({ status: 'ok' });
     });
 };

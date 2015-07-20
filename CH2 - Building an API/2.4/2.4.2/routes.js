@@ -1,4 +1,3 @@
-
 module.exports = [{
     method: 'GET',
     path: '/api/recipes',
