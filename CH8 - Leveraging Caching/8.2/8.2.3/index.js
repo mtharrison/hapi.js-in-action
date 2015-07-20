@@ -32,7 +32,7 @@ var loop = function () {
         }
 
         var endTime = Date.now() - startTime;
-        console.log('Found %d articles in %dms %s %s', value , endTime, cached ? '(CACHED)' : '', cached && cached.isStale ? '(STALE)' : '');
+        console.log('Found %d articles in %dms %s %s', value, endTime, cached ? '(CACHED)' : '', cached && cached.isStale ? '(STALE)' : '');
     });
 
 };
@@ -53,6 +53,6 @@ client.start(function (err) {
     if (err) {
         throw err;
     }
-    
+
     setInterval(loop, 2000);
 });

@@ -30,7 +30,7 @@ var loop = function () {
         }
 
         var endTime = Date.now() - startTime;
-        console.log('Found %d articles in %dms', value , endTime);
+        console.log('Found %d articles in %dms', value, endTime);
     });
 
 };

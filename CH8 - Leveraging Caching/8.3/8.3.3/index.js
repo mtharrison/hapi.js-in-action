@@ -9,8 +9,7 @@ var server = new Hapi.Server({
             name: 'redis-cache',
             host: '127.0.0.1',
             port: 6379
-        },
-
+        }
     ]
 });
 
@@ -19,11 +18,11 @@ server.connection({ port: 4000 });
 var searchReviews = function (query, callback) {
 
     var baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
-    var query = {
+    var queryObj = {
         'api-key': '2d07d4c26378607c5e104ae3164327ff:18:72077307',
-        'query': query
-    }
-    var queryUrl = baseUrl + '?' + Qs.stringify(query);
+        query: query
+    };
+    var queryUrl = baseUrl + '?' + Qs.stringify(queryObj);
 
     var options = { json: true };
 
@@ -33,7 +32,7 @@ var searchReviews = function (query, callback) {
     });
 };
 
-server.method('reviews', searchReviews, { 
+server.method('reviews', searchReviews, {
     cache: {
         expiresIn: 60000,
         staleIn: 10000,
@@ -48,7 +47,9 @@ server.route({
     path: '/movies/{movie}',
     handler: function (request, reply) {
 
-        server.methods.reviews(request.params.movie, function (err, reviews) {
+        var query = request.params.movie;
+
+        server.methods.reviews(query, function (err, reviews) {
 
             if (err) {
                 throw err;
@@ -59,4 +60,7 @@ server.route({
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server running at:', server.info.uri);
+});
