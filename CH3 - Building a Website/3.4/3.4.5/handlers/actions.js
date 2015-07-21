@@ -19,12 +19,11 @@ exports.login = function (request, reply) {
             reply.redirect(self.webBaseUrl + '/login');
         } else {
             request.session.set('user', {
-                loggedIn: true, 
+                loggedIn: true,
                 token: payload.token
             });
             reply.redirect(self.webBaseUrl);
         }
-
     });
 };
 
@@ -37,13 +36,13 @@ exports.createRecipe = function (request, reply) {
 
     Wreck.post(apiUrl, {
         payload: JSON.stringify(request.payload),
-        headers: {  
+        headers: {
             'Authorization': 'Bearer ' + token
         }
     }, function (err, res, payload) {
 
 
-        if(err) {
+        if (err) {
             throw err;
         }
 

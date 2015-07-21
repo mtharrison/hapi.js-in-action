@@ -4,7 +4,7 @@ exports.home = function (request, reply) {
 
     var apiUrl = this.apiBaseUrl + '/recipes';
 
-    Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
 
         if (err) {
             throw err;
@@ -14,14 +14,13 @@ exports.home = function (request, reply) {
             recipes: payload
         });
     });
-
 };
 
 exports.viewRecipe = function (request, reply) {
 
     var apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id;
 
-    Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
 
         if (err) {
             throw err;
@@ -31,5 +30,4 @@ exports.viewRecipe = function (request, reply) {
             recipe: payload
         });
     });
-
 };

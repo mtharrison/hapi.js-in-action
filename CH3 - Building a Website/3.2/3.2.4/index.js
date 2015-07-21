@@ -1,7 +1,7 @@
 var Hapi = require('hapi');
 
 var server = new Hapi.Server();
-server.connection({port: 4000});
+server.connection({ port: 4000 });
 
 server.views({
     engines: {
@@ -29,6 +29,7 @@ server.register(require('dindin-api'), function (err) {
     server.route(require('./routes'));
 
     server.start(function () {
+
         console.log('Started server at', server.info.uri);
     });
 });

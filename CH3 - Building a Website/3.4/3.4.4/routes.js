@@ -14,7 +14,7 @@ module.exports = [{
     method: 'GET',
     path: '/login',
     handler: Pages.login
-}, {    
+}, {
     method: 'GET',
     path: '/create',
     handler: Pages.createRecipe
@@ -24,7 +24,7 @@ module.exports = [{
     config: {
         payload: {
             output: 'data'
-        },
+        }
     },
     handler: Actions.login
 }, {
@@ -33,7 +33,7 @@ module.exports = [{
     config: {
         payload: {
             output: 'data'
-        },
+        }
     },
     handler: Actions.createRecipe
 }, {

@@ -20,7 +20,7 @@ module.exports = [{
     config: {
         payload: {
             output: 'data'
-        },
+        }
     },
     handler: Actions.login
 }, {

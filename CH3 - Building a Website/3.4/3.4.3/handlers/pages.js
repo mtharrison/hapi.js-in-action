@@ -4,7 +4,7 @@ exports.home = function (request, reply) {
 
     var apiUrl = this.apiBaseUrl + '/recipes';
 
-    Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
 
         if (err) {
             throw err;
@@ -21,7 +21,7 @@ exports.viewRecipe = function (request, reply) {
 
     var apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id;
 
-    Wreck.get(apiUrl, {json: true}, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
 
         reply.view('single', {
             recipe: payload,
@@ -31,5 +31,6 @@ exports.viewRecipe = function (request, reply) {
 };
 
 exports.login = function (request, reply) {
+
     reply.view('login');
 };

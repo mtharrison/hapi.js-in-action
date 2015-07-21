@@ -19,11 +19,10 @@ exports.login = function (request, reply) {
             reply.redirect(self.webBaseUrl + '/login');
         } else {
             request.session.set('user', {
-                loggedIn: true, 
+                loggedIn: true,
                 token: payload.token
             });
             reply.redirect(self.webBaseUrl);
         }
-
     });
 };
