@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^0.8.0",
-    "hapi": "^8.0.0",
+    "hapi": "8.x.x",
     "hapi-auth-bearer-token": "^3.1.0",
     "sqlite3": "^3.0.4"
   }
