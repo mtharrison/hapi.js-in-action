@@ -1,5 +1,5 @@
-PROGRAM=./node_modules/lab/node_modules/eslint/bin/eslint.js
-CONFIG=./node_modules/lab/lib/linters/eslint/.eslintrc
+PROGRAM=eslint
+CONFIG=./.eslintrc
 IGNORE=**/node_modules
 CMD=$(PROGRAM) -c $(CONFIG) --ignore-pattern $(IGNORE)
 lint:
@@ -12,6 +12,8 @@ ch3:
 	$(CMD) CH03\ -\ Building\ a\ Website/ 
 ch4:
 	$(CMD) CH04\ -\ Routes\ and\ Handlers\ in\ Depth/ 
+ch5:
+	$(CMD) CH05\ -\ Understanding\ Requests\ and\ Responses 
 ch6:
 	$(CMD) CH06\ -\ Validation\ with\ Joi/ 
 ch8:

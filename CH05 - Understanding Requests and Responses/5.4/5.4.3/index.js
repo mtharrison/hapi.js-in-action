@@ -9,7 +9,7 @@ server.route({
     method: 'GET',
     path: '/boom',
     handler: function (request, reply) {
-        
+
         Fs.readFile('/not/a/real/filepath', function (err) {
 
             if (err) {
@@ -21,4 +21,7 @@ server.route({
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server running at:', server.info.uri);
+});

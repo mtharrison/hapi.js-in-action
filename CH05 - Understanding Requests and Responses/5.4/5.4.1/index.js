@@ -16,4 +16,4 @@
 var err = new Error('Woops, wasn’t supposed to do that!');
 
 console.log(err.name);
-console.log(err.message);""
+console.log(err.message);

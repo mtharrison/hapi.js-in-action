@@ -18,5 +18,6 @@ server.views({
 server.route(require('./routes'));
 
 server.start(function () {
+
     console.log('Started server at', server.info.uri);
 });

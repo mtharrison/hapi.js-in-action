@@ -1,5 +1,5 @@
 exports.servePublicDirectory = {
-	directory: {
+    directory: {
         path: 'public'
     }
 };

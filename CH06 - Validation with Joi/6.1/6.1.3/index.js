@@ -6,7 +6,7 @@ var goodReport = {
     temperature: 34,
     humidity: 95,
     precipitation: false,
-    windDirection: 'E',
+    windDirection: 'E'
 };
 
 var badReport = {
@@ -15,17 +15,17 @@ var badReport = {
     temperature: 34,
     humidity: 95,
     precipitation: false,
-    windDirection: 'WE',		//Invalid
+    windDirection: 'WE'     //Invalid
 };
 
 var schema = {
-	station: Joi.string().max(100).required(),
-	datetime: Joi.date().required(),
-	temperature: Joi.number().min(-100).max(100).required(),
-	humidity: Joi.number().min(0).max(100),
-	precipitation: Joi.boolean(),
-	windDirection: Joi.string()
-		.valid(['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
+    station: Joi.string().max(100).required(),
+    datetime: Joi.date().required(),
+    temperature: Joi.number().min(-100).max(100).required(),
+    humidity: Joi.number().min(0).max(100),
+    precipitation: Joi.boolean(),
+    windDirection: Joi.string()
+        .valid(['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'])
 };
 
 Joi.assert(goodReport, schema);

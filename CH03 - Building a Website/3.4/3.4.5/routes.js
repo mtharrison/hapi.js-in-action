@@ -3,9 +3,9 @@ var Assets = require('./handlers/assets');
 var Actions = require('./handlers/actions');
 
 module.exports = [{
-	method: 'GET',
-	path: '/',
-	handler: Pages.home
+    method: 'GET',
+    path: '/',
+    handler: Pages.home
 }, {
     method: 'GET',
     path: '/recipes/{id}',

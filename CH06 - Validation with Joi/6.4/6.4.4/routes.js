@@ -26,7 +26,7 @@ module.exports = [{
                 var errors = {};
                 var details = error.data.details;
 
-                for(var i = 0; i < details.length; i++) {
+                for (var i = 0; i < details.length; i++) {
                     if (!errors.hasOwnProperty(details[i].path)) {
                         errors[details[i].path] = details[i].message;
                     }

@@ -9,7 +9,7 @@ var schema = {
     lastName: Joi.string().required(),
     age: Joi.number().required(),
     location: Joi.string().required(),
-    dob: Joi.date().required(),
+    dob: Joi.date().required()
 };
 
 server.route({
@@ -24,7 +24,7 @@ server.route({
                 age: 48,
                 location: 'Singapore',
                 dob: '1967-03-02'
-            }, 
+            },
             2: {
                 firstName: 'Ioannis',
                 lastName: 'Michelakakis',

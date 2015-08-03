@@ -1,4 +1,3 @@
-
 exports.form = function (request, reply) {
 
     reply.view('form');

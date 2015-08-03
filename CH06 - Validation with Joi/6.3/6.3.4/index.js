@@ -8,6 +8,7 @@ server.route({
     method: 'POST',
     path: '/{var}',
     handler: function (request, reply) {
+
         reply('Everything was ok.');
     },
     config: {
@@ -30,5 +31,6 @@ server.route({
 });
 
 server.start(function () {
+
     console.log('Server started');
 });
