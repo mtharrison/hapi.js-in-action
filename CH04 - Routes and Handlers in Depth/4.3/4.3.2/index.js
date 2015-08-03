@@ -21,11 +21,14 @@ server.route({
     path: '/avg',
     handler: function (request, reply) {
 
-        server.methods.mean(request.payload.values, function (err, mean) {
+        server.methods.mean(request.payload.values, function (err, result) {
 
-            reply({ mean: mean });
+            reply({ mean: result });
         });
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server started!');
+});

@@ -6,7 +6,7 @@ server.connection({ port: 4000 });
 
 server.views({
     engines: {
-        hbs: require('handlebars'),
+        hbs: require('handlebars')
     },
     path: Path.join(__dirname, 'templates')
 });
@@ -22,5 +22,6 @@ server.route([
 ]);
 
 server.start(function () {
+
     console.log('Server started!');
 });

@@ -15,7 +15,7 @@ server.connection({ port: 4000 });
 
 server.views({
     engines: {
-        hbs: require('handlebars'),
+        hbs: require('handlebars')
     },
     path: Path.join(__dirname, 'templates')
 });
@@ -37,7 +37,7 @@ server.handler('i18n-view', function (route, options) {
         }
 
         reply.view(view + '_' + settings.defaultLang);
-    }
+    };
 });
 
 server.route([
@@ -46,12 +46,13 @@ server.route([
         path: '/',
         handler: {
             'i18n-view': {
-                view: 'index',
+                view: 'index'
             }
         }
     }
 ]);
 
 server.start(function () {
+
     console.log('Server started!');
 });

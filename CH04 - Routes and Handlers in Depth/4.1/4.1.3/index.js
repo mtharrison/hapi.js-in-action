@@ -67,5 +67,6 @@ server.route({
 });
 
 server.start(function () {
+
     console.log('Server started!');
 });

@@ -25,7 +25,7 @@ server.method('readKey', function (request, reply) {
 server.method('decryptMessage', function (request, reply) {
 
     var decipher = Crypto.createDecipher('aes-256-cbc', request.pre.readKey);
-    var cleartext = decipher.update(request.payload.message,'hex','utf8');
+    var cleartext = decipher.update(request.payload.message, 'hex', 'utf8');
     cleartext += decipher.final('utf8');
 
     reply(cleartext);
@@ -64,4 +64,7 @@ server.route({
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server started!');
+});

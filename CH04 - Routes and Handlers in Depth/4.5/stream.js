@@ -11,10 +11,10 @@ server.route({
 
         var upload = request.payload.upload;
         var uploadName = request.payload.upload.hapi.filename;
-        var destination = Path.join(__dirname, ‘uploads’, uploadName);
+        var destination = Path.join(__dirname, 'uploads', uploadName);
 
         upload.pipe(Fs.createWriteStream(destination));
-               
+
         reply('ok');
     },
     config: {
@@ -34,4 +34,7 @@ server.route({
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server started!');
+});

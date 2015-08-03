@@ -5,14 +5,14 @@ CMD=$(PROGRAM) -c $(CONFIG) --ignore-pattern $(IGNORE)
 lint:
 	$(CMD) .
 ch1:
-	$(CMD) CH1\ -\ Introducing\ hapi/ 
+	$(CMD) CH01\ -\ Introducing\ hapi/ 
 ch2:
-	$(CMD) CH2\ -\ Building\ an\ API/ 
+	$(CMD) CH02\ -\ Building\ an\ API/ 
 ch3:
-	$(CMD) CH3\ -\ Building\ a\ Website/ 
+	$(CMD) CH03\ -\ Building\ a\ Website/ 
 ch4:
-	$(CMD) CH4\ -\ Routes\ and\ Handlers\ in\ Depth/ 
+	$(CMD) CH04\ -\ Routes\ and\ Handlers\ in\ Depth/ 
 ch6:
-	$(CMD) CH6\ -\ Validation\ with\ Joi/ 
+	$(CMD) CH06\ -\ Validation\ with\ Joi/ 
 ch8:
-	$(CMD) CH8\ -\ Leveraging\ Caching/ 
+	$(CMD) CH08\ -\ Leveraging\ Caching/ 

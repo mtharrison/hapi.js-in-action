@@ -25,4 +25,7 @@ server.route({
     }
 });
 
-server.start();
+server.start(function () {
+
+    console.log('Server started!');
+});
