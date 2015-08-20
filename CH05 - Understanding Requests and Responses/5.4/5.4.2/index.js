@@ -1,4 +1,3 @@
-var Boom = require('boom');
 var Hapi = require('hapi');
 
 var server = new Hapi.Server();
@@ -6,10 +5,19 @@ server.connection({ port: 4000 });
 
 server.route({
     method: 'GET',
-    path: '/v4/users',
+    path: '/error',
     handler: function (request, reply) {
 
-        var err = Boom.notImplemented('Still working on this');
+        reply('Internal server error').code(500);
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/js-error',
+    handler: function (request, reply) {
+
+        var err = new Error('Oh no, it didn\'t work!');
         reply(err);
     }
 });
