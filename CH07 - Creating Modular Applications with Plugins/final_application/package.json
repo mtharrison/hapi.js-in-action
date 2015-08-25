@@ -1,5 +1,5 @@
 {
-  "name": "5.4.4",
+  "name": "7.x",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,17 @@
   "license": "ISC",
   "dependencies": {
     "boom": "^2.8.0",
+    "confidence": "^1.2.0",
+    "glue": "^2.2.0",
     "handlebars": "^3.0.3",
     "hapi": "9.x.x",
+    "hoek": "^2.14.0",
     "joi": "^6.6.1",
+    "pingoo-api": "^1.0.0",
+    "pingoo-database": "^1.0.0",
+    "pingoo-portal": "^1.0.0",
+    "pingoo-receive": "^1.0.0",
+    "rethinkdb": "^2.1.0",
     "vision": "^3.0.0"
   }
 }

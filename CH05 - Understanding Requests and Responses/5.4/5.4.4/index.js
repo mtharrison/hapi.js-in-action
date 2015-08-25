@@ -6,42 +6,14 @@ var Path = require('path');
 var server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.views({
-    engines: {
-        hbs: require('handlebars')
-    },
-    path: Path.join(__dirname, 'templates')
-});
-
-server.route([{
+server.route({
     method: 'GET',
     path: '/error',
     handler: function (request, reply) {
 
-        reply(new Error('Something bad happened!'));
+        reply(new Error('I\'ll be a 500'));
     }
-}, {
-    method: 'GET',
-    path: '/newFeature',
-    handler: function (request, reply) {
-
-        reply(Boom.notImplemented());
-    }
-}, {
-    config: {
-        validate: {
-            params: {
-                name: Joi.string().min(4)
-            }
-        }
-    },
-    method: 'GET',
-    path: '/name/{name}',
-    handler: function (request, reply) {
-
-        reply('OK');
-    }
-}]);
+});
 
 server.ext('onPreResponse', function (request, reply) {
 
@@ -60,7 +32,18 @@ server.ext('onPreResponse', function (request, reply) {
     reply.continue();
 });
 
-server.start(function () {
 
-    console.log('Server running at:', server.info.uri);
+server.register(require('vision'), function () {
+
+    server.views({
+        engines: {
+            hbs: require('handlebars')
+        },
+        path: Path.join(__dirname, 'templates')
+    });
+
+    server.start(function () {
+
+        console.log('Server running at:', server.info.uri);
+    });
 });
