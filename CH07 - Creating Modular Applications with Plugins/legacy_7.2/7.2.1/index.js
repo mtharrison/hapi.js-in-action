@@ -1,9 +1,13 @@
 var Hapi = require('hapi');
 
-var server = new Hapi.Server();
+var server = new Hapi.Server({
+    debug: {
+        request: ['info']
+    }
+});
 server.connection({ port: 4000 });
 
-server.register(plugin, function (err) {
+server.register(require('./id-logger'), function (err) {
 
     if (err) {
         throw err;
@@ -15,6 +19,6 @@ server.register(plugin, function (err) {
             throw err;
         }
 
-        console.log('Started server');
+        console.log('Server started');
     });
 });

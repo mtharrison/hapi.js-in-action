@@ -33,11 +33,6 @@
             }]
         },
         { 
-            "pingoo-api": [{
-                "routes": { "vhost": "api.pingoo.io" }
-            }]
-        },
-        { 
             "pingoo-receive": [{
                 "routes": { "prefix": "/receive", "vhost": "api.pingoo.io" }
             }]

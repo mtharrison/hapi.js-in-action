@@ -1,0 +1,44 @@
+<div class="col-md-6">
+    <a href="/">< Back</a>
+    <h3>Pings for flight {{code}}</h3>
+    {{> table}}
+</div>
+<div class="col-md-6">
+    <div id="map" style="height: 500px"></div>
+</div>
+
+<script>
+
+    var initMap = function () {
+
+        var bounds = new google.maps.LatLngBounds();
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: {lat: 0, lng: -180},
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        });
+
+        var data = {{{stringify pings}}};
+
+        for (var i = 0; i < data.length; i++) {
+            bounds.extend(new google.maps.LatLng(data[i].lat, data[i].lng));
+        }
+
+        map.fitBounds(bounds);
+        map.setZoom();
+
+        var flightPath = new google.maps.Polyline({
+            path: data,
+            map: map
+        });
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(data[0].lat, data[0].lng),
+            label: '✈',
+            map: map
+          });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>

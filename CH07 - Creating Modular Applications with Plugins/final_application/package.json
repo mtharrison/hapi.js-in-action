@@ -18,7 +18,6 @@
     "joi": "^6.6.1",
     "pingoo-api": "^1.0.0",
     "pingoo-database": "^1.0.0",
-    "pingoo-portal": "^1.0.0",
     "pingoo-receive": "^1.0.0",
     "rethinkdb": "^2.1.0",
     "vision": "^3.0.0"

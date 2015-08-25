@@ -150,26 +150,6 @@ server.register(require('vision'), function (err) {
             }
         });
 
-        // API
-
-        server.route({
-            method: 'GET',
-            path: '/api',
-            handler: function (request, reply) {
-
-                server.methods.database.getRecent(reply);
-            }
-        });
-
-        server.route({
-            method: 'GET',
-            path: '/api/flight/{flight}',
-            handler: function (request, reply) {
-
-                server.methods.database.getRecent(request.params.flight, reply);
-            }
-        });
-
         Hoek.assert(!err, err);
         server.start(function (err) {
 

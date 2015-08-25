@@ -1,5 +1,5 @@
 {
-  "name": "7.1.1",
+  "name": "pingoo-database",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "hapi": "9.x.x"
-  }
+  "license": "ISC"
 }
