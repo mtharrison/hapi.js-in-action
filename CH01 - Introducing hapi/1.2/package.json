@@ -1,5 +1,5 @@
 {
-  "name": "1.4",
+  "name": "1.2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "good": "6.x.x",
-    "good-console": "5.x.x",
     "hapi": "10.x.x"
   }
 }
