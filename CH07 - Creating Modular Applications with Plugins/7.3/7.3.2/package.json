@@ -9,7 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "glue": "2.x.x",
-    "hapi": "9.x.x"
+    "boom": "^2.8.0",
+    "handlebars": "^3.0.3",
+    "hapi": "9.x.x",
+    "hoek": "^2.14.0",
+    "joi": "^6.6.1",
+    "rethinkdb": "^2.1.0",
+    "vision": "^3.0.0"
   }
 }

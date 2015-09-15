@@ -1,28 +1,15 @@
-var Confidence = require('confidence');
 var Glue = require('glue');
-var Manifest = require('./manifest');
-
-var store = new Confidence.Store();
-store.load(Manifest);
-var manifest = store.get('/manifest', { env: process.env.NODE_ENV || 'development' });
+var Hoek = require('hoek');
+var Manifest = require('./config');
 
 var options = { relativeTo: __dirname };
 
-Glue.compose(manifest, options, function (err, server){
+Glue.compose(Manifest, options, function (err, server) {
 
-    if (err) {
-        throw err;
-    }
-
-    server.settings.app = server.settings.app || {};
-    server.settings.app.store = store;
-
+    Hoek.assert(!err, err);
     server.start(function (err) {
 
-        if (err) {
-            throw err;
-        }
-
-        server.log('info', 'Started server');
+        Hoek.assert(!err, err);
+        console.log('Server started at: ' + server.info.uri);
     });
 });
