@@ -1,5 +1,5 @@
 {
-  "name": "dindin",
+  "name": "2.4.2",
   "version": "0.0.0",
   "description": "A social network for food",
   "main": "index.js",
@@ -7,7 +7,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "hapi": "8.x.x",
+    "hapi": "10.x.x",
     "sqlite3": "^3.0.4"
   }
 }
