@@ -1,5 +1,5 @@
 {
-  "name": "dindin-web",
+  "name": "3.2.2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dindin-api": "1.7.0",
-    "hapi": "^8.1.0"
+    "hapi": "10.x.x",
+    "inert": "^3.0.1"
   }
 }

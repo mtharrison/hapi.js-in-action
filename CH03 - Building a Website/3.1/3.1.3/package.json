@@ -1,9 +1,9 @@
 {
-  "name": "dindin-web",
+  "name": "3.1.3",
   "version": "1.0.0",
   "description": "A social network for food",
   "dependencies": {
-    "dindin-api": "1.7.0",
-    "hapi": "8.1.0"
+    "dindin-api": "^1.7.0",
+    "hapi": "10.x.x"
   }
 }

@@ -8,7 +8,10 @@ server.bind({
     webBaseUrl: 'http://localhost:4000'
 });
 
-server.register(require('dindin-api'), function (err) {
+server.register([
+    require('dindin-api'),
+    require('inert'),
+], function (err) {
 
     if (err) {
         throw err;
