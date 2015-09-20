@@ -41,7 +41,8 @@ var client = new Catbox.Client(CatboxMemory);
 
 var options = {
     expiresIn: 2000,
-    generateFunc: search
+    generateFunc: search,
+    generateTimeout: false
 };
 
 var policy = new Catbox.Policy(options, client, 'default');

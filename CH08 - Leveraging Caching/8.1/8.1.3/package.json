@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^8.4.0"
+    "hapi": "10.x.x",
+    "inert": "^3.0.1"
   }
 }

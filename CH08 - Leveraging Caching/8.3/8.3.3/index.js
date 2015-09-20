@@ -34,6 +34,7 @@ var searchReviews = function (query, callback) {
 
 server.method('reviews', searchReviews, {
     cache: {
+        generateTimeout: 10000,
         expiresIn: 60000,
         staleIn: 10000,
         staleTimeout: 100,

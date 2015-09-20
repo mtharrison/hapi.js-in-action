@@ -19,7 +19,14 @@ server.route({
     }
 });
 
-server.start(function () {
+server.register(require('inert'), function (err) {
 
-    console.log('Server running at:', server.info.uri);
+    if (err) {
+        throw err;
+    }
+
+    server.start(function () {
+
+        console.log('Server running at:', server.info.uri);
+    });
 });

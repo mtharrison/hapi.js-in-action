@@ -43,7 +43,8 @@ var options = {
     expiresIn: 20000,
     staleIn: 2000,
     staleTimeout: 90,
-    generateFunc: search
+    generateFunc: search,
+    generateTimeout: false
 };
 
 var policy = new Catbox.Policy(options, client, 'default');

@@ -34,6 +34,7 @@ var searchReviews = function (query, callback) {
 
 var movieCache = server.cache({
     generateFunc: searchReviews,
+    generateTimeout: 10000,
     expiresIn: 60000,
     staleIn: 10000,
     staleTimeout: 100,
