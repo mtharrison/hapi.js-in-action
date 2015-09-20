@@ -1,8 +1,0 @@
-{
-  "name": "id-logger",
-  "version": "1.0.0",
-  "description": "A hapi plugin that logs the request id for every request",
-  "main": "index.js",
-  "author": "Matt Harrison",
-  "license": "BSD-3-Clause"
-}
