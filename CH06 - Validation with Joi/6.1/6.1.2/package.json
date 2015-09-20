@@ -1,5 +1,5 @@
 {
-  "name": "4.1.1",
+  "name": "6.1.2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "joi": "^5.1.0"
+    "joi": "6.x.x"
   }
 }

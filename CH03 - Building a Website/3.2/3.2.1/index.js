@@ -10,7 +10,7 @@ server.bind({
 
 server.register([
     require('dindin-api'),
-    require('inert'),
+    require('inert')
 ], function (err) {
 
     if (err) {
