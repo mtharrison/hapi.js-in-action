@@ -11,6 +11,7 @@
   "dependencies": {
     "accept-language": "^2.0.14",
     "handlebars": "^3.0.3",
-    "hapi": "^8.4.0"
+    "hapi": "^10.0.0",
+    "vision": "^3.0.0"
   }
 }

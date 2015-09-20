@@ -13,46 +13,57 @@ var server = new Hapi.Server({
 
 server.connection({ port: 4000 });
 
-server.views({
-    engines: {
-        hbs: require('handlebars')
-    },
-    path: Path.join(__dirname, 'templates')
-});
+server.register(require('vision'), function (err) {
 
-server.handler('i18n-view', function (route, options) {
-
-    var view = options.view;
-
-    return function (request, reply) {
-
-        var settings = server.settings.app.i18n;
-
-        var langs = AcceptLanguage.parse(request.headers['accept-language']);
-
-        for (var i = 0; i < langs.length; i++) {
-            if (settings.supportedLangs.indexOf(langs[i].language) !== -1) {
-                return reply.view(view + '_' + langs[i].language);
-            }
-        }
-
-        reply.view(view + '_' + settings.defaultLang);
-    };
-});
-
-server.route([
-    {
-        method: 'GET',
-        path: '/',
-        handler: {
-            'i18n-view': {
-                view: 'index'
-            }
-        }
+    if (err) {
+        throw err;
     }
-]);
 
-server.start(function () {
+    server.views({
+        engines: {
+            hbs: require('handlebars')
+        },
+        path: Path.join(__dirname, 'templates')
+    });
 
-    console.log('Server started!');
+    server.handler('i18n-view', function (route, options) {
+
+        var view = options.view;
+
+        return function (request, reply) {
+
+            var settings = server.settings.app.i18n;
+
+            var langs = AcceptLanguage.parse(request.headers['accept-language']);
+
+            for (var i = 0; i < langs.length; i++) {
+                if (settings.supportedLangs.indexOf(langs[i].language) !== -1) {
+                    return reply.view(view + '_' + langs[i].language);
+                }
+            }
+
+            reply.view(view + '_' + settings.defaultLang);
+        };
+    });
+
+    server.route([
+        {
+            method: 'GET',
+            path: '/',
+            handler: {
+                'i18n-view': {
+                    view: 'index'
+                }
+            }
+        }
+    ]);
+
+    server.start(function () {
+
+        if (err) {
+            throw err;
+        }
+
+        console.log('Server started!');
+    });
 });

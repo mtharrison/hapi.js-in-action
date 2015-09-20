@@ -5,44 +5,47 @@ var Path = require('path');
 var server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.views({
-    engines: {
-        hbs: require('handlebars')
-    },
-    path: Path.join(__dirname, 'templates')
-});
+server.register(require('vision'), function (err) {
 
-server.route([
-    {
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
+    server.views({
+        engines: {
+            hbs: require('handlebars')
+        },
+        path: Path.join(__dirname, 'templates')
+    });
 
-            var supportedLanguages = ['en', 'fr', 'zh'];
-            var defaultLanguage = 'en';
-            var templateBasename = 'index';
+    server.route([
+        {
+            method: 'GET',
+            path: '/',
+            handler: function (request, reply) {
 
-            // Parse the accept-lang header
+                var supportedLanguages = ['en', 'fr', 'zh'];
+                var defaultLanguage = 'en';
+                var templateBasename = 'index';
 
-            var acceptLangHeader = request.headers['accept-language'];
-            var langs = AcceptLanguage.parse(acceptLangHeader);
+                // Parse the accept-lang header
 
-            // Loop through langs to see if we support any of them
+                var acceptLangHeader = request.headers['accept-language'];
+                var langs = AcceptLanguage.parse(acceptLangHeader);
 
-            for (var i = 0; i < langs.length; i++) {
-                if (supportedLanguages.indexOf(langs[i].language) !== -1) {
-                    return reply.view(templateBasename + '_' + langs[i].language);
+                // Loop through langs to see if we support any of them
+
+                for (var i = 0; i < langs.length; i++) {
+                    if (supportedLanguages.indexOf(langs[i].language) !== -1) {
+                        return reply.view(templateBasename + '_' + langs[i].language);
+                    }
                 }
+
+                // Otherwise render default language
+
+                reply.view(templateBasename + '_' + defaultLanguage);
             }
-
-            // Otherwise render default language
-
-            reply.view(templateBasename + '_' + defaultLanguage);
         }
-    }
-]);
+    ]);
 
-server.start(function () {
+    server.start(function () {
 
-    console.log('Server started!');
+        console.log('Server started!');
+    });
 });

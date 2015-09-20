@@ -9,7 +9,7 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        reply(new Error('Hii'));
+        reply(request.pre.poem);
     },
     config: {
         pre: [{
@@ -20,10 +20,6 @@ server.route({
 
                     reply(data.toString());
                 });
-            },
-            failAction: function () {
-                
-                console.log(arguments);
             }
         }]
     }
