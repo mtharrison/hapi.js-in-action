@@ -1,0 +1,21 @@
+{
+  "name": "7.4.1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "boom": "^2.8.0",
+    "handlebars": "^3.0.3",
+    "hapi": "10.x.x",
+    "hoek": "^2.14.0",
+    "joi": "^6.6.1",
+    "rejoice": "^2.0.1",
+    "rethinkdb": "^2.1.0",
+    "vision": "^3.0.0"
+  }
+}
