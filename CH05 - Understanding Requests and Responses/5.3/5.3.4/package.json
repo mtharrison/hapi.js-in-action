@@ -1,5 +1,5 @@
 {
-  "name": "5.4.1",
+  "name": "5.3.4",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "boom": "^2.8.0",
+    "handlebars": "^3.0.3",
+    "hapi": "10.x.x",
+    "joi": "^6.6.1",
+    "vision": "^3.0.0"
   }
 }

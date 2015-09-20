@@ -19,10 +19,10 @@ server.route({
                 throw err;
             }
 
-            var resp = reply(response);
+            var resp = reply(response);             // response is an instanceof ReadableStream
 
             var sent = 0;
-            resp.on('peek', function (chunk) {
+            resp.on('peek', function (chunk) {      // resp has a 'peek' event for each chunk written
 
                 sent += chunk.length;
                 process.stdout.write(sent + ' bytes written to response \r');

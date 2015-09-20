@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^2.9.34",
-    "hapi": "^8.8.1",
-    "wreck": "^6.1.0"
+    "hapi": "10.x.x"
   }
 }

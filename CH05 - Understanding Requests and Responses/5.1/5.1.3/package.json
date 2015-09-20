@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "boom": "^2.8.0",
-    "hapi": "^8.8.1",
+    "boom": "2.x.x",
+    "hapi": "10.x.x",
     "netmask": "^1.0.5"
   }
 }

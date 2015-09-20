@@ -1,12 +1,7 @@
 var Hapi = require('hapi');
-var Wreck = require('wreck');
-var Promise = require('bluebird');
 
 var server = new Hapi.Server();
-
 server.connection({ port: 4000 });
-
-
 
 server.route({
     method: 'GET',
