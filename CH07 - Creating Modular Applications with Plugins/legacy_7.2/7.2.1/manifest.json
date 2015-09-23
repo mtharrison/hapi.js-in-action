@@ -1,0 +1,43 @@
+{
+    "lucky": {
+        "$filter": "randomNumber",
+        "$range": [
+                { "limit": 10, "value": "Sunny" },
+                { "limit": 20, "value": "Raining" }
+        ]
+    },
+    "manifest": {
+        "server": {
+            "debug": {
+                "request": ["info"],
+                "log": ["info"]
+            }
+        },
+        "connections":{
+            "$filter": "env",
+            "development": [
+                { 
+                    "port": 4000, 
+                    "router": { "isCaseSensitive": false } 
+                },
+                { 
+                    "port": 4001 
+                }
+            ],
+            "production": [
+                { 
+                    "port": 3000 
+                }
+            ]
+        } ,
+        "plugins": {
+            "./plugin.js": {
+                "greeting": {
+                    "$filter": "env",
+                    "development": "Howdy there",
+                    "production": "Good day"
+                }
+            }
+        }
+    }
+}

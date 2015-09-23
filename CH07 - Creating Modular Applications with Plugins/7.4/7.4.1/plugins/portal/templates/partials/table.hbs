@@ -1,0 +1,16 @@
+<table class="table table-striped">
+    <tr>
+        <th>Flight Number</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Timestamp</th>
+    </tr>
+    {{#each pings}}
+        <tr>
+            <td><a href="/flight/{{code}}">{{code}}</a></td>
+            <td>{{lat}}</td>
+            <td>{{lng}}</td>
+            <td>{{timestamp}}</td>
+        </tr>
+    {{/each}}
+</table>

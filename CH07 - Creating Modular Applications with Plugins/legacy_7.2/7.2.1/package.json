@@ -1,0 +1,16 @@
+{
+  "name": "7.3.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "confidence": "^1.2.0",
+    "glue": "2.x.x",
+    "hapi": "10.x.x"
+  }
+}
