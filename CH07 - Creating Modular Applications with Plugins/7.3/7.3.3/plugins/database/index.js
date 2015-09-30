@@ -57,7 +57,7 @@ exports.register = function (server, options, next) {
                 callback();
             });
         }
-    }); 
+    });
 
     R.connect({ db: options.dbName }, function (err, connection) {
 

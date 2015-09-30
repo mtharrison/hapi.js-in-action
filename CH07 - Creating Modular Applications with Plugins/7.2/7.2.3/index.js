@@ -12,9 +12,9 @@ server.connection({ port: 4000 });
 
 server.register([
     { register: require('vision') },
-    { register: require('./plugins/database')},
-    { register: require('./plugins/portal')},
-    { register: require('./plugins/receive')}
+    { register: require('./plugins/database') },
+    { register: require('./plugins/portal') },
+    { register: require('./plugins/receive') }
 ], function (err) {
 
     Hoek.assert(!err, err);
@@ -24,4 +24,3 @@ server.register([
         console.log('Server started at: ' + server.info.uri);
     });
 });
-
