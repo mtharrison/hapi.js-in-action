@@ -26,7 +26,6 @@
         ]
     },
     "plugins": [
-        { "vision": null },
         { "./plugins/events": null },
         { "./plugins/logger": null },
         { 
@@ -38,6 +37,7 @@
             }] 
         },
         { "./plugins/portal": null },
-        { "./plugins/receive": null }
+        { "./plugins/receive": null },
+        { "vision": null }
     ]
 }

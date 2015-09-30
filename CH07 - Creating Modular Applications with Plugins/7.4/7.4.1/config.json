@@ -26,7 +26,6 @@
         ]
     },
     "plugins": [
-        { "vision": null },
         { 
             "./plugins/database": [{
                 "options": {
@@ -36,6 +35,7 @@
             }] 
         },
         { "./plugins/portal": null },
-        { "./plugins/receive": null }
+        { "./plugins/receive": null },
+        { "vision": null }
     ]
 }

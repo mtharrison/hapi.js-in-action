@@ -11,7 +11,6 @@ var server = new Hapi.Server({
 server.connection({ port: 4000 });
 
 server.register([
-    { register: require('vision') },
     {
         register: require('./plugins/database'),
         options: {
@@ -20,7 +19,8 @@ server.register([
         }
     },
     { register: require('./plugins/portal') },
-    { register: require('./plugins/receive') }
+    { register: require('./plugins/receive') },
+    { register: require('vision') }
 ], function (err) {
 
     Hoek.assert(!err, err);
