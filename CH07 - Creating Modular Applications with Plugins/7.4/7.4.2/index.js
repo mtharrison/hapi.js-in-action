@@ -13,7 +13,7 @@ Glue.compose(manifest, options, function (err, server) {
     setInterval(function () {
 
         var views = server.plugins['pingoo-portal'].viewCount();
-        console.log('homepage has been viewed ' + views + ' times');
+        console.log('homepage has been viewed %d times', views);
     }, 1000);
 
     Hoek.assert(!err, err);

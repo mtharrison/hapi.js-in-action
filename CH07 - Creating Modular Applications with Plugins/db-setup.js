@@ -1,3 +1,8 @@
+// Once you have RethinkDb installed, run this script to create
+// the sample database with some preseeded data
+
+// You will need to run `npm install rethinkdb` first
+
 var RethinkDb = require('rethinkdb');
 
 var data = [
@@ -98,6 +103,7 @@ RethinkDb.connect(function (err, conn) {
 
                 RethinkDb.db(dbName).table(tblName).insert(data).run(conn, function (err) {
 
+                    console.log('👏 Database successfully setup');
                     conn.close();
                 });
             });
