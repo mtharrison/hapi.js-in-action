@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallpaper</title>
+    
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            {{#if wallpaper}}
+            background: url({{wallpaper}}) no-repeat center center fixed; 
+            {{/if}}
+            background-size: cover;
+            display: flex;
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+        .container {
+            background: #24242D;
+            width: 400px;
+            text-align: center;
+        }
+        input[type=text] {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            width: 200px;
+        }
+        .button {
+            background: #4e69a2;
+            color: #fff;
+            display: block;
+            border: none;
+            padding: 8px;
+            font-size: 18px;
+            margin: 30px auto;
+            width: 200px;
+            box-sizing: content-box
+        }
+    </style>
+
+</head>
+<body>
+    {{{content}}}
+</body>
+</html>
