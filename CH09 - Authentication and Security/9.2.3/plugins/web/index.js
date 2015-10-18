@@ -1,19 +1,14 @@
-var Handlebars = require('handlebars');
 var Path = require('path');
 
 exports.register = function (server, options, next) {
-
-    var db = options.db;
 
     server.dependency(['vision', 'auth'], function (server, next) {
 
         server.views({
             engines: {
-                hbs: Handlebars
+                hbs: require('handlebars')
             },
-            path: Path.join(__dirname, 'views'),
-            layout: true,
-            isCached: process.env.NODE_ENV === 'production'
+            path: Path.join(__dirname, 'views')
         });
 
         server.route({
@@ -27,32 +22,17 @@ exports.register = function (server, options, next) {
             },
             handler: function (request, reply) {
 
-                var context = {};
+                var context = { loggedIn: false };
 
                 if (request.auth.isAuthenticated) {
-                    var id = request.auth.credentials.id;
-                    var account = db[id];
+                    var account = request.auth.credentials.account;
                     context = {
-                        name: account.name,
-                        wallpaper: account.wallpaper
+                        loggedIn: true,
+                        name: account.profile.displayName
                     };
                 }
 
                 reply.view('index', context);
-            }
-        });
-
-        server.route({
-            method: 'POST',
-            path: '/wallpaper',
-            config: {
-                auth: 'session'
-            },
-            handler: function (request, reply) {
-
-                var id = request.auth.credentials.id;
-                db[id].wallpaper = request.payload.image;
-                reply.redirect('/');
             }
         });
 

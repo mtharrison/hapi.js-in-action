@@ -17,17 +17,26 @@ exports.register = function (server, options, next) {
 
                 if (request.auth.isAuthenticated) {
                     var credentials = request.auth.credentials;
-                    var id = credentials.profile.id;
-                    db[id] = db[id] || {
-                        id: id,
-                        name: credentials.profile.displayName
-                    };
-                    request.auth.session.set({ id: id });
+                    request.auth.session.set({ account: credentials });
                 }
 
                 return reply.redirect('/');
             }
         });
+
+        server.route({
+            method: 'GET',
+            path: '/logout',
+            config: {
+                auth: 'session'
+            },
+            handler: function (request, reply) {
+
+                request.auth.session.clear();
+                reply.redirect('/');
+            }
+        });
+
 
         next();
     });

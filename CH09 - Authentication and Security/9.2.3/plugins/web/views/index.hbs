@@ -1,12 +1,15 @@
-<div class="container">    
-    {{#if name}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Login Application</title>
+</head>
+<body>
+    {{#if loggedIn}}
         <h1>Hi {{name}}!</h1>
-        <form action="/wallpaper" method="POST">
-            <input type="text" name="image" id="image" placeholder="enter url">
-            <input type="submit" class="button" value="Save background">
-        </form>
-        <a href="/logout" class="button">Logout</a>
+        <a href="/logout">Logout</a>
     {{else}}
-        <a href="/login" class="button">Log in with Facebook</a>
+        <a href="/login">Log in with Facebook</a>
     {{/if}}
-</div>
+</body>
+</html>
