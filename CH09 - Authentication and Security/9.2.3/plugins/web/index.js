@@ -33,7 +33,6 @@ exports.register = function (server, options, next) {
                     var id = request.auth.credentials.id;
                     var account = db[id];
                     context = {
-                        loggedIn: true,
                         name: account.name,
                         wallpaper: account.wallpaper
                     };

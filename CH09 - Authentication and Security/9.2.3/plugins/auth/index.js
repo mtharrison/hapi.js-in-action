@@ -29,19 +29,6 @@ exports.register = function (server, options, next) {
             }
         });
 
-        server.route({
-            method: 'GET',
-            path: '/logout',
-            config: {
-                auth: 'session'
-            },
-            handler: function (request, reply) {
-
-                request.auth.session.clear();
-                reply.redirect('/');
-            }
-        });
-
         next();
     });
 
