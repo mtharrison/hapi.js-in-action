@@ -1,0 +1,20 @@
+<h1>Current Status: {{message}}</h1>
+
+<input name="status" type="text" id="status">
+<button id="submit">Update status</button>
+
+<script>
+
+    document.getElementById('submit').addEventListener('mouseup', function (e) {
+
+        var req = new XMLHttpRequest();
+        req.open("PUT", "http://localhost:4000/change", true);
+        req.setRequestHeader("X-CSRF-Token", '{{crumb}}');
+        req.setRequestHeader("Content-Type", 'application/json');
+        req.send(JSON.stringify({ message: document.getElementById('status').value }));
+        req.onload = function () {
+
+            location.reload();
+        }
+    });
+</script>

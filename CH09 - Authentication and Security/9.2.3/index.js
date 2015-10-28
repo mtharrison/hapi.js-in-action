@@ -6,21 +6,18 @@ server.connection({ port: 4000 });
 var db = {};
 
 server.register([
-    { register: require('./plugins/web'), options: {
-        db: db
-    } },
+    { register: require('./plugins/web') },
     { register: require('./plugins/auth'), options: {
-        db: db,
         bell: {
             provider: 'facebook',
             isSecure: false,
-            password: 'MP1EDg609f6ouaSX',
-            clientId: '107527619605244',
-            clientSecret: '0aefbe3d28fd94cf5e00fee8e27d97ed'
+            password: '',
+            clientId: '',
+            clientSecret: ''
         },
         cookies: {
-            password: 'TfxNkk8cjAUIxw9p',
-            cookie: 'wallpaper-session',
+            password: '',
+            cookie: 'session',
             isSecure: false
         }
     } },

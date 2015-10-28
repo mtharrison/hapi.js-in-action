@@ -1,7 +1,5 @@
 exports.register = function (server, options, next) {
 
-    var db = options.db;
-
     server.dependency(['bell', 'hapi-auth-cookie'], function (server, next) {
 
         server.auth.strategy('facebook', 'bell', options.bell);

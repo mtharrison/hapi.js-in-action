@@ -1,0 +1,8 @@
+<h1>Current Status: {{message}}</h1>
+
+<form action="/change" method="POST">
+    <input type="hidden" name="crumb" value="{{crumb}}"/>
+    <label for="message">Update status: </label>
+    <input type="text" name="message"/>
+    <input type="submit" value="Submit">
+</form>
