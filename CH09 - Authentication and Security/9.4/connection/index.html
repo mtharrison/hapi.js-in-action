@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS</title>
+</head>
+<body>
+    <h1>CORS</h1>
+    <script>
+        var request = new XMLHttpRequest();
+        request.open('GET', 'http://127.0.0.1:4000/resource', true);
+
+        request.onload = function () {
+
+            console.log('Loaded successfully');
+            console.log(request.responseText);
+        };
+
+        request.onerror = function () {
+
+            console.log('An error occured');
+        };
+
+        request.send();
+    </script>
+</body>
+</html>
