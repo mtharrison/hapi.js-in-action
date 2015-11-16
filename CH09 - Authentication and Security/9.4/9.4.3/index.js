@@ -34,8 +34,8 @@ server.register([
             },
             handler: function (request, reply) {
 
-                var message = request.auth.isAuthenticated ? 
-                    request.auth.credentials.message : 
+                var message = request.auth.isAuthenticated ?
+                    request.auth.credentials.message :
                     'Feeling great!';
                 request.auth.session.set({ message: message });
                 reply.view('index', { message: message });

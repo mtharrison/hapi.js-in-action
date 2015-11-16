@@ -21,7 +21,7 @@ server.route({
         reply('hi');
     }
 });
-    
+
 server.start(function (err) {
 
     if (err) {

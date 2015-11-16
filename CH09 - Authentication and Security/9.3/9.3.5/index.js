@@ -10,7 +10,7 @@ var server = new Hapi.Server({
     //     }
     // }
 });
-server.connection({ 
+server.connection({
     port: 4000,
     routes: {
         cors: {
@@ -31,7 +31,7 @@ server.register(require('inert'), function (err) {
             }
         }, {
             config: {
-                
+
             },
             method: 'GET',
             path: '/resource',

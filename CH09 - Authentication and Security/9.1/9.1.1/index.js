@@ -11,7 +11,7 @@ var validUsers = {
 var validate = function (request, username, password, callback) {
 
     var err = null;
-    var isValid = false
+    var isValid = false;
     var credentials = {};
 
     if (validUsers[username] && validUsers[username] === password) {
@@ -25,16 +25,16 @@ var validate = function (request, username, password, callback) {
 server.register(require('hapi-auth-basic'), function (err) {
 
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
-    server.route({ 
-        method: 'GET', 
-        path: '/', 
-        config: { 
+    server.route({
+        method: 'GET',
+        path: '/',
+        config: {
             auth: 'simple',
             handler: function (request, reply) {
 
                 reply('Hi ' + request.auth.credentials.username + '!' );
             }
-        } 
+        }
     });
 
     server.start(function () {

@@ -4,7 +4,7 @@ var Path = require('path');
 
 var server = new Hapi.Server();
 server.connection({ port: 80 });
-server.connection({ 
+server.connection({
     port: 443,
     tls: {
         key: Fs.readFileSync(Path.join(__dirname, 'server.key')),
