@@ -4,74 +4,35 @@ var Path = require('path');
 var server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.register([
-    require('vision'),
-    require('hapi-auth-cookie'),
-    { register: require('crumb'), options: { restful: true } }
-], function (err) {
+server.register(require('inert'), function (err) {
 
-    server.views({
-        engines: {
-            hbs: require('handlebars')
-        },
-        layout: true,
-        path: Path.join(__dirname, 'views'),
-        isCached: false
-    });
-
-    server.auth.strategy('session', 'cookie', {
-        password: 'a51bq0LqVQRqM5y4',
-        cookie: 'sid',
-        isSecure: false
-    });
-
-    server.route([{
+server.route([
+    {
         method: 'GET',
         path: '/',
-        config: {
-            auth: {
-                strategy: 'session',
-                mode: 'try'
-            },
-            handler: function (request, reply) {
-
-                var message;
-
-                if (!request.auth.isAuthenticated) {
-                    message = 'Feeling great!';
-                    request.auth.session.set({ message: message });
-                } else {
-                    message = request.auth.credentials.message;
-                }
-
-                reply.view('index', { message: message });
-            }
-        }
-    }, {
-        method: 'PUT',
-        path: '/change',
-        config: {
-            auth: 'session',
-            handler: function (request, reply) {
-
-                if (request.auth.isAuthenticated) {
-                    var message = request.payload.message;
-                    request.auth.session.set({ message: message });
-                }
-                reply({ success: true });
-            }
-        }
-    }, {
-        method: 'GET',
-        path: '/evil',
         handler: function (request, reply) {
 
-            reply.view('evil');
+            reply.file(Path.join(__dirname, 'index.html'));
         }
-    }]);
+    }, {
+        config: {
+            cors: {
+                origin: ['http://localhost:4000'],
+                additionalHeaders: ['x-custom-header'],
+                additionalExposedHeaders: ['x-custom-response']
+            }
+        },
+        method: 'GET',
+        path: '/resource',
+        handler: function (request, reply) {
 
-    server.start(function (err) {
+            reply('A resource').header('x-custom-response', 'value');
+        }
+    }
+]);
 
-        console.log('Started server!');
+    server.start(function () {
+
+        console.log('Started server');
     });
 });

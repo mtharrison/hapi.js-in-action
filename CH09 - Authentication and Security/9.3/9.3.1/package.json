@@ -1,5 +1,5 @@
 {
-  "name": "9.3.2",
+  "name": "9.3.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,10 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "crumb": "^4.0.4",
-    "handlebars": "^4.0.3",
-    "hapi": "^11.0.2",
-    "hapi-auth-cookie": "^3.1.0",
-    "vision": "^3.0.0"
+    "hapi": "^11.0.1",
+    "inert": "^3.1.0"
   }
 }
