@@ -1,0 +1,11 @@
+{
+  "name": "my-project",
+  "description": "A well tested piece of software",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "lab"
+  },
+  "devDependencies": {
+    "lab": "7.x.x"
+  }
+}

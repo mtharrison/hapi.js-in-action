@@ -1,0 +1,18 @@
+{
+  "name": "10.3",
+  "description": "A well tested piece of software",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "lab"
+  },
+  "devDependencies": {
+    "lab": "7.x.x"
+  },
+  "dependencies": {
+    "code": "^2.0.1",
+    "hapi": "^11.1.1",
+    "hapi-auth-basic": "^4.1.0",
+    "inert": "^3.2.0",
+    "joi": "^7.0.0"
+  }
+}
