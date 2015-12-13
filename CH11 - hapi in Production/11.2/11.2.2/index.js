@@ -59,41 +59,41 @@ server.route([
             reply('Made a new user!');
         }
     },
-{
-    config: {
-        description: 'Modify a single product',
-        tags: ['web', 'products'],
-        notes: ['Remember to add proper functionality'],
-        validate: {
-            payload: {
-                name: Joi.string().required(),
-                price: Joi.number().required(),
-                sku: Joi.string().required().min(5)
-            },
-            params: {
-                id: Joi.number().required().min(0)
+    {
+        config: {
+            description: 'Modify a single product',
+            tags: ['web', 'products'],
+            notes: ['Remember to add proper functionality'],
+            validate: {
+                payload: {
+                    name: Joi.string().required(),
+                    price: Joi.number().required(),
+                    sku: Joi.string().required().min(5)
+                },
+                params: {
+                    id: Joi.number().required().min(0)
+                }
             }
-        }
-    },
-    method: 'PUT',
-    path: '/products/{id}',
-    handler: function (request, reply) {
+        },
+        method: 'PUT',
+        path: '/products/{id}',
+        handler: function (request, reply) {
 
-        reply('Made a new user!');
+            reply('Made a new user!');
+        }
     }
-}
 ]);
 
 server.register([
     require('vision'),
     require('inert'),
     require('lout')
-], err => {
+], (err) => {
 
     if (err) {
         throw err;
     }
-    server.start(err => {
+    server.start((err) => {
 
         if (err) {
             throw err;

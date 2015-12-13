@@ -8,8 +8,8 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        request.log(['route'], 'Someone requested the GET / route');
-        reply('Howdy!');
+        debugger;
+        reply(request.headers['X-Custom-Header']);
     }
 });
 
@@ -18,5 +18,5 @@ server.start((err) => {
     if (err) {
         throw err;
     }
-    server.log(['server'], 'Wohoo, the server has started!');
+    console.log('Started server');
 });

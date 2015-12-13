@@ -6,14 +6,14 @@ const server = new Hapi.Server({
     connections: {
         routes: {
             security: {
-                hsts: true  // ensure that strict-transport-security header is set
+                hsts: true  // ensures that strict-transport-security header is set
             }
         }
     }
 });
 
-server.connection({ port: 80 });
-server.connection({
+server.connection({ port: 80 });    // insecure connection
+server.connection({                 // secure connection
     port: 443,
     tls: {
         key: Fs.readFileSync(Path.join(__dirname, 'server.key')),

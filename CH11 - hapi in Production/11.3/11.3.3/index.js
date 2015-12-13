@@ -10,7 +10,8 @@ server.connection({ port: 4000 });
 
 const oppsy = new Oppsy(server);
 
-oppsy.on('ops', data => {
+oppsy.on('ops', (data) => {
+    
     console.log(data);
     statsd.timing('ops.osmem.free', data.osmem.free);
     statsd.timing('ops.osload', data.osload[0]);

@@ -23,12 +23,12 @@ server.register({
             }
         ]
     }
-}, err => {
+}, (err) => {
 
     if (err) {
         throw err;
     }
-    server.start(err => {
+    server.start((err) => {
 
         if (err) {
             throw err;

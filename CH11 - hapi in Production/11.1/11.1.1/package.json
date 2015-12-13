@@ -9,9 +9,9 @@
   "author": "",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "boom": "^3.0.0",
-    "good": "^6.4.0",
-    "good-console": "^5.2.0",
-    "hapi": "^11.1.2"
+    "boom": "3.x.x",
+    "good": "6.x.x",
+    "good-console": "5.x.x",
+    "hapi": "11.x.x"
   }
 }
