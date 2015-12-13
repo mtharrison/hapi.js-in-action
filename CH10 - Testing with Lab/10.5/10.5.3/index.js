@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 
 module.exports = function (callback) {

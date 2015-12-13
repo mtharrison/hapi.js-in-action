@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 const Joi = require('joi');
 
@@ -29,6 +31,6 @@ module.exports = function (callback) {
             reply(user);
         }
     });
-       
+
     callback(null, server);
 };

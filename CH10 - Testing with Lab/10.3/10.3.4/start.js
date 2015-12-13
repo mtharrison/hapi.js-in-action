@@ -1,16 +1,18 @@
+'use strict';
+
 // Write a script like this to load
 // your server object and start it
 // listening on ports
 
-var Server = require('./index');
+const Server = require('./index');
 
-Server(function (err, server) {
+Server((err, server) => {
 
     if (err) {
         throw err;
     }
 
-    server.start(function (err) {
+    server.start((err) => {
 
         if (err) {
             throw err;

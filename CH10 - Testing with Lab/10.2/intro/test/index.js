@@ -1,3 +1,5 @@
+'use strict';
+
 const Assert = require('assert');
 const Code = require('code');
 const Lab = require('lab');
@@ -10,7 +12,7 @@ const headers = {
     accept: '...'
 };
 
-lab.test('ensure headers is correct format', function (done) {
+test('ensure headers is correct format', (done) => {
 
     Assert(typeof headers === 'object');
     Assert('content-type' in headers);
@@ -18,9 +20,8 @@ lab.test('ensure headers is correct format', function (done) {
     done();
 });
 
-lab.test('ensure headers is correct format', function (done) {
+test('ensure headers is correct format', (done) => {
 
     expect(headers).to.be.an.object().and.contain(['accept', 'content-type']);
     done();
 });
-

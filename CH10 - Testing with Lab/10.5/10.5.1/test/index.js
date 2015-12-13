@@ -11,9 +11,13 @@ const beforeEach = lab.beforeEach;
 
 let server;
 
-beforeEach(function (done) {
+beforeEach((done) => {
 
-    require('..')(function (err, srv) {
+    require('..')((err, srv) => {
+
+        if (err) {
+            throw err;
+        }
 
         server = srv;
         done();
@@ -32,7 +36,7 @@ experiment('Test POST /user', () => {
                     doc._id = 'abcdef';
                     callback(null, { ops: [doc] });
                 }
-            }
+            };
         };
 
         const user = {
@@ -54,7 +58,7 @@ experiment('Test POST /user', () => {
         server.inject(options, (res) => {
 
             expect(res.statusCode).to.equal(200);
-            var response = JSON.parse(res.payload);
+            const response = JSON.parse(res.payload);
             expect(response).to.deep.include(user);
             expect(response._id).to.be.a.string();
             expect(response.createdAt)
@@ -80,12 +84,10 @@ experiment('Test POST /user', () => {
             payload: user
         };
 
-        const start = Date.now();
-
         server.inject(options, (res) => {
 
             expect(res.statusCode).to.equal(400);
-            var response = JSON.parse(res.payload);
+            const response = JSON.parse(res.payload);
             expect(response.message).to.equal('child "age" fails because ["age" must be a number]');
             done();
         });

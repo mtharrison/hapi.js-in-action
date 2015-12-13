@@ -10,7 +10,7 @@ const experiment = lab.experiment;
 const test = lab.test;
 const beforeEach = lab.beforeEach;
 
-const InertMock = require('./mocks/inert')
+const InertMock = require('./mocks/inert');
 const Server = Proxyquire('..', { inert: InertMock });
 
 let server;
@@ -18,6 +18,10 @@ let server;
 beforeEach((done) => {
 
     Server((err, srv) => {
+
+        if (err) {
+            throw err;
+        }
 
         server = srv;
         done();

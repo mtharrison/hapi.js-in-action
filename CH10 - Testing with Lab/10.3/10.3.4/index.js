@@ -1,5 +1,6 @@
+'use strict';
+
 const Hapi = require('hapi');
-const Joi = require('joi');
 
 module.exports = function (callback) {
 
@@ -12,12 +13,12 @@ module.exports = function (callback) {
             return callback(err);
         }
 
-        const validate = function (request, username, password, callback) {
+        const validate = function (request, username, password, cb) {
 
             if (username === 'john' && password === 'secret') {
-                return callback(null, true, { username: 'john' });
+                return cb(null, true, { username: 'john' });
             }
-            callback(null, false);
+            cb(null, false);
         };
 
         server.auth.strategy('basic', 'basic', { validateFunc: validate });
@@ -35,11 +36,11 @@ module.exports = function (callback) {
         });
 
         server.initialize((err) => {
-            
+
             if (err) {
                 return callback(err);
             }
-            callback(null, server);            
+            callback(null, server);
         });
     });
 };

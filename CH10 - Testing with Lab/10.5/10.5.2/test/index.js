@@ -12,9 +12,13 @@ const beforeEach = lab.beforeEach;
 
 let server;
 
-beforeEach(function (done) {
+beforeEach((done) => {
 
-    require('..')(function (err, srv) {
+    require('..')((err, srv) => {
+
+        if (err) {
+            throw err;
+        }
 
         server = srv;
         done();
@@ -33,7 +37,7 @@ experiment('Test POST /user', () => {
                     doc._id = 'abcdef';
                     callback(null, { ops: [doc] });
                 }
-            }
+            };
         };
 
         const spy = Sinon.spy(server.app.db, 'collection');
@@ -52,8 +56,6 @@ experiment('Test POST /user', () => {
             payload: user
         };
 
-        const start = Date.now();
-
         server.inject(options, (res) => {
 
             expect(spy.calledOnce).to.be.true();
@@ -70,12 +72,12 @@ experiment('Test POST /user', () => {
         const stub = Sinon.stub(server.app.db, 'collection', (doc, callback) => {
 
             return {
-                insertOne: function (doc, callback) {
+                insertOne: function (doc2, cb) {
 
-                    doc._id = 'abcdef';
-                    callback(null, { ops: [doc] });
+                    doc2._id = 'abcdef';
+                    cb(null, { ops: [doc2] });
                 }
-            }
+            };
         });
 
         const user = {
@@ -91,8 +93,6 @@ experiment('Test POST /user', () => {
             url: '/user',
             payload: user
         };
-
-        const start = Date.now();
 
         server.inject(options, (res) => {
 

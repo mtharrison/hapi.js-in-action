@@ -11,9 +11,13 @@ const before = lab.before;
 
 let server;
 
-before(function (done) {
+before((done) => {
 
-    require('..')(function (err, srv) {
+    require('..')((err, srv) => {
+
+        if (err) {
+            throw err;
+        }
 
         server = srv;
         done();
