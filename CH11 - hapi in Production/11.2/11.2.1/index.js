@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 
 const server = new Hapi.Server();
@@ -29,7 +31,7 @@ server.route([
 
             reply('Users page!');
         }
-    },
+    }
 ]);
 
 server.start((err) => {

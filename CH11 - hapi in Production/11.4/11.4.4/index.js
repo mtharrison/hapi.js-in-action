@@ -5,12 +5,12 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.register(require('poop'), err => {
+server.register(require('poop'), (err) => {
 
     if (err) {
         throw err;
     }
-    server.start(err => {
+    server.start((err) => {
 
         if (err) {
             throw err;
@@ -23,18 +23,20 @@ server.register(require('poop'), err => {
 
 class MyObject {
     constructor() {
+
         this.name = 'MyObject';
     }
 };
 
 global.myobjs = [];
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 1000; ++i) {
     myobjs.push(new MyObject());
 }
 
 // Cause an uncaught exception
 
 setTimeout(() => {
-    throw new Error('Can\'t touch this')
+
+    throw new Error('Can\'t touch this');
 }, 1000);

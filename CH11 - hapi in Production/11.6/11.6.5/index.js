@@ -1,3 +1,5 @@
+'use strict';
+
 const Hapi = require('hapi');
 const Fs = require('fs');
 const Path = require('path');
