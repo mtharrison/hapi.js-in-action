@@ -1,5 +1,5 @@
 {
-  "name": "9.5.2",
+  "name": "11.4.2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "dependencies": {
-    "hapi": "^11.0.0"
+    "hapi": "11.x.x"
   }
 }

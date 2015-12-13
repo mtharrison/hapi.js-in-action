@@ -11,8 +11,7 @@
   "dependencies": {
     "code": "^2.0.1",
     "hapi": "^11.1.1",
-    "joi": "^7.0.0",
-    "mongodb": "^2.0.48",
+    "inert": "^3.2.0",
     "proxyquire": "^1.7.3"
   }
 }

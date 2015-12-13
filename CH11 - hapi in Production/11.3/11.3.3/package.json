@@ -1,0 +1,16 @@
+{
+  "name": "11.3.3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "hapi": "^11.1.2",
+    "node-statsd": "^0.1.1",
+    "oppsy": "^1.0.1"
+  }
+}

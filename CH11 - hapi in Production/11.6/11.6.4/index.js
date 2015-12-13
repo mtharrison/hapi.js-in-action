@@ -1,8 +1,8 @@
-var Hapi = require('hapi');
-var Fs = require('fs');
-var Path = require('path');
+const Hapi = require('hapi');
+const Fs = require('fs');
+const Path = require('path');
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection({ port: 80 });
 server.connection({
     port: 443,
@@ -12,7 +12,16 @@ server.connection({
     }
 });
 
-server.start(function (err) {
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
+
+        reply('Welcome Home!');
+    }
+});
+
+server.start((err) => {
 
     if (err) {
         throw err;

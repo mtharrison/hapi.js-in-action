@@ -1,0 +1,15 @@
+{
+  "name": "11.4.4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "hapi": "11.x.x",
+    "poop": "2.x.x"
+  }
+}

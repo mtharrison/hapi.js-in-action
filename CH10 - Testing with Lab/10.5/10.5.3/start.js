@@ -4,13 +4,13 @@
 
 var Server = require('./index');
 
-Server(function (err, server) {
+Server((err, server) => {
 
     if (err) {
         throw err;
     }
 
-    server.start(function (err) {
+    server.start((err) => {
 
         if (err) {
             throw err;
