@@ -1,13 +1,11 @@
-'use strict';
-
 const Hapi = require('hapi');
 
-const server = new Hapi.Server({
-    debug: {
-        log: ['server'],
-        request: ['route', 'handler']
-    }
+const server = new Hapi.Server();
+
+server.on('start', () => {
+    console.log('Server started!')
 });
+
 server.connection({ port: 4000 });
 
 server.route({
@@ -15,15 +13,22 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        request.log(['route'], 'Someone requested the GET / route');
-        reply('Howdy!');
+        reply('hello');
     }
 });
 
-server.start((err) => {
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
+
+        reply('hello');
+    }
+});
+
+server.start(err => {
 
     if (err) {
         throw err;
     }
-    server.log(['server'], 'Wohoo, the server has started!');
 });

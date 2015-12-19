@@ -2,7 +2,12 @@
 
 const Hapi = require('hapi');
 
-const server = new Hapi.Server();
+const server = new Hapi.Server({
+    debug: {
+        log: ['my-log-tag'],
+        request: ['my-request-tag']
+    }
+});
 server.connection({ port: 4000 });
 
 server.route({
@@ -10,31 +15,15 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        request.log(['route'], 'Someone requested the GET / route');
+        request.log(['my-request-tag'], 'Got a request');
         reply('Howdy!');
     }
 });
 
-server.register({
-    register: require('good'),
-    options: {
-        reporters: [
-            {
-                reporter: require('good-console'),
-                events: { log:'*', request: '*', response: '*' }
-            }
-        ]
-    }
-}, (err) => {
+server.start((err) => {
 
     if (err) {
         throw err;
     }
-    server.start((err) => {
-
-        if (err) {
-            throw err;
-        }
-        server.log(['server'], 'Wohoo, the server has started!');
-    });
+    server.log(['my-log-tag'], 'Wohoo, the server has started!');
 });

@@ -1,5 +1,5 @@
 {
-  "name": "11.1.1",
+  "name": "11.1.4",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "dependencies": {
-    "hapi": "11.x.x"
+    "boom": "3.x.x",
+    "good": "6.x.x",
+    "good-file": "^5.1.1",
+    "hapi": "11.x.x",
+    "hoek": "^3.0.4"
   }
 }
