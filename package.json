@@ -4,6 +4,7 @@
   "description": "hapi.js in Action",
   "private": true,
   "scripts": {
+    "lint-ch1": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH01 - Introducing hapi'",
     "lint-ch10": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH11 - hapi in Production'"
   },

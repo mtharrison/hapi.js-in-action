@@ -11,6 +11,6 @@
   "dependencies": {
     "good": "6.x.x",
     "good-console": "5.x.x",
-    "hapi": "10.x.x"
+    "hapi": "11.x.x"
   }
 }

@@ -1,6 +1,8 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -12,7 +14,7 @@ server.route({
     }
 });
 
-var plugin = function (server, options, next) {
+const plugin = function (server, options, next) {
 
     server.route({
         method: 'GET',
@@ -29,12 +31,12 @@ plugin.attributes = {
     name: 'My plugin'
 };
 
-server.register(plugin, function (err) {
+server.register(plugin, (err) => {
 
     if (err) {
         throw err;
     }
-    server.start(function (err) {
+    server.start((err) => {
 
         if (err) {
             throw err;

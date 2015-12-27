@@ -1,8 +1,10 @@
-var Hapi = require('hapi');
+'use strict';
+
+const Hapi = require('hapi');
 
 // Creating a Hapi server
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 // Setting up routes
@@ -33,7 +35,7 @@ server.register({
             events: { response: '*' }
         }]
     }
-}, function (err) {
+}, (err) => {
 
     if (err) {
         throw err;
@@ -41,9 +43,8 @@ server.register({
 
     // Starting the server
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Server running at:', server.info.uri);
     });
-
 });
