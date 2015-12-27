@@ -1,6 +1,8 @@
-var Pages = require('./handlers/pages');
-var Assets = require('./handlers/assets');
-var Actions = require('./handlers/actions');
+'use strict';
+
+const Pages = require('./handlers/pages');
+const Assets = require('./handlers/assets');
+const Actions = require('./handlers/actions');
 
 module.exports = [{
     method: 'GET',

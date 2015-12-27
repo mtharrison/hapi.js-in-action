@@ -1,4 +1,6 @@
-var Pages = require('./handlers/pages');
+'use strict';
+
+const Pages = require('./handlers/pages');
 
 module.exports = [{
     method: 'GET',

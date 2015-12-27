@@ -1,10 +1,12 @@
-var Wreck = require('wreck');
+'use strict';
+
+const Wreck = require('wreck');
 
 exports.home = function (request, reply) {
 
-    var apiUrl = this.apiBaseUrl + '/recipes';
+    const apiUrl = this.apiBaseUrl + '/recipes';
 
-    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, (err, res, payload) => {
 
         if (err) {
             throw err;
@@ -18,9 +20,9 @@ exports.home = function (request, reply) {
 
 exports.viewRecipe = function (request, reply) {
 
-    var apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id;
+    const apiUrl = this.apiBaseUrl + '/recipes/' + request.params.id;
 
-    Wreck.get(apiUrl, { json: true }, function (err, res, payload) {
+    Wreck.get(apiUrl, { json: true }, (err, res, payload) => {
 
         if (err) {
             throw err;

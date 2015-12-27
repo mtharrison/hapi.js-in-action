@@ -1,6 +1,8 @@
+'use strict';
+
 exports.home = function (request, reply) {
 
-    var recipes = [{
+    const recipes = [{
         id: 1,
         name: 'Silicate soup',
         cuisine: 'Martian',
