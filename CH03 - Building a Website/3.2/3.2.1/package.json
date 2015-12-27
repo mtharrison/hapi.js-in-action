@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dindin-api": "1.7.0",
-    "hapi": "10.x.x",
+    "hapi": "11.x.x",
     "inert": "^3.0.1"
   }
 }
