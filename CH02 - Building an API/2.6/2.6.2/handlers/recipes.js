@@ -1,14 +1,16 @@
+'use strict';
+
 exports.find = function (request, reply) {
 
-    var sql = 'SELECT * FROM recipes';
-    var params = [];
+    let sql = 'SELECT * FROM recipes';
+    const params = [];
 
     if (request.query.cuisine) {
         sql += ' WHERE cuisine = ?';
         params.push(request.query.cuisine);
     }
 
-    this.db.all(sql, params, function (err, results) {
+    this.db.all(sql, params, (err, results) => {
 
         if (err) {
             throw err;
@@ -20,7 +22,7 @@ exports.find = function (request, reply) {
 
 exports.findOne = function (request, reply) {
 
-    this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], function (err, result) {
+    this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], (err, result) => {
 
         if (err) {
             throw err;
@@ -28,7 +30,8 @@ exports.findOne = function (request, reply) {
 
         if (typeof result !== 'undefined') {
             reply(result);
-        } else {
+        }
+        else {
             reply('Not found').code(404);
         }
     });
@@ -36,7 +39,7 @@ exports.findOne = function (request, reply) {
 
 exports.create = function (request, reply) {
 
-    var sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO recipes (name, cooking_time, prep_time, serves, cuisine, ingredients, directions, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
 
     this.db.run(sql,
         [
@@ -49,7 +52,7 @@ exports.create = function (request, reply) {
             request.payload.directions,
             request.auth.credentials.id
         ],
-    function (err) {
+    (err) => {
 
         if (err) {
             throw err;

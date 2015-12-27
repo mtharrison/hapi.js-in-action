@@ -1,4 +1,6 @@
-var Recipes = require('./handlers/recipes');
+'use strict';
+
+const Recipes = require('./handlers/recipes');
 
 module.exports = [{
     method: 'GET',

@@ -1,16 +1,18 @@
-var Hapi = require('hapi');
-var Sqlite3 = require('sqlite3');
+'use strict';
 
-var db = new Sqlite3.Database('../../dindin.sqlite');
+const Hapi = require('hapi');
+const Sqlite3 = require('sqlite3');
 
-var server = new Hapi.Server();
+const db = new Sqlite3.Database('../../dindin.sqlite');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.bind({ db: db });
 
 server.route(require('./routes'));
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server listening at:', server.info.uri);
 });

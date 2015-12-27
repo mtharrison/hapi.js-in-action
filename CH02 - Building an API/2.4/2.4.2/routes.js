@@ -1,17 +1,19 @@
+'use strict';
+
 module.exports = [{
     method: 'GET',
     path: '/api/recipes',
     handler: function (request, reply) {
 
-        var sql = 'SELECT * FROM recipes';
-        var params = [];
+        let sql = 'SELECT * FROM recipes';
+        const params = [];
 
         if (request.query.cuisine) {
             sql += ' WHERE cuisine = ?';
             params.push(request.query.cuisine);
         }
 
-        this.db.all(sql, params, function (err, results) {
+        this.db.all(sql, params, (err, results) => {
 
             if (err) {
                 throw err;
@@ -25,7 +27,7 @@ module.exports = [{
     path: '/api/recipes/{id}',
     handler: function (request, reply) {
 
-        this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], function (err, result) {
+        this.db.get('SELECT * FROM recipes WHERE id = ?', [request.params.id], (err, result) => {
 
             if (err) {
                 throw err;
@@ -33,7 +35,8 @@ module.exports = [{
 
             if (typeof result !== 'undefined') {
                 reply(result);
-            } else {
+            }
+            else {
                 reply('Not found').code(404);
             }
         });

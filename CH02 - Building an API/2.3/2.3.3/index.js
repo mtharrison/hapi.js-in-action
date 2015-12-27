@@ -1,9 +1,11 @@
-var Hapi = require('hapi');
-var Sqlite3 = require('sqlite3');
+'use strict';
 
-var db = new Sqlite3.Database('../../dindin.sqlite');
+const Hapi = require('hapi');
+const Sqlite3 = require('sqlite3');
 
-var server = new Hapi.Server();
+const db = new Sqlite3.Database('../../dindin.sqlite');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route([{
@@ -11,7 +13,7 @@ server.route([{
     path: '/api/recipes',
     handler: function (request, reply) {
 
-        db.all('SELECT * FROM recipes', function (err, results) {
+        db.all('SELECT * FROM recipes', (err, results) => {
 
             if (err) {
                 throw err;
@@ -22,7 +24,7 @@ server.route([{
     }
 }]);
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server listening at:', server.info.uri);
 });
