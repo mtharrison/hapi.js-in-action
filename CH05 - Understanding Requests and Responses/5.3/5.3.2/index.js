@@ -1,6 +1,8 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -17,12 +19,12 @@ server.route({
     path: '/js-error',
     handler: function (request, reply) {
 
-        var err = new Error('Oh no, it didn\'t work!');
+        const err = new Error('Oh no, it didn\'t work!');
         reply(err);
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

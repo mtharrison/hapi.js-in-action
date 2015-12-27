@@ -1,23 +1,25 @@
-var Boom = require('boom');
-var Hapi = require('hapi');
-var Netmask = require('netmask').Netmask;
+'use strict';
 
-var blacklist = [
+const Boom = require('boom');
+const Hapi = require('hapi');
+const Netmask = require('netmask').Netmask;
+
+const blacklist = [
     '12.166.96.32/27',
     '41.58.0.0/16',
     '41.66.192.0/18',
     '127.0.0.0/8'           // comment this line out for access
 ];
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.ext('onRequest', function (request, reply) {
+server.ext('onRequest', (request, reply) => {
 
-    var ip = request.info.remoteAddress;
+    const ip = request.info.remoteAddress;
 
-    for (var i = 0; i < blacklist.length; i++) {
-        var block = new Netmask(blacklist[i]);
+    for (let i = 0; i < blacklist.length; ++i) {
+        const block = new Netmask(blacklist[i]);
 
         if (block.contains(ip)) {
             console.log('Blocking request from ' + ip + '. Within blocked subnet ' + blacklist[i]);
@@ -37,7 +39,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Started server');
 });

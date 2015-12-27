@@ -1,7 +1,9 @@
-var Boom = require('boom');
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Boom = require('boom');
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -9,12 +11,12 @@ server.route({
     path: '/v4/users',
     handler: function (request, reply) {
 
-        var err = Boom.notImplemented('Still working on this');
+        const err = Boom.notImplemented('Still working on this');
         reply(err);
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

@@ -1,9 +1,11 @@
-var Boom = require('boom');
-var Hapi = require('hapi');
-var Joi = require('joi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const Boom = require('boom');
+const Hapi = require('hapi');
+const Joi = require('joi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route([{
@@ -36,12 +38,12 @@ server.route([{
     }
 }]);
 
-server.ext('onPreResponse', function (request, reply) {
+server.ext('onPreResponse', (request, reply) => {
 
     if (request.response.isBoom) {
-        var err = request.response;
-        var errName = err.output.payload.error;
-        var statusCode = err.output.payload.statusCode;
+        const err = request.response;
+        const errName = err.output.payload.error;
+        const statusCode = err.output.payload.statusCode;
 
         return reply.view('error', {
             statusCode: statusCode,
@@ -54,7 +56,7 @@ server.ext('onPreResponse', function (request, reply) {
 });
 
 
-server.register(require('vision'), function () {
+server.register(require('vision'), () => {
 
     server.views({
         engines: {
@@ -63,7 +65,7 @@ server.register(require('vision'), function () {
         path: Path.join(__dirname, 'templates')
     });
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Server running at:', server.info.uri);
     });

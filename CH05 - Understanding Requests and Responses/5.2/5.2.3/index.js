@@ -1,7 +1,9 @@
-var Hapi = require('hapi');
-var Wreck = require('wreck');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Wreck = require('wreck');
+
+const server = new Hapi.Server();
 
 server.connection({ port: 4000 });
 
@@ -13,16 +15,16 @@ server.route({
         Wreck.request('GET',
         'https://archive.org/download/isforAto1953/isforAto1953_512kb.mp4',
         { redirects: 3 },
-        function (err, response) {
+        (err, response) => {
 
             if (err) {
                 throw err;
             }
 
-            var resp = reply(response);             // response is an instanceof ReadableStream
+            const resp = reply(response);             // response is an instanceof ReadableStream
 
-            var sent = 0;
-            resp.on('peek', function (chunk) {      // resp has a 'peek' event for each chunk written
+            let sent = 0;
+            resp.on('peek', (chunk) => {      // resp has a 'peek' event for each chunk written
 
                 sent += chunk.length;
                 process.stdout.write(sent + ' bytes written to response \r');
@@ -31,7 +33,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

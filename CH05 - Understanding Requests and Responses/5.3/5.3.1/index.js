@@ -1,3 +1,5 @@
+'use strict';
+
 // var Fs = require('fs');
 
 // Fs.readFile('/not/a/real/filepath', function (err, contents) {
@@ -13,7 +15,7 @@
 //     console.log(contents);
 // });
 
-var err = new Error('Woops, wasn’t supposed to do that!');
+const err = new Error('Woops, wasn’t supposed to do that!');
 
 console.log(err.name);
 console.log(err.message);

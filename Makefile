@@ -4,8 +4,6 @@ IGNORE=**/node_modules
 CMD=$(PROGRAM) -c $(CONFIG) --ignore-pattern $(IGNORE)
 lint:
 	$(CMD) .
-ch5:
-	$(CMD) CH05\ -\ Understanding\ Requests\ and\ Responses
 ch6:
 	$(CMD) CH06\ -\ Validation\ with\ Joi/
 ch7:
