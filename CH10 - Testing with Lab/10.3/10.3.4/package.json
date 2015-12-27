@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "code": "^2.0.1",
-    "hapi": "^11.1.1",
+    "hapi": "11.x.x",
     "hapi-auth-basic": "^4.1.0",
     "inert": "^3.2.0",
     "joi": "^7.0.0"
