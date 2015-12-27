@@ -1,13 +1,18 @@
-var Hapi = require('hapi');
-var Fs = require('fs');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Fs = require('fs');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.method('poem', function (request, reply) {
+server.method('poem', (request, reply) => {
 
-    Fs.readFile('./poem.txt', function (err, data) {
+    Fs.readFile('./poem.txt', (err, data) => {
 
+        if (err) {
+            throw err;
+        }
         reply(data.toString());
     });
 });
@@ -26,7 +31,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });

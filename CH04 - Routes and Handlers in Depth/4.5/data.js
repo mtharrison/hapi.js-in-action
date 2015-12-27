@@ -1,7 +1,9 @@
-var Hapi = require('hapi');
-var Fs = require('fs');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Fs = require('fs');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -9,12 +11,11 @@ server.route({
     path: '/upload',
     handler: function (request, reply) {
 
-        Fs.writeFile('uploadedFile', request.payload.upload, function (err) {
+        Fs.writeFile('uploadedFile', request.payload.upload, (err) => {
 
             if (err) {
                 throw err;
             }
-
             reply('ok');
         });
     },
@@ -35,7 +36,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });

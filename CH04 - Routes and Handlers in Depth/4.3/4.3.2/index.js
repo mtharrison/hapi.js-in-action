@@ -1,13 +1,15 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-var mean = function (values, next) {
+const mean = function (values, next) {
 
-    var sum = 0;
+    let sum = 0;
 
-    for (var i = 0; i < values.length; i++) {
+    for (let i = 0; i < values.length; ++i) {
         sum += values[i];
     }
 
@@ -21,14 +23,17 @@ server.route({
     path: '/avg',
     handler: function (request, reply) {
 
-        server.methods.mean(request.payload.values, function (err, result) {
+        server.methods.mean(request.payload.values, (err, result) => {
 
+            if (err) {
+                throw err;
+            }
             reply({ mean: result });
         });
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });

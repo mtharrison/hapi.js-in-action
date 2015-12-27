@@ -1,11 +1,17 @@
-var AcceptLanguage = require('accept-language');
-var Hapi = require('hapi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const AcceptLanguage = require('accept-language');
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.register(require('vision'), function (err) {
+server.register(require('vision'), (err) => {
+
+    if (err) {
+        throw err;
+    }
 
     server.views({
         engines: {
@@ -20,18 +26,18 @@ server.register(require('vision'), function (err) {
             path: '/',
             handler: function (request, reply) {
 
-                var supportedLanguages = ['en', 'fr', 'zh'];
-                var defaultLanguage = 'en';
-                var templateBasename = 'index';
+                const supportedLanguages = ['en', 'fr', 'zh'];
+                const defaultLanguage = 'en';
+                const templateBasename = 'index';
 
                 // Parse the accept-lang header
 
-                var acceptLangHeader = request.headers['accept-language'];
-                var langs = AcceptLanguage.parse(acceptLangHeader);
+                const acceptLangHeader = request.headers['accept-language'];
+                const langs = AcceptLanguage.parse(acceptLangHeader);
 
                 // Loop through langs to see if we support any of them
 
-                for (var i = 0; i < langs.length; i++) {
+                for (let i = 0; i < langs.length; ++i) {
                     if (supportedLanguages.indexOf(langs[i].language) !== -1) {
                         return reply.view(templateBasename + '_' + langs[i].language);
                     }
@@ -44,7 +50,7 @@ server.register(require('vision'), function (err) {
         }
     ]);
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Server started!');
     });

@@ -1,10 +1,16 @@
-var Hapi = require('hapi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.register(require('vision'), function (err) {
+server.register(require('vision'), (err) => {
+
+    if (err) {
+        throw err;
+    }
 
     server.views({
         engines: {
@@ -23,7 +29,7 @@ server.register(require('vision'), function (err) {
         }
     ]);
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Server started!');
     });

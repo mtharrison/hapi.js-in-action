@@ -1,8 +1,10 @@
-var Hapi = require('hapi');
-var Path = require('path');
-var AcceptLanguage = require('accept-language');
+'use strict';
 
-var server = new Hapi.Server({
+const Hapi = require('hapi');
+const Path = require('path');
+const AcceptLanguage = require('accept-language');
+
+const server = new Hapi.Server({
     app: {
         i18n: {
             supportedLangs: ['en', 'fr', 'zh'],
@@ -13,7 +15,7 @@ var server = new Hapi.Server({
 
 server.connection({ port: 4000 });
 
-server.register(require('vision'), function (err) {
+server.register(require('vision'), (err) => {
 
     if (err) {
         throw err;
@@ -26,17 +28,16 @@ server.register(require('vision'), function (err) {
         path: Path.join(__dirname, 'templates')
     });
 
-    server.handler('i18n-view', function (route, options) {
+    server.handler('i18n-view', (route, options) => {
 
-        var view = options.view;
+        const view = options.view;
 
         return function (request, reply) {
 
-            var settings = server.settings.app.i18n;
+            const settings = server.settings.app.i18n;
+            const langs = AcceptLanguage.parse(request.headers['accept-language']);
 
-            var langs = AcceptLanguage.parse(request.headers['accept-language']);
-
-            for (var i = 0; i < langs.length; i++) {
+            for (let i = 0; i < langs.length; ++i) {
                 if (settings.supportedLangs.indexOf(langs[i].language) !== -1) {
                     return reply.view(view + '_' + langs[i].language);
                 }
@@ -58,12 +59,11 @@ server.register(require('vision'), function (err) {
         }
     ]);
 
-    server.start(function () {
+    server.start(() => {
 
         if (err) {
             throw err;
         }
-
         console.log('Server started!');
     });
 });

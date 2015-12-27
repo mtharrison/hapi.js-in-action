@@ -1,8 +1,10 @@
-var Hapi = require('hapi');
-var Path = require('path');
-var Fs = require('fs');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Path = require('path');
+const Fs = require('fs');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -10,15 +12,14 @@ server.route({
     path: '/upload',
     handler: function (request, reply) {
 
-        var targetPath = Path.join(__dirname, request.payload.upload.filename);
-        var tempPath = request.payload.upload.path;
+        const targetPath = Path.join(__dirname, request.payload.upload.filename);
+        const tempPath = request.payload.upload.path;
 
-        Fs.rename(tempPath, targetPath, function (err) {
+        Fs.rename(tempPath, targetPath, (err) => {
 
             if (err) {
                 throw err;
             }
-
             reply('ok');
         });
     },
@@ -39,7 +40,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });

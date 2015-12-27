@@ -1,6 +1,8 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 // Parameters
@@ -10,8 +12,8 @@ server.route({
     path: '/nature/flowers/orchids/{image}.{ext}',
     handler: function (request, reply) {
 
-        var image = request.params.image;
-        var ext = request.params.ext;
+        const image = request.params.image;
+        const ext = request.params.ext;
 
         reply('You requested ' + image + '.' + ext);
     }
@@ -61,12 +63,12 @@ server.route({
     path: '/{path*}',
     handler: function (request, reply) {
 
-        var path = request.params.path;
+        const path = request.params.path;
         return reply('Matched the catch-all route with path: ' + path);
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });

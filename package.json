@@ -7,6 +7,7 @@
     "lint-ch1": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH01 - Introducing hapi'",
     "lint-ch2": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH02 - Building an API'",
     "lint-ch3": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH03 - Building a Website'",
+    "lint-ch4": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH04 - Routes and Handlers in Depth'",
     "lint-ch10": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH11 - hapi in Production'"
   },

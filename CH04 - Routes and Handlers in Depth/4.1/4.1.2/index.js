@@ -1,6 +1,8 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -8,12 +10,12 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        var method = request.method;
+        const method = request.method;
         reply('Route was matched for a ' + method + ' request');
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server started!');
 });
