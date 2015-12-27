@@ -7,7 +7,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "hapi": "10.x.x",
+    "hapi": "11.x.x",
     "sqlite3": "^3.0.4"
   }
 }
