@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "handlebars": "^3.0.0",
-    "hapi": "10.x.x",
+    "hapi": "11.x.x",
     "joi": "6.x.x",
     "vision": "^3.0.0"
   }

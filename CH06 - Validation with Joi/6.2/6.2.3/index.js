@@ -1,21 +1,29 @@
-var Joi = require('joi');
+'use strict';
+
+const Joi = require('joi');
 
 // String => Number
 
-var numberString = '16';
+let numberString = '16';
 console.log(typeof numberString);
 
-Joi.validate(numberString, Joi.number(), function (err, value) {
+Joi.validate(numberString, Joi.number(), (err, value) => {
 
+    if (err) {
+        throw err;
+    }
     console.log(typeof value);
 });
 
 // String => Buffer
 
-var string = 'I\'m a string';
+const string = 'I\'m a string';
 
-Joi.validate(string, Joi.binary(), function (err, value) {
+Joi.validate(string, Joi.binary(), (err, value) => {
 
+    if (err) {
+        throw err;
+    }
     console.log(value);
     console.log(value instanceof Buffer);
 });
@@ -24,7 +32,7 @@ Joi.validate(string, Joi.binary(), function (err, value) {
 
 numberString = '16';
 
-Joi.validate(numberString, Joi.number(), { convert: false }, function (err, value) {
+Joi.validate(numberString, Joi.number(), { convert: false }, (err, value) => {
 
     if (err) {
         throw err;

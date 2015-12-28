@@ -1,8 +1,10 @@
-var Joi = require('joi');
+'use strict';
 
-var schema = Joi.string().min(6).max(10);
+const Joi = require('joi');
 
-var updatePassword = function (password) {
+const schema = Joi.string().min(6).max(10);
+
+const updatePassword = function (password) {
 
     Joi.assert(password, schema);
     console.log('Validation success!');

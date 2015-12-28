@@ -1,3 +1,5 @@
+'use strict';
+
 exports.form = function (request, reply) {
 
     if (request.method === 'post') {

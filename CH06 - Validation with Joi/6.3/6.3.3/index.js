@@ -1,10 +1,12 @@
-var Hapi = require('hapi');
-var Joi = require('joi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Joi = require('joi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-var schema = {
+const schema = {
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
     age: Joi.number().required(),
@@ -17,7 +19,7 @@ server.route({
     path: '/people/{id}',
     handler: function (request, reply) {
 
-        var people = {
+        const people = {
             1: {
                 firstName: 'Xiang',
                 lastName: 'Zheng',
@@ -35,7 +37,6 @@ server.route({
         };
 
         reply(people[request.params.id]);
-
     },
     config: {
         response: {
@@ -44,7 +45,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Started server');
 });

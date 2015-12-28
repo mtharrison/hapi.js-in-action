@@ -1,5 +1,6 @@
-var Handlers = require('./handlers');
-var Joi = require('joi');
+'use strict';
+
+const Handlers = require('./handlers');
 
 module.exports = [{
     method: 'GET',

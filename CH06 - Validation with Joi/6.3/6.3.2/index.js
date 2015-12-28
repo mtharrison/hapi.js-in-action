@@ -1,10 +1,12 @@
-var Hapi = require('hapi');
-var Joi = require('joi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Joi = require('joi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-var schema = {
+const schema = {
     station: Joi.string().max(100).required(),
     datetime: Joi.date().required(),
     temp: Joi.number().min(-100).max(100).required(),
@@ -31,7 +33,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Started server');
 });

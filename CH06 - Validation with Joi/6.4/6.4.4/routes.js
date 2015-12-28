@@ -1,5 +1,7 @@
-var Handlers = require('./handlers');
-var Joi = require('joi');
+'use strict';
+
+const Handlers = require('./handlers');
+const Joi = require('joi');
 
 module.exports = [{
     method: 'GET',
@@ -23,10 +25,10 @@ module.exports = [{
             },
             failAction: function (request, reply, source, error) {
 
-                var errors = {};
-                var details = error.data.details;
+                const errors = {};
+                const details = error.data.details;
 
-                for (var i = 0; i < details.length; i++) {
+                for (let i = 0; i < details.length; ++i) {
                     if (!errors.hasOwnProperty(details[i].path)) {
                         errors[details[i].path] = details[i].message;
                     }
