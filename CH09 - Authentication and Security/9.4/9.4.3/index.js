@@ -1,14 +1,20 @@
-var Hapi = require('hapi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.register([
     require('vision'),
     require('hapi-auth-cookie'),
     { register: require('crumb'), options: { restful: true } }
-], function (err) {
+], (err) => {
+
+    if (err) {
+        throw err;
+    }
 
     server.views({
         engines: {
@@ -34,7 +40,7 @@ server.register([
             },
             handler: function (request, reply) {
 
-                var message = request.auth.isAuthenticated ?
+                const message = request.auth.isAuthenticated ?
                     request.auth.credentials.message :
                     'Feeling great!';
                 request.auth.session.set({ message: message });
@@ -60,7 +66,7 @@ server.register([
         }
     }]);
 
-    server.start(function (err) {
+    server.start(() => {
 
         console.log('Started server!');
     });

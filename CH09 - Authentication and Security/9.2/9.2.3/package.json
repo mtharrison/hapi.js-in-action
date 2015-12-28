@@ -6,7 +6,7 @@
   "dependencies": {
     "bell": "5.x.x",
     "handlebars": "^4.0.3",
-    "hapi": "10.x.x",
+    "hapi": "11.x.x",
     "hapi-auth-cookie": "^3.1.0",
     "vision": "3.x.x"
   }

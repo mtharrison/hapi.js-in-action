@@ -1,10 +1,16 @@
-var Hapi = require('hapi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.register(require('inert'), function (err) {
+server.register(require('inert'), (err) => {
+
+    if (err) {
+        throw err;
+    }
 
     server.route([
         {
@@ -30,7 +36,7 @@ server.register(require('inert'), function (err) {
         }
     ]);
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Started server');
     });

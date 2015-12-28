@@ -11,7 +11,7 @@
   "dependencies": {
     "crumb": "^4.0.4",
     "handlebars": "^4.0.3",
-    "hapi": "^11.0.2",
+    "hapi": "11.x.x",
     "hapi-auth-cookie": "^3.1.0",
     "vision": "^3.0.0"
   }

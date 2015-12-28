@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^11.0.2",
+    "hapi": "11.x.x",
     "hapi-auth-basic": "^3.0.0"
   }
 }

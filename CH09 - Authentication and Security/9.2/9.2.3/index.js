@@ -1,9 +1,9 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
-
-var db = {};
 
 server.register([
     { register: require('./plugins/web') },
@@ -24,13 +24,13 @@ server.register([
     { register: require('vision') },
     { register: require('bell') },
     { register: require('hapi-auth-cookie') }
-], function (err) {
+], (err) => {
 
     if (err) {
         throw err;
     }
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Started server');
     });

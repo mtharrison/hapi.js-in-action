@@ -4,6 +4,7 @@
   "description": "hapi.js in Action",
   "private": true,
   "scripts": {
+    "lint": "npm run lint-ch1; npm run lint-ch2; npm run lint-ch3; npm run lint-ch4; npm run lint-ch5; npm run lint-ch6; npm run lint-ch7; npm run lint-ch8; npm run lint-ch9; npm run lint-ch10; npm run lint-ch11;",
     "lint-ch1": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH01 - Introducing hapi'",
     "lint-ch2": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH02 - Building an API'",
     "lint-ch3": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH03 - Building a Website'",
@@ -12,6 +13,7 @@
     "lint-ch6": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH06 - Validation with Joi'",
     "lint-ch7": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH07 - Creating Modular Applications with Plugins'",
     "lint-ch8": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH08 - Leveraging Caching'",
+    "lint-ch9": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH09 - Authentication and Security'",
     "lint-ch10": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'"
   },

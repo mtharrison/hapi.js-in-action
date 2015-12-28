@@ -1,18 +1,20 @@
-var Hapi = require('hapi');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-var validUsers = {
+const validUsers = {
     john: 'secret',
     jane: 'topsecret'
 };
 
-var validate = function (request, username, password, callback) {
+const validate = function (request, username, password, callback) {
 
-    var err = null;
-    var isValid = false;
-    var credentials = {};
+    const err = null;
+    let isValid = false;
+    let credentials = {};
 
     if (validUsers[username] && validUsers[username] === password) {
         isValid = true;
@@ -22,7 +24,11 @@ var validate = function (request, username, password, callback) {
     callback(err, isValid, credentials);
 };
 
-server.register(require('hapi-auth-basic'), function (err) {
+server.register(require('hapi-auth-basic'), (err) => {
+
+    if (err) {
+        throw err;
+    }
 
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
@@ -40,7 +46,7 @@ server.register(require('hapi-auth-basic'), function (err) {
         }
     });
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Started server');
     });

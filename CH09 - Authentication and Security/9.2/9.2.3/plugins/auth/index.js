@@ -1,6 +1,8 @@
+'use strict';
+
 exports.register = function (server, options, next) {
 
-    server.dependency(['bell', 'hapi-auth-cookie'], function (server, next) {
+    server.dependency(['bell', 'hapi-auth-cookie'], (server, next) => {
 
         server.auth.strategy('facebook', 'bell', options.bell);
         server.auth.strategy('session', 'cookie', options.cookies);
@@ -14,7 +16,7 @@ exports.register = function (server, options, next) {
             handler: function (request, reply) {
 
                 if (request.auth.isAuthenticated) {
-                    var credentials = request.auth.credentials;
+                    const credentials = request.auth.credentials;
                     request.auth.session.set({ account: credentials });
                 }
 

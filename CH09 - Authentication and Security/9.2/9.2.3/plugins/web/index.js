@@ -1,8 +1,10 @@
-var Path = require('path');
+'use strict';
+
+const Path = require('path');
 
 exports.register = function (server, options, next) {
 
-    server.dependency(['vision', 'auth'], function (server, next) {
+    server.dependency(['vision', 'auth'], (server, next) => {
 
         server.views({
             engines: {
@@ -22,10 +24,10 @@ exports.register = function (server, options, next) {
             },
             handler: function (request, reply) {
 
-                var context = { loggedIn: false };
+                let context = { loggedIn: false };
 
                 if (request.auth.isAuthenticated) {
-                    var account = request.auth.credentials.account;
+                    const account = request.auth.credentials.account;
                     context = {
                         loggedIn: true,
                         name: account.profile.displayName
