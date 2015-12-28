@@ -10,6 +10,7 @@
     "lint-ch4": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH04 - Routes and Handlers in Depth'",
     "lint-ch5": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH05 - Understanding Requests and Responses'",
     "lint-ch6": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH06 - Validation with Joi'",
+    "lint-ch7": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH07 - Creating Modular Applications with Plugins'",
     "lint-ch10": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc-es6 --ignore-pattern **/node_modules 'CH11 - hapi in Production'"
   },

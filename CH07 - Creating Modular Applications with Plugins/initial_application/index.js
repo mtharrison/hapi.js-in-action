@@ -1,9 +1,11 @@
-var Hapi = require('hapi');
-var Hoek = require('hoek');
-var Joi = require('joi');
-var R = require('rethinkdb');
+'use strict';
 
-var server = new Hapi.Server({
+const Hapi = require('hapi');
+const Hoek = require('hoek');
+const Joi = require('joi');
+const R = require('rethinkdb');
+
+const server = new Hapi.Server({
     debug: {
         request: ['error'],
         log: ['error']
@@ -12,9 +14,13 @@ var server = new Hapi.Server({
 
 server.connection({ port: 4000 });
 
-server.register(require('vision'), function (err) {
+server.register(require('vision'), (err) => {
 
-    var setup = function (err, conn) {
+    if (err) {
+        throw err;
+    }
+
+    const setup = function (err, conn) {
 
         Hoek.assert(!err, err);
 
@@ -27,7 +33,7 @@ server.register(require('vision'), function (err) {
                 R
                 .table('pings')
                 .orderBy(R.desc('timestamp'))
-                .run(conn, function (err, cursor) {
+                .run(conn, (err, cursor) => {
 
                     if (err) {
                         throw err;
@@ -46,7 +52,7 @@ server.register(require('vision'), function (err) {
                 .table('pings')
                 .filter({ code: code })
                 .orderBy(R.desc('timestamp'))
-                .run(conn, function (err, cursor) {
+                .run(conn, (err, cursor) => {
 
                     if (err) {
                         throw err;
@@ -64,7 +70,7 @@ server.register(require('vision'), function (err) {
                 R
                 .table('pings')
                 .insert(payload)
-                .run(conn, function (err) {
+                .run(conn, (err) => {
 
                     if (err) {
                         throw err;
@@ -94,7 +100,7 @@ server.register(require('vision'), function (err) {
             path: '/',
             handler: function (request, reply) {
 
-                server.methods.database.getRecent(function (err, pings) {
+                server.methods.database.getRecent((err, pings) => {
 
                     if (err) {
                         throw err;
@@ -112,9 +118,9 @@ server.register(require('vision'), function (err) {
             path: '/flight/{code}',
             handler: function (request, reply) {
 
-                var code = request.params.code;
+                const code = request.params.code;
 
-                server.methods.database.getFlight(code, function (err, pings) {
+                server.methods.database.getFlight(code, (err, pings) => {
 
                     if (err) {
                         throw err;
@@ -151,7 +157,7 @@ server.register(require('vision'), function (err) {
         });
 
         Hoek.assert(!err, err);
-        server.start(function (err) {
+        server.start((err) => {
 
             Hoek.assert(!err, err);
             console.log('Server started at: ' + server.info.uri);

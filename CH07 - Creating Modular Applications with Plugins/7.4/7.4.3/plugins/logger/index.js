@@ -1,6 +1,8 @@
+'use strict';
+
 exports.register = function (server, options, next) {
 
-    server.events.on('newPing', function (data) {
+    server.events.on('newPing', (data) => {
 
         server.log('info', 'received a new ping ' + JSON.stringify(data));
     });

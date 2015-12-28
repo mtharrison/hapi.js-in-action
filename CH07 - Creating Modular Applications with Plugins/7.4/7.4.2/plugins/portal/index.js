@@ -1,6 +1,8 @@
-var after = function (server, next) {
+'use strict';
 
-    var appName = server.settings.app.appName;
+const after = function (server, next) {
+
+    const appName = server.settings.app.appName;
 
     server.views({
         engines: {
@@ -14,8 +16,8 @@ var after = function (server, next) {
         isCached: false
     });
 
-    var counter = 0;
-    server.expose('viewCount', function () {
+    let counter = 0;
+    server.expose('viewCount', () => {
 
         return counter;
     });
@@ -27,7 +29,7 @@ var after = function (server, next) {
 
             counter++;
 
-            server.methods.database.getRecent(function (err, pings) {
+            server.methods.database.getRecent((err, pings) => {
 
                 if (err) {
                     throw err;
@@ -46,9 +48,9 @@ var after = function (server, next) {
         path: '/flight/{code}',
         handler: function (request, reply) {
 
-            var code = request.params.code;
+            const code = request.params.code;
 
-            server.methods.database.getFlight(code, function (err, pings) {
+            server.methods.database.getFlight(code, (err, pings) => {
 
                 if (err) {
                     throw err;

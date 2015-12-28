@@ -1,11 +1,13 @@
+'use strict';
+
 // Once you have RethinkDb installed, run this script to create
 // the sample database with some preseeded data
 
 // You will need to run `npm install rethinkdb` first
 
-var RethinkDb = require('rethinkdb');
+const RethinkDb = require('rethinkdb');
 
-var data = [
+const data = [
     {
         'code': 'SA2490',
         'lat': 53.470721,
@@ -86,22 +88,22 @@ var data = [
     }
 ];
 
-var dbName = 'pingoo';
-var tblName = 'pings';
+const dbName = 'pingoo';
+const tblName = 'pings';
 
-RethinkDb.connect(function (err, conn) {
+RethinkDb.connect((err, conn) => {
 
     if (err) {
         throw err;
     }
 
-    RethinkDb.dbCreate(dbName).run(conn, function (err) {
+    RethinkDb.dbCreate(dbName).run(conn, (err) => {
 
-        RethinkDb.db(dbName).tableCreate(tblName).run(conn, function (err) {
+        RethinkDb.db(dbName).tableCreate(tblName).run(conn, (err) => {
 
-            RethinkDb.db(dbName).table(tblName).delete().run(conn, function (err) {
+            RethinkDb.db(dbName).table(tblName).delete().run(conn, (err) => {
 
-                RethinkDb.db(dbName).table(tblName).insert(data).run(conn, function (err) {
+                RethinkDb.db(dbName).table(tblName).insert(data).run(conn, (err) => {
 
                     console.log('👏 Database successfully setup');
                     conn.close();

@@ -1,3 +1,5 @@
+'use strict';
+
 exports.register = function (server, options, next) {
 
     server.views({
@@ -17,7 +19,7 @@ exports.register = function (server, options, next) {
         path: '/',
         handler: function (request, reply) {
 
-            server.methods.database.getRecent(function (err, pings) {
+            server.methods.database.getRecent((err, pings) => {
 
                 if (err) {
                     throw err;
@@ -35,9 +37,9 @@ exports.register = function (server, options, next) {
         path: '/flight/{code}',
         handler: function (request, reply) {
 
-            var code = request.params.code;
+            const code = request.params.code;
 
-            server.methods.database.getFlight(code, function (err, pings) {
+            server.methods.database.getFlight(code, (err, pings) => {
 
                 if (err) {
                     throw err;

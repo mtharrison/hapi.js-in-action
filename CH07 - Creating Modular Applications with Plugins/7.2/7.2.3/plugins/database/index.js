@@ -1,8 +1,10 @@
-var R = require('rethinkdb');
+'use strict';
+
+const R = require('rethinkdb');
 
 exports.register = function (server, options, next) {
 
-    var conn;
+    let conn;
 
     server.method({
         name: 'database.getRecent',
@@ -11,7 +13,7 @@ exports.register = function (server, options, next) {
             R
             .table('pings')
             .orderBy(R.desc('timestamp'))
-            .run(conn, function (err, cursor) {
+            .run(conn, (err, cursor) => {
 
                 if (err) {
                     throw err;
@@ -30,7 +32,7 @@ exports.register = function (server, options, next) {
             .table('pings')
             .filter({ code: code })
             .orderBy(R.desc('timestamp'))
-            .run(conn, function (err, cursor) {
+            .run(conn, (err, cursor) => {
 
                 if (err) {
                     throw err;
@@ -48,7 +50,7 @@ exports.register = function (server, options, next) {
             R
             .table('pings')
             .insert(payload)
-            .run(conn, function (err) {
+            .run(conn, (err) => {
 
                 if (err) {
                     throw err;
@@ -59,7 +61,7 @@ exports.register = function (server, options, next) {
         }
     });
 
-    R.connect({ db: 'pingoo' }, function (err, connection) {
+    R.connect({ db: 'pingoo' }, (err, connection) => {
 
         if (err) {
             return next(err);

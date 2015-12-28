@@ -1,13 +1,15 @@
-var Glue = require('glue');
-var Hoek = require('hoek');
-var Manifest = require('./config');
+'use strict';
 
-var options = { relativeTo: __dirname };
+const Glue = require('glue');
+const Hoek = require('hoek');
+const Manifest = require('./config');
 
-Glue.compose(Manifest, options, function (err, server) {
+const options = { relativeTo: __dirname };
+
+Glue.compose(Manifest, options, (err, server) => {
 
     Hoek.assert(!err, err);
-    server.start(function (err) {
+    server.start((err) => {
 
         Hoek.assert(!err, err);
         console.log('Server started at: ' + server.info.uri);

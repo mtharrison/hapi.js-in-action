@@ -1,8 +1,10 @@
-var EventEmitter = require('events').EventEmitter;
+'use strict';
+
+const EventEmitter = require('events').EventEmitter;
 
 exports.register = function (server, options, next) {
 
-    var emitter = new EventEmitter();
+    const emitter = new EventEmitter();
     server.decorate('server', 'events', emitter);
     next();
 };
