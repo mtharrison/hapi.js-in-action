@@ -1,8 +1,10 @@
-var Hapi = require('hapi');
-var Qs = require('qs');
-var Wreck = require('wreck');
+'use strict';
 
-var server = new Hapi.Server({
+const Hapi = require('hapi');
+const Qs = require('qs');
+const Wreck = require('wreck');
+
+const server = new Hapi.Server({
     cache: [
         {
             engine: require('catbox-redis'),
@@ -15,24 +17,24 @@ var server = new Hapi.Server({
 
 server.connection({ port: 4000 });
 
-var searchReviews = function (query, callback) {
+const searchReviews = function (query, callback) {
 
-    var baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
-    var queryObj = {
+    const baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
+    const queryObj = {
         'api-key': '2d07d4c26378607c5e104ae3164327ff:18:72077307',
         query: query
     };
-    var queryUrl = baseUrl + '?' + Qs.stringify(queryObj);
+    const queryUrl = baseUrl + '?' + Qs.stringify(queryObj);
 
-    var options = { json: true };
+    const options = { json: true };
 
-    Wreck.get(queryUrl, options, function (err, res, payload) {
+    Wreck.get(queryUrl, options, (err, res, payload) => {
 
         callback(err, payload);
     });
 };
 
-var movieCache = server.cache({
+const movieCache = server.cache({
     generateFunc: searchReviews,
     generateTimeout: 10000,
     expiresIn: 60000,
@@ -47,10 +49,10 @@ server.route({
     path: '/movies/{movie}',
     handler: function (request, reply) {
 
-        var start = Date.now();
-        var query = request.params.movie;
+        const start = Date.now();
+        const query = request.params.movie;
 
-        movieCache.get(query, function (err, value, cached, report) {
+        movieCache.get(query, (err, value, cached, report) => {
 
             console.log('Got reviews for %s in %dms %s %s',
                 query,
@@ -67,7 +69,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

@@ -1,8 +1,9 @@
-var Hapi = require('hapi');
-var Path = require('path');
-var Crypto = require('crypto');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Crypto = require('crypto');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -10,7 +11,7 @@ server.route({
     path: '/users',
     handler: function (request, reply) {
 
-        var users = [
+        const users = [
             {
                 gender: 'female',
                 name: {
@@ -27,11 +28,11 @@ server.route({
             }
         ];
 
-        var hash = Crypto.createHash('sha1');
+        const hash = Crypto.createHash('sha1');
         hash.update(JSON.stringify(users));
-        var etag = hash.digest('base64');
+        const etag = hash.digest('base64');
 
-        var response = reply(users);
+        const response = reply(users);
 
         response.etag(etag);
     },
@@ -43,7 +44,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

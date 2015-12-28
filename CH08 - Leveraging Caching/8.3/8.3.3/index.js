@@ -1,8 +1,10 @@
-var Hapi = require('hapi');
-var Qs = require('qs');
-var Wreck = require('wreck');
+'use strict';
 
-var server = new Hapi.Server({
+const Hapi = require('hapi');
+const Qs = require('qs');
+const Wreck = require('wreck');
+
+const server = new Hapi.Server({
     cache: [
         {
             engine: require('catbox-redis'),
@@ -15,18 +17,18 @@ var server = new Hapi.Server({
 
 server.connection({ port: 4000 });
 
-var searchReviews = function (query, callback) {
+const searchReviews = function (query, callback) {
 
-    var baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
-    var queryObj = {
+    const baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
+    const queryObj = {
         'api-key': '2d07d4c26378607c5e104ae3164327ff:18:72077307',
         query: query
     };
-    var queryUrl = baseUrl + '?' + Qs.stringify(queryObj);
+    const queryUrl = baseUrl + '?' + Qs.stringify(queryObj);
 
-    var options = { json: true };
+    const options = { json: true };
 
-    Wreck.get(queryUrl, options, function (err, res, payload) {
+    Wreck.get(queryUrl, options, (err, res, payload) => {
 
         callback(err, payload);
     });
@@ -48,9 +50,9 @@ server.route({
     path: '/movies/{movie}',
     handler: function (request, reply) {
 
-        var query = request.params.movie;
+        const query = request.params.movie;
 
-        server.methods.reviews(query, function (err, reviews) {
+        server.methods.reviews(query, (err, reviews) => {
 
             if (err) {
                 throw err;
@@ -61,7 +63,7 @@ server.route({
     }
 });
 
-server.start(function () {
+server.start(() => {
 
     console.log('Server running at:', server.info.uri);
 });

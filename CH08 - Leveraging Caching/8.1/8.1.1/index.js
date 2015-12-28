@@ -1,7 +1,9 @@
-var Hapi = require('hapi');
-var Path = require('path');
+'use strict';
 
-var server = new Hapi.Server();
+const Hapi = require('hapi');
+const Path = require('path');
+
+const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
@@ -9,18 +11,18 @@ server.route({
     path: '/image.png',
     handler: function (request, reply) {
 
-        var response = reply.file(Path.join(__dirname, 'image.png'));
+        const response = reply.file(Path.join(__dirname, 'image.png'));
         response.header('Cache-Control', 'max-age=86400');
     }
 });
 
-server.register(require('inert'), function (err) {
+server.register(require('inert'), (err) => {
 
     if (err) {
         throw err;
     }
 
-    server.start(function () {
+    server.start(() => {
 
         console.log('Server running at:', server.info.uri);
     });
