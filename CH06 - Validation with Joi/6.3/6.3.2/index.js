@@ -9,7 +9,7 @@ server.connection({ port: 4000 });
 const schema = {
     station: Joi.string().max(100).required(),
     datetime: Joi.date().required(),
-    temp: Joi.number().min(-100).max(100).required(),
+    temp: Joi.number().min(-140).max(140).required(),
     humidity: Joi.number().min(0).max(100),
     precipitation: Joi.boolean(),
     windDirection: Joi.string()
