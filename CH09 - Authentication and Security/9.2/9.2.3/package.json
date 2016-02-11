@@ -7,7 +7,7 @@
     "bell": "5.x.x",
     "handlebars": "^4.0.3",
     "hapi": "11.x.x",
-    "hapi-auth-cookie": "^3.1.0",
+    "hapi-auth-cookie": "3.x.x",
     "vision": "3.x.x"
   }
 }

@@ -11,9 +11,9 @@ server.register([
         bell: {
             provider: 'facebook',
             isSecure: false,
-            password: 'password',
             clientId: 'clientid',
             clientSecret: 'clientsecret'
+            password: 'secret',
         },
         cookies: {
             password: 'password',
