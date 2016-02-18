@@ -14,6 +14,8 @@ let server;
 
 beforeEach((done) => {
 
+    // Get a fresh server object for each test
+
     require('..')((err, srv) => {
 
         if (err) {
@@ -47,7 +49,7 @@ experiment('Test POST /user', () => {
                 first: 'Craig',
                 last: 'Railton'
             },
-            age: 29
+            age: 30
         };
 
         const options = {
@@ -85,7 +87,7 @@ experiment('Test POST /user', () => {
                 first: 'Craig',
                 last: 'Railton'
             },
-            age: 29
+            age: 30
         };
 
         const options = {

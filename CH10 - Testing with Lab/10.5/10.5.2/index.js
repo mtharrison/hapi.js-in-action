@@ -34,7 +34,7 @@ module.exports = function (callback) {
             db.collection('users').insertOne(user, (err, result) => {
 
                 if (err) {
-                    reply(err);
+                    return reply(err);
                 }
 
                 const document = result.ops[0];
