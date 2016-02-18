@@ -1,6 +1,6 @@
 'use strict';
 
-const AcceptLanguage = require('accept-language');
+const Accept = require('accept');
 const Hapi = require('hapi');
 const Path = require('path');
 
@@ -32,14 +32,13 @@ server.register(require('vision'), (err) => {
 
                 // Parse the accept-lang header
 
-                const acceptLangHeader = request.headers['accept-language'];
-                const langs = AcceptLanguage.parse(acceptLangHeader);
+                const langs = Accept.languages(request.headers['accept-language']);
 
                 // Loop through langs to see if we support any of them
 
                 for (let i = 0; i < langs.length; ++i) {
-                    if (supportedLanguages.indexOf(langs[i].language) !== -1) {
-                        return reply.view(templateBasename + '_' + langs[i].language);
+                    if (supportedLanguages.indexOf(langs[i]) !== -1) {
+                        return reply.view(templateBasename + '_' + langs[i]);
                     }
                 }
 

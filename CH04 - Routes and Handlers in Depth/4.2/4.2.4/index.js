@@ -1,8 +1,8 @@
 'use strict';
 
+const Accept = require('accept');
 const Hapi = require('hapi');
 const Path = require('path');
-const AcceptLanguage = require('accept-language');
 
 const server = new Hapi.Server({
     app: {
@@ -35,11 +35,11 @@ server.register(require('vision'), (err) => {
         return function (request, reply) {
 
             const settings = server.settings.app.i18n;
-            const langs = AcceptLanguage.parse(request.headers['accept-language']);
+            const langs = Accept.languages(request.headers['accept-language']);
 
             for (let i = 0; i < langs.length; ++i) {
-                if (settings.supportedLangs.indexOf(langs[i].language) !== -1) {
-                    return reply.view(view + '_' + langs[i].language);
+                if (settings.supportedLangs.indexOf(langs[i]) !== -1) {
+                    return reply.view(view + '_' + langs[i]);
                 }
             }
 

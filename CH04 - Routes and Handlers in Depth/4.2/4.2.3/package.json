@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "accept-language": "^2.0.14",
+    "accept": "2.x.x",
     "handlebars": "^3.0.3",
     "hapi": "11.x.x",
     "vision": "^3.0.0"
