@@ -12,8 +12,8 @@ server.register([
             provider: 'facebook',
             isSecure: false,
             clientId: 'clientid',
-            clientSecret: 'clientsecret'
-            password: 'secret',
+            clientSecret: 'clientsecret',
+            password: 'secret'
         },
         cookies: {
             password: 'password',
