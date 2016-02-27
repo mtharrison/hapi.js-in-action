@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dindin-api": "1.7.0",
+    "dindin-api": "2.x.x",
     "handlebars": "^2.0.0",
     "hapi": "11.x.x",
     "inert": "^3.0.1",
