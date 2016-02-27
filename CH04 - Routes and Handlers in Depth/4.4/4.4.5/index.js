@@ -18,7 +18,7 @@ server.method('readKey1', (request, reply) => {
         if (err) {
             throw err;
         }
-        reply(data);
+        reply(data.trim());
     });
 });
 
@@ -29,7 +29,7 @@ server.method('readKey2', (request, reply) => {
         if (err) {
             throw err;
         }
-        reply(data);
+        reply(data.trim());
     });
 });
 

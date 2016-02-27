@@ -2,41 +2,49 @@
 
 const Hapi = require('hapi');
 const Fs = require('fs');
+const Path = require('path');
 
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.route({
-    method: 'POST',
-    path: '/upload',
-    handler: function (request, reply) {
+server.register(require('inert'), (err) => {
 
-        const upload = request.payload.upload;
-        const uploadName = request.payload.upload.hapi.filename;
-        const destination = Path.join(__dirname, 'uploads', uploadName);
+    if (err) {
+        throw err;
+    }
 
-        upload.pipe(Fs.createWriteStream(destination));
+    server.route({
+        method: 'POST',
+        path: '/upload',
+        handler: function (request, reply) {
 
-        reply('ok');
-    },
-    config: {
-        payload: {
-            parse: true,
-            output: 'stream'
+            const upload = request.payload.upload;
+            const uploadName = request.payload.upload.hapi.filename;
+            const destination = Path.join(__dirname, 'uploads', uploadName);
+
+            upload.pipe(Fs.createWriteStream(destination));
+
+            reply('ok');
+        },
+        config: {
+            payload: {
+                parse: true,
+                output: 'stream'
+            }
         }
-    }
-});
+    });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
 
-        reply.file('index.html');
-    }
-});
+            reply.file('index.html');
+        }
+    });
 
-server.start(() => {
+    server.start(() => {
 
-    console.log('Server started!');
+        console.log('Server started!');
+    });
 });

@@ -7,40 +7,47 @@ const Fs = require('fs');
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.route({
-    method: 'POST',
-    path: '/upload',
-    handler: function (request, reply) {
+server.register(require('inert'), (err) => {
 
-        const targetPath = Path.join(__dirname, request.payload.upload.filename);
-        const tempPath = request.payload.upload.path;
+    if (err) {
+        throw err;
+    }
 
-        Fs.rename(tempPath, targetPath, (err) => {
+    server.route({
+        method: 'POST',
+        path: '/upload',
+        handler: function (request, reply) {
 
-            if (err) {
-                throw err;
+            const targetPath = Path.join(__dirname, request.payload.upload.filename);
+            const tempPath = request.payload.upload.path;
+
+            Fs.rename(tempPath, targetPath, (err) => {
+
+                if (err) {
+                    throw err;
+                }
+                reply('ok');
+            });
+        },
+        config: {
+            payload: {
+                parse: true,
+                output: 'file'
             }
-            reply('ok');
-        });
-    },
-    config: {
-        payload: {
-            parse: true,
-            output: 'file'
         }
-    }
-});
+    });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
 
-        reply.file('index.html');
-    }
-});
+            reply.file('index.html');
+        }
+    });
 
-server.start(() => {
+    server.start(() => {
 
-    console.log('Server started!');
+        console.log('Server started!');
+    });
 });

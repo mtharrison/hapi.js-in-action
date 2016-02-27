@@ -19,7 +19,7 @@ server.method('readKey', (request, reply) => {
         if (err) {
             throw err;
         }
-        reply(data);
+        reply(data.trim());
     });
 });
 

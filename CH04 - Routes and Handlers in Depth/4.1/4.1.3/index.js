@@ -19,18 +19,16 @@ server.route({
     }
 });
 
-// Commented out because will cause a route conflict
-//
-// server.route({
-//     method: 'GET',
-//     path: '/{category}/{subcat1}/{subcat2}/{image}.{ext}',
-//     handler: function (request, reply) {
+server.route({
+    method: 'GET',
+    path: '/images/{category}/{subcat1}/{subcat2}/{image}.{ext}',
+    handler: function (request, reply) {
 
-//         console.log(JSON.stringify(request.params, null, 2));
+        console.log(JSON.stringify(request.params, null, 2));
 
-//         reply();
-//     }
-// });
+        reply();
+    }
+});
 
 // Multi
 

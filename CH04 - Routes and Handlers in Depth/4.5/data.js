@@ -6,37 +6,44 @@ const Fs = require('fs');
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
-server.route({
-    method: 'POST',
-    path: '/upload',
-    handler: function (request, reply) {
+server.register(require('inert'), (err) => {
 
-        Fs.writeFile('uploadedFile', request.payload.upload, (err) => {
+    if (err) {
+        throw err;
+    }
 
-            if (err) {
-                throw err;
+    server.route({
+        method: 'POST',
+        path: '/upload',
+        handler: function (request, reply) {
+
+            Fs.writeFile('uploadedFile', request.payload.upload, (err) => {
+
+                if (err) {
+                    throw err;
+                }
+                reply('ok');
+            });
+        },
+        config: {
+            payload: {
+                parse: true,
+                output: 'data'
             }
-            reply('ok');
-        });
-    },
-    config: {
-        payload: {
-            parse: true,
-            output: 'data'
         }
-    }
-});
+    });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, reply) {
 
-        reply.file('index.html');
-    }
-});
+            reply.file('index.html');
+        }
+    });
 
-server.start(() => {
+    server.start(() => {
 
-    console.log('Server started!');
+        console.log('Server started!');
+    });
 });
