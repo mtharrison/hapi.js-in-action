@@ -15,7 +15,8 @@
     "lint-ch8": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH08 - Leveraging Caching'",
     "lint-ch9": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH09 - Authentication and Security'",
     "lint-ch10": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
-    "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'"
+    "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'",
+    "test": "lab -m 20000"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,8 @@
   "devDependencies": {
     "eslint": "^1.x.x",
     "eslint-config-hapi": "8.x.x",
-    "eslint-plugin-hapi": "4.x.x"
+    "eslint-plugin-hapi": "4.x.x",
+    "code": "^2.1.0",
+    "lab": "^10.0.0"
   }
 }
