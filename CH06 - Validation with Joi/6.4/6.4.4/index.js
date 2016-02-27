@@ -24,7 +24,11 @@ server.register(require('vision'), (err) => {
 
     server.route(require('./routes'));
 
-    server.start(() => {
+    server.start((err) => {
+
+        if (err) {
+            throw err;
+        }
 
         console.log('Started server at', server.info.uri);
     });

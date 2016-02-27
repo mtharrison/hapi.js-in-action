@@ -11,7 +11,7 @@
   "dependencies": {
     "handlebars": "^3.0.0",
     "hapi": "11.x.x",
-    "joi": "6.x.x",
+    "joi": "8.x.x",
     "vision": "^3.0.0"
   }
 }
