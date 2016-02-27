@@ -28,7 +28,7 @@ exports.viewRecipe = function (request, reply) {
             throw err;
         }
 
-        reply.view('single', {
+        reply.view('recipe', {
             recipe: payload
         });
     });
