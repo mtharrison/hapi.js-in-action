@@ -59,11 +59,11 @@ server.register(require('vision'), (err) => {
         }
     ]);
 
-    server.start(() => {
+    server.start((err) => {
 
         if (err) {
             throw err;
         }
-        console.log('Server started!');
+        console.log('Server listening at:', server.info.uri);
     });
 });

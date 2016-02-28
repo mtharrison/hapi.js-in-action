@@ -25,7 +25,10 @@ server.ext('onPreResponse', (request, reply) => {
     reply.continue();
 });
 
-server.start(() => {
+server.start((err) => {
 
-    console.log('Server running at:', server.info.uri);
+    if (err) {
+        throw err;
+    }
+    console.log('Server listening at:', server.info.uri);
 });

@@ -42,8 +42,11 @@ server.register(require('inert'), (err) => {
         }
     });
 
-    server.start(() => {
+    server.start((err) => {
 
-        console.log('Server started!');
+        if (err) {
+            throw err;
+        }
+        console.log('Server listening at:', server.info.uri);
     });
 });
