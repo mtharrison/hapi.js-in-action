@@ -5,7 +5,7 @@ const Hapi = require('hapi');
 const server = new Hapi.Server({
     debug: {
         log: ['my-log-tag'],
-        request: ['my-request-tag']
+        request: ['my-request-tag', 'handler']
     }
 });
 server.connection({ port: 4000 });
