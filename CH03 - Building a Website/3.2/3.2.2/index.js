@@ -21,8 +21,11 @@ server.register([
 
     server.route(require('./routes'));
 
-    server.start(() => {
+    server.start((err) => {
 
-        console.log('Started server at', server.info.uri);
+        if (err) {
+            throw err;
+        }
+        console.log('Server listening at:', server.info.uri);
     });
 });

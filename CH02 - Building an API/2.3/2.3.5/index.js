@@ -51,7 +51,10 @@ server.route([{
     }
 }]);
 
-server.start(() => {
+server.start((err) => {
 
+    if (err) {
+        throw err;
+    }
     console.log('Server listening at:', server.info.uri);
 });
