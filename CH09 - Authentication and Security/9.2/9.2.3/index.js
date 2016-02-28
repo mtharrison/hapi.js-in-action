@@ -11,12 +11,12 @@ server.register([
         bell: {
             provider: 'facebook',
             isSecure: false,
-            clientId: 'clientid',
-            clientSecret: 'clientsecret',
-            password: 'secret'
+            clientId: 'Your Facebook App ID goes here',
+            clientSecret: 'Your Facebook App Secret goes here',
+            password: 'hapi-auth-cookie'
         },
         cookies: {
-            password: 'password',
+            password: 'secret',
             cookie: 'session',
             isSecure: false
         }
