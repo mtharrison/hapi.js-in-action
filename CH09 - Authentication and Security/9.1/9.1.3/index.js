@@ -46,8 +46,11 @@ server.register(require('hapi-auth-basic'), (err) => {
         }
     });
 
-    server.start(() => {
+    server.start((err) => {
 
-        console.log('Started server');
+        if (err) {
+            throw err;
+        }
+        console.log('Server listening at:', server.info.uri);
     });
 });
