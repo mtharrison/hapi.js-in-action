@@ -50,7 +50,7 @@ server.route([
                     id: Joi.number().required()
                 },
                 query: {
-                    page: Joi.number().min(0)
+                    page: Joi.number().min(1)
                 }
             }
         },
@@ -73,7 +73,7 @@ server.route([
                     sku: Joi.string().required().min(5)
                 },
                 params: {
-                    id: Joi.number().required().min(0)
+                    id: Joi.number().required().min(1)
                 }
             }
         },
@@ -81,7 +81,7 @@ server.route([
         path: '/products/{id}',
         handler: function (request, reply) {
 
-            reply('Made a new user!');
+            reply('Modified a product!');
         }
     }
 ]);
