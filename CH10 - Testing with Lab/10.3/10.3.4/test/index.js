@@ -44,7 +44,7 @@ experiment('Test Authenticated Route', () => {
         });
     });
 
-    test('Authenticates successfully (custom header)', (done) => {
+    test('Authenticates successfully (passing credentials)', (done) => {
 
         const options = {
             method: 'GET',
@@ -58,6 +58,23 @@ experiment('Test Authenticated Route', () => {
 
             expect(res.statusCode).to.equal(200);
             expect(res.payload).to.equal('hello steve');
+            done();
+        });
+    });
+
+    test('fails for a non-existent user', (done) => {
+
+        const options = {
+            method: 'GET',
+            url: '/',
+            headers: {
+                authorization: 'Basic ' + new Buffer('steve:pass').toString('base64')
+            }
+        };
+
+        server.inject(options, (res) => {
+
+            expect(res.statusCode).to.equal(401);
             done();
         });
     });

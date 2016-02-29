@@ -76,7 +76,7 @@ experiment('Test POST /user', () => {
 
             expect(res.statusCode).to.equal(400);
             const response = JSON.parse(res.payload);
-            expect(response.message).to.equal('child "age" fails because ["age" must be a number]');
+            expect(response.message).to.include('age').and.to.include('number');
             done();
         });
     });
