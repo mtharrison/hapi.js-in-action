@@ -61,6 +61,24 @@ Fs.readdir(basePath, (err, contents) => {
             throw err;
         }
 
+        const agg = {};
+
+        for (var i in deps) {
+            for (var j in deps[i].normal) {
+                if (!agg[j]) {
+                    agg[j] = [];
+                }
+                agg[j] = _.uniq(agg[j].concat(deps[i].normal[j]));
+            }
+            for (var j in deps[i].dev) {
+                if (!agg[j]) {
+                    agg[j] = [];
+                }
+                agg[j] = _.uniq(agg[j].concat(deps[i].dev[j]));
+            }
+        }
+
+        deps.aggregate = agg;
         console.log(JSON.stringify(deps, null, 2));
     });
 });
