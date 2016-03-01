@@ -61,7 +61,7 @@ experiment('Chapter 1', () => {
                 Wreck.get('http://localhost:4000/json', (err, res, payload) => {
 
                     expect(err).to.not.exist();
-                    expect(payload.toString()).to.equal('{"hello":"World"}');
+                    expect(JSON.parse(payload)).to.deep.equal({ hello: 'World' });
 
                     // Check logging output
 

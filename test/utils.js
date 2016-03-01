@@ -67,7 +67,6 @@ exports.install = internals.install = function (path, callback) {
         cwd: fPath
     }, (err, stdout, stderr) => {
 
-        if (stderr) console.log(stderr);
         callback(err, fPath);
     });
 };
