@@ -1,0 +1,293 @@
+{
+  "CH01 - Introducing hapi": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "good": [
+        "6.x.x"
+      ],
+      "good-console": [
+        "5.x.x"
+      ]
+    },
+    "dev": {}
+  },
+  "CH02 - Building an API": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "sqlite3": [
+        "^3.0.4"
+      ],
+      "bcrypt": [
+        "^0.8.0"
+      ],
+      "hapi-auth-bearer-token": [
+        "^3.1.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH03 - Building a Website": {
+    "normal": {
+      "dindin-api": [
+        "2.x.x"
+      ],
+      "hapi": [
+        "11.x.x"
+      ],
+      "inert": [
+        "^3.0.1"
+      ],
+      "handlebars": [
+        "^2.0.0"
+      ],
+      "vision": [
+        "^3.0.0"
+      ],
+      "wreck": [
+        "^6.2.0"
+      ],
+      "yar": [
+        "^4.2.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH04 - Routes and Handlers in Depth": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "handlebars": [
+        "^3.0.3"
+      ],
+      "vision": [
+        "^3.0.0"
+      ],
+      "accept": [
+        "2.x.x"
+      ],
+      "inert": [
+        "^3.2.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH05 - Understanding Requests and Responses": {
+    "normal": {
+      "boom": [
+        "2.x.x",
+        "^2.8.0"
+      ],
+      "hapi": [
+        "10.x.x"
+      ],
+      "netmask": [
+        "^1.0.5"
+      ],
+      "wreck": [
+        "6.x.x"
+      ],
+      "handlebars": [
+        "^3.0.3"
+      ],
+      "joi": [
+        "^6.6.1"
+      ],
+      "vision": [
+        "^3.0.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH06 - Validation with Joi": {
+    "normal": {
+      "joi": [
+        "8.x.x"
+      ],
+      "hapi": [
+        "11.x.x"
+      ],
+      "handlebars": [
+        "^3.0.0"
+      ],
+      "vision": [
+        "^3.0.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH07 - Creating Modular Applications with Plugins": {
+    "normal": {
+      "boom": [
+        "^2.8.0"
+      ],
+      "handlebars": [
+        "^3.0.3"
+      ],
+      "hapi": [
+        "10.x.x"
+      ],
+      "hoek": [
+        "^2.14.0"
+      ],
+      "joi": [
+        "^6.6.1"
+      ],
+      "rethinkdb": [
+        "^2.1.0"
+      ],
+      "vision": [
+        "^3.0.0"
+      ],
+      "confidence": [
+        "^1.4.2"
+      ],
+      "glue": [
+        "^2.3.0"
+      ]
+    },
+    "dev": {}
+  },
+  "CH08 - Leveraging Caching": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "inert": [
+        "^3.0.1"
+      ],
+      "wreck": [
+        "^6.0.0",
+        "6.x.x"
+      ],
+      "catbox": [
+        "^6.0.0"
+      ],
+      "catbox-memory": [
+        "^1.1.2"
+      ],
+      "catbox-redis": [
+        "1.x.x"
+      ],
+      "qs": [
+        "4.x.x"
+      ]
+    },
+    "dev": {}
+  },
+  "CH09 - Authentication and Security": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "hapi-auth-basic": [
+        "^3.0.0"
+      ],
+      "bell": [
+        "5.x.x"
+      ],
+      "handlebars": [
+        "^4.0.3"
+      ],
+      "hapi-auth-cookie": [
+        "3.x.x",
+        "^3.1.0"
+      ],
+      "vision": [
+        "3.x.x",
+        "^3.0.0"
+      ],
+      "inert": [
+        "^3.1.0"
+      ],
+      "crumb": [
+        "^4.0.4"
+      ]
+    },
+    "dev": {}
+  },
+  "CH10 - Testing with Lab": {
+    "normal": {
+      "code": [
+        "^2.0.1"
+      ],
+      "hapi": [
+        "11.x.x"
+      ],
+      "inert": [
+        "^3.2.0"
+      ],
+      "joi": [
+        "^7.0.0"
+      ],
+      "hapi-auth-basic": [
+        "^4.1.0"
+      ],
+      "mongodb": [
+        "^2.0.48"
+      ],
+      "sinon": [
+        "^1.17.3"
+      ],
+      "proxyquire": [
+        "^1.7.3"
+      ]
+    },
+    "dev": {
+      "lab": [
+        "7.x.x"
+      ]
+    }
+  },
+  "CH11 - hapi in Production": {
+    "normal": {
+      "hapi": [
+        "11.x.x"
+      ],
+      "boom": [
+        "3.x.x"
+      ],
+      "good": [
+        "6.x.x"
+      ],
+      "good-console": [
+        "5.x.x"
+      ],
+      "hoek": [
+        "^3.0.4"
+      ],
+      "good-file": [
+        "^5.1.1"
+      ],
+      "inert": [
+        "3.x.x"
+      ],
+      "joi": [
+        "7.x.x"
+      ],
+      "lout": [
+        "7.x.x"
+      ],
+      "vision": [
+        "4.x.x"
+      ],
+      "node-statsd": [
+        "0.1.x"
+      ],
+      "oppsy": [
+        "1.x.x"
+      ],
+      "poop": [
+        "2.x.x"
+      ],
+      "tv": [
+        "5.x.x"
+      ]
+    },
+    "dev": {}
+  }
+}

@@ -16,7 +16,8 @@
     "lint-ch9": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH09 - Authentication and Security'",
     "lint-ch10": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'",
-    "test": "lab -m 20000"
+    "test": "lab -m 20000",
+    "version-checker": "node scripts/version-checker"
   },
   "repository": {
     "type": "git",
@@ -34,5 +35,11 @@
     "eslint-plugin-hapi": "4.x.x",
     "code": "^2.1.0",
     "lab": "^10.0.0"
+  },
+  "dependencies": {
+    "glob": "^7.0.0",
+    "items": "^2.0.0",
+    "lodash": "^4.5.1",
+    "wreck": "^7.0.0"
   }
 }
