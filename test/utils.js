@@ -8,7 +8,8 @@ const WAIT_FOR_KILL = 500;
 
 const chapters = [
     'CH01 - Introducing hapi',
-    'CH02 - Building an API'
+    'CH02 - Building an API',
+    'CH03 - Building a Website'
 ];
 
 const internals = {};

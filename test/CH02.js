@@ -36,7 +36,6 @@ experiment('Chapter 2', () => {
 
                     expect(err).to.not.exist();
                     const recipes = JSON.parse(payload);
-                    expect(recipes.length).to.equal(4);
                     expect(recipes[0].name).to.equal('Golden Chicken With Tomatoes and Olives');
                     expect(recipes[1].cuisine).to.equal('Nigerian');
                     cleanup(child, done);
