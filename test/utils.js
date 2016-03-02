@@ -2,6 +2,7 @@
 
 const ChildProcess = require('child_process');
 const Path = require('path');
+const PassThrough = require('stream').PassThrough;
 
 const WAIT_FOR_PROC = 4000;
 const WAIT_FOR_KILL = 500;
@@ -9,7 +10,8 @@ const WAIT_FOR_KILL = 500;
 const chapters = [
     'CH01 - Introducing hapi',
     'CH02 - Building an API',
-    'CH03 - Building a Website'
+    'CH03 - Building a Website',
+    'CH04 - Routes and Handlers in Depth'
 ];
 
 const internals = {};
@@ -29,14 +31,14 @@ exports.setup = function (path, file, callback) {
             return callback(err);
         }
 
-        internals.run(fpath, file, (err, child) => {
+        internals.run(fpath, file, (err, child, stdout, stderr) => {
 
             if (err) {
                 return callback(err);
             }
 
             procs.push(child);
-            callback(null, child);
+            callback(null, child, stdout, stderr);
         });
     });
 }
@@ -76,12 +78,18 @@ exports.install = internals.install = function (path, callback) {
 
 exports.run = internals.run = function (cwd, file, callback) {
 
+    // Buffer to intermediate streams in case proc exits prematurely
+
+    const stdout = new PassThrough();
+    const stderr = new PassThrough();
+
     const child = ChildProcess.spawn('node', [file], { cwd });
 
-    child.stderr.pipe(process.stdout);
+    child.stdout.pipe(stdout);
+    child.stderr.pipe(stderr);
 
     setTimeout(() => {
-        callback(null, child);
+        callback(null, child, stdout, stderr);
     }, WAIT_FOR_PROC);
 };
 
