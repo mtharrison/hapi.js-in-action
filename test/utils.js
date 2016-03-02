@@ -4,6 +4,7 @@ const ChildProcess = require('child_process');
 const Path = require('path');
 
 const WAIT_FOR_PROC = 4000;
+const WAIT_FOR_KILL = 500;
 
 const chapters = [
     'CH01 - Introducing hapi',
@@ -12,7 +13,7 @@ const chapters = [
 
 const internals = {};
 
-const procs = {};
+const procs = [];
 
 exports.setup = function (path, file, callback) {
 
@@ -33,6 +34,7 @@ exports.setup = function (path, file, callback) {
                 return callback(err);
             }
 
+            procs.push(child);
             callback(null, child);
         });
     });
@@ -41,7 +43,7 @@ exports.setup = function (path, file, callback) {
 exports.cleanup = function (child, callback) {
 
     child.kill();
-    callback();
+    setTimeout(callback, WAIT_FOR_KILL);
 };
 
 exports.install = internals.install = function (path, callback) {
@@ -90,3 +92,10 @@ exports.getStreamBuffer = function (stream) {
     });
     return buff;
 };
+
+// Kill all procs on unexpected exit
+
+process.on('exit', () => {
+
+    procs.forEach((p) => p.kill());
+});
