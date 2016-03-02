@@ -38,7 +38,7 @@ exports.setup = function (path, file, callback) {
             }
 
             procs.push(child);
-            callback(null, child, stdout, stderr);
+            callback(null, child, stdout, stderr, fpath);
         });
     });
 }

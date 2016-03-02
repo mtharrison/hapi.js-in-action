@@ -3,7 +3,9 @@
 // Load modules
 
 const Code = require('code');
+const Fs = require('fs');
 const Lab = require('lab');
+const Path = require('path');
 const TestUtils = require('./utils');
 const Wreck = require('wreck');
 
@@ -133,6 +135,335 @@ experiment('Chapter 4', () => {
                                 cleanup(child, done);
                             });
                         });
+                    });
+                });
+            });
+        });
+    });
+
+    experiment('4.1', () => {
+
+        test('4.2.1', (done) => {
+
+            setup('4.2.1', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('<h2>Hello!</h2>');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+
+        test('4.2.3', (done) => {
+
+            setup('4.2.3', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('<h2>Hello!</h2>');
+
+                    const options = {
+                        headers: {
+                            'accept-language': 'fr'
+                        }
+                    };
+
+                    Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(payload.toString()).to.equal('<h2>Bonjour!</h2>');
+
+                        const options = {
+                            headers: {
+                                'accept-language': 'zh'
+                            }
+                        };
+
+                        Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(payload.toString()).to.equal('<h2>你好!</h2>');
+
+                            cleanup(child, done);
+                        });
+                    });
+                });
+            });
+        });
+
+        test('4.2.4', (done) => {
+
+            setup('4.2.4', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('<h2>Hello!</h2>');
+
+                    const options = {
+                        headers: {
+                            'accept-language': 'fr'
+                        }
+                    };
+
+                    Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(payload.toString()).to.equal('<h2>Bonjour!</h2>');
+
+                        const options = {
+                            headers: {
+                                'accept-language': 'zh'
+                            }
+                        };
+
+                        Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(payload.toString()).to.equal('<h2>你好!</h2>');
+
+                            cleanup(child, done);
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    experiment('4.3', () => {
+
+        test('4.3.1', (done) => {
+
+            setup('4.3.1', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const options = {
+                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                };
+
+                Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('{\"mean\":26.25}');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+
+        test('4.3.2', (done) => {
+
+            setup('4.3.2', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const options = {
+                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                };
+
+                Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('{\"mean\":26.25}');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+
+        test('4.3.2', (done) => {
+
+            setup('4.3.2', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const options = {
+                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                };
+
+                Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('{\"mean\":26.25}');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+    });
+
+    experiment('4.4', () => {
+
+        test('4.4.2', (done) => {
+
+            setup('4.4.2', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('April is the cruelest month, breeding\nlilacs out of the dead land, mixing\nmemory and desire, stirring\ndull roots with spring rain.');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+
+        test('4.4.3', (done) => {
+
+            setup('4.4.3', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.equal('April is the cruelest month, breeding\nlilacs out of the dead land, mixing\nmemory and desire, stirring\ndull roots with spring rain.');
+
+                    cleanup(child, done);
+                });
+            });
+        });
+
+        test('4.4.4', (done) => {
+
+            setup('4.4.4', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const options = {
+                    payload: JSON.stringify({ message: '0dd31dde3980c1b7ecee12e0c52d85a5' })
+                };
+
+                Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(getStreamBuffer(stdout)).to.include('0dd31dde3980c1b7ecee12e0c52d85a5')
+                        .and.to.include('Catflap is open')
+                        .and.to.include('I have infiltrated the base');
+
+                    options.payload = JSON.stringify({ message: '65e11a21872da5477187bcdbfa1ef25f' });
+
+                    Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(getStreamBuffer(stdout)).to.include('65e11a21872da5477187bcdbfa1ef25f')
+                            .and.to.include('Ink is dry')
+                            .and.to.include('I have the blueprints');
+
+                        options.payload = JSON.stringify({ message: 'ef2de8d315317333f7930901287fa768' });
+
+                        Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(getStreamBuffer(stdout)).to.include('ef2de8d315317333f7930901287fa768')
+                                .and.to.include('Bird has flown')
+                                .and.to.include('I am making my escape');
+
+                            cleanup(child, done);
+                        });
+                    });
+                });
+            });
+        });
+
+        test('4.4.5', (done) => {
+
+            setup('4.4.5', (err, child, stdout) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const options = {
+                    payload: JSON.stringify({ message: '0dd31dde3980c1b7ecee12e0c52d85a5' })
+                };
+
+                Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(getStreamBuffer(stdout)).to.include('0dd31dde3980c1b7ecee12e0c52d85a5')
+                        .and.to.include('Catflap is open')
+                        .and.to.include('I have infiltrated the base');
+
+                    options.payload = JSON.stringify({ message: '65e11a21872da5477187bcdbfa1ef25f' });
+
+                    Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(getStreamBuffer(stdout)).to.include('65e11a21872da5477187bcdbfa1ef25f')
+                            .and.to.include('Ink is dry')
+                            .and.to.include('I have the blueprints');
+
+                        options.payload = JSON.stringify({ message: 'ef2de8d315317333f7930901287fa768' });
+
+                        Wreck.post('http://localhost:4000', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(getStreamBuffer(stdout)).to.include('ef2de8d315317333f7930901287fa768')
+                                .and.to.include('Bird has flown')
+                                .and.to.include('I am making my escape');
+
+                            cleanup(child, done);
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    experiment('4.5', () => {
+
+        test('4.5 - data', (done) => {
+
+            setup('4.5', 'data.js', (err, child, stdout, stderr, fpath) => {
+
+                Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.include('<form action="/upload" method="post" enctype="multipart/form-data">');
+
+                    const options = {
+                        payload: JSON.stringify({ upload: 'abc'})
+                    };
+
+                    Wreck.post('http://localhost:4000/upload', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(200);
+                        expect(Fs.readFileSync(Path.join(fpath, 'uploadedFile')).toString()).to.equal('abc');
+
+                        cleanup(child, done);
                     });
                 });
             });

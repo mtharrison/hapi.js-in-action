@@ -47,7 +47,7 @@ experiment('Chapter 1', () => {
 
     test('1.4', (done) => {
 
-        setup('1.4', (err, child) => {
+        setup('1.4', (err, child, stdout) => {
 
             if (err) {
                 throw err;
@@ -65,7 +65,7 @@ experiment('Chapter 1', () => {
 
                     // Check logging output
 
-                    expect(getStreamBuffer(child.stdout)).to.include('[response]');
+                    expect(getStreamBuffer(stdout)).to.include('[response]');
                     cleanup(child, done);
                 });
             });
