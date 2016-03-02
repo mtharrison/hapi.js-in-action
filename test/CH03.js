@@ -169,4 +169,145 @@ experiment('Chapter 3', () => {
             });
         });
     });
+
+    experiment('3.4', () => {
+
+        test('3.4.3', (done) => {
+
+            setup('3.4.3', (err, child) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/login', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.include('Login');
+
+                    Wreck.post('http://localhost:4000/login', {
+                        payload: JSON.stringify({
+                            username: 'john',
+                            password: 'secret'
+                        })
+                    }, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(302);
+                        expect(res.headers.location).to.equal('http://localhost:4000');
+                        expect(res.headers['set-cookie']).to.exist();
+
+                        const options = {
+                            headers: {
+                                cookie: res.headers['set-cookie']
+                            }
+                        };
+
+                        Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(payload.toString()).to.include('Logout');
+                            cleanup(child, done);
+                        });
+                    });
+                });
+            });
+        });
+
+        test('3.4.4', (done) => {
+
+            setup('3.4.4', (err, child) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.get('http://localhost:4000/login', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(payload.toString()).to.include('Login');
+
+                    Wreck.post('http://localhost:4000/login', {
+                        payload: JSON.stringify({
+                            username: 'john',
+                            password: 'secret'
+                        })
+                    }, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(302);
+                        expect(res.headers.location).to.equal('http://localhost:4000');
+                        expect(res.headers['set-cookie']).to.exist();
+
+                        const options = {
+                            headers: {
+                                cookie: res.headers['set-cookie']
+                            },
+                            payload: JSON.stringify({
+                                name: 'Web test',
+                                cooking_time: '12 mins',
+                                prep_time: '15 mins',
+                                serves: 16,
+                                cuisine: 'Mongolian',
+                                ingredients: 'Cheese',
+                                directions: 'Melt',
+                            })
+                        };
+
+                        Wreck.post('http://localhost:4000/create', options, (err, res, payload) => {
+
+                            expect(err).to.not.exist();
+                            expect(res.statusCode).to.equal(302);
+                            expect(res.headers.location).to.equal('http://localhost:4000');
+
+                            Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
+
+                                expect(err).to.not.exist();
+                                expect(res.statusCode).to.equal(200);
+                                expect(payload.toString()).to.include('Web test');
+                                cleanup(child, done);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+
+        test('3.4.5', (done) => {
+
+            setup('3.4.5', (err, child) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                Wreck.post('http://localhost:4000/login', {
+                    payload: JSON.stringify({
+                        username: 'john',
+                        password: 'secret'
+                    })
+                }, (err, res, payload) => {
+
+                    expect(err).to.not.exist();
+                    expect(res.statusCode).to.equal(302);
+                    expect(res.headers.location).to.equal('http://localhost:4000');
+                    expect(res.headers['set-cookie']).to.exist();
+
+                    const options = {
+                        headers: {
+                            cookie: res.headers['set-cookie']
+                        }
+                    };
+
+                    Wreck.get('http://localhost:4000/logout', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(302);
+                        expect(res.headers.location).to.equal('http://localhost:4000');
+                        cleanup(child, done);
+                    });
+                });
+            });
+        });
+    });
 });
