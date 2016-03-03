@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "11.x.x",
+    "hapi": "13.x.x",
     "joi": "8.x.x"
   }
 }
