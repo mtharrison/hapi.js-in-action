@@ -19,7 +19,7 @@ exports.login = function (request, reply) {
             return reply.redirect(this.webBaseUrl + '/login');
         }
 
-        request.session.set('user', {
+        request.yar.set('user', {
             loggedIn: true,
             token: payload.token
         });
@@ -30,7 +30,7 @@ exports.login = function (request, reply) {
 exports.createRecipe = function (request, reply) {
 
     const apiUrl = this.apiBaseUrl + '/recipes';
-    const token = request.session.get('user').token;
+    const token = request.yar.get('user').token;
 
     Wreck.post(apiUrl, {
         payload: JSON.stringify(request.payload),
@@ -49,6 +49,6 @@ exports.createRecipe = function (request, reply) {
 
 exports.logout = function (request, reply) {
 
-    request.session.clear('user');
+    request.yar.clear('user');
     reply.redirect(this.webBaseUrl);
 };

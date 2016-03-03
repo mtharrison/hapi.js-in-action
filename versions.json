@@ -1,8 +1,12 @@
+
+> hapi.js-in-action@1.0.0 version-checker /Users/mattharrison/Developer/hapi.js-in-action
+> node scripts/version-checker
+
 {
   "CH01 - Introducing hapi": {
     "normal": {
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "good": [
         "6.x.x"
@@ -16,7 +20,7 @@
   "CH02 - Building an API": {
     "normal": {
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "sqlite3": [
         "^3.0.4"
@@ -25,7 +29,7 @@
         "^0.8.0"
       ],
       "hapi-auth-bearer-token": [
-        "^3.1.0"
+        "4.x.x"
       ]
     },
     "dev": {}
@@ -36,22 +40,22 @@
         "2.x.x"
       ],
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "inert": [
-        "^3.0.1"
+        "3.x.x"
       ],
       "handlebars": [
-        "^2.0.0"
+        "4.x.x"
       ],
       "vision": [
-        "^3.0.0"
+        "4.x.x"
       ],
       "wreck": [
-        "^6.2.0"
+        "7.x.x"
       ],
       "yar": [
-        "^4.2.0"
+        "7.x.x"
       ]
     },
     "dev": {}
@@ -59,19 +63,19 @@
   "CH04 - Routes and Handlers in Depth": {
     "normal": {
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "handlebars": [
-        "^3.0.3"
+        "4.x.x"
       ],
       "vision": [
-        "^3.0.0"
+        "4.x.x"
       ],
       "accept": [
         "2.x.x"
       ],
       "inert": [
-        "^3.2.0"
+        "3.x.x"
       ]
     },
     "dev": {}
@@ -292,8 +296,9 @@
   },
   "aggregate": {
     "hapi": [
-      "11.x.x",
-      "10.x.x"
+      "13.x.x",
+      "10.x.x",
+      "11.x.x"
     ],
     "good": [
       "6.x.x"
@@ -308,35 +313,35 @@
       "^0.8.0"
     ],
     "hapi-auth-bearer-token": [
-      "^3.1.0"
+      "4.x.x"
     ],
     "dindin-api": [
       "2.x.x"
     ],
     "inert": [
+      "3.x.x",
       "^3.0.1",
-      "^3.2.0",
       "^3.1.0",
-      "3.x.x"
+      "^3.2.0"
     ],
     "handlebars": [
-      "^2.0.0",
+      "4.x.x",
       "^3.0.3",
       "^3.0.0",
       "^4.0.3"
     ],
     "vision": [
+      "4.x.x",
       "^3.0.0",
-      "3.x.x",
-      "4.x.x"
+      "3.x.x"
     ],
     "wreck": [
-      "^6.2.0",
+      "7.x.x",
       "6.x.x",
       "^6.0.0"
     ],
     "yar": [
-      "^4.2.0"
+      "7.x.x"
     ],
     "accept": [
       "2.x.x"

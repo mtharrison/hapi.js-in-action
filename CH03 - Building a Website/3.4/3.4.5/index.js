@@ -18,7 +18,7 @@ server.register([
         register: require('yar'),
         options: {
             cookieOptions: {
-                password: 'password',
+                password: 'a9e084b6b48f7d6ea90e2ddc2f62cb09',
                 isSecure: false
             }
         }

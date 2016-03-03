@@ -4,6 +4,6 @@
   "description": "A social network for food",
   "dependencies": {
     "dindin-api": "2.x.x",
-    "hapi": "11.x.x"
+    "hapi": "13.x.x"
   }
 }

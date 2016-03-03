@@ -10,9 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "dindin-api": "2.x.x",
-    "handlebars": "^2.0.0",
-    "hapi": "11.x.x",
-    "inert": "^3.0.1",
-    "vision": "^3.0.0"
+    "handlebars": "4.x.x",
+    "hapi": "13.x.x",
+    "inert": "3.x.x",
+    "vision": "4.x.x"
   }
 }
