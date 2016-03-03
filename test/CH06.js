@@ -57,6 +57,10 @@ experiment('Chapter 6', () => {
 
             setup('6.2.3', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 expect(getStreamBuffer(stderr)).to.include('"value" must be a number');
                 cleanup(child, done);
             });
@@ -68,6 +72,10 @@ experiment('Chapter 6', () => {
         test('6.3.1', (done) => {
 
             setup('6.3.1', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/products/1', (err, res, payload) => {
 
@@ -90,7 +98,11 @@ experiment('Chapter 6', () => {
 
             setup('6.3.2', (err, child, stdout, stderr) => {
 
-                let payload = JSON.stringify({
+                if (err) {
+                    throw err;
+                }
+
+                const payload = JSON.stringify({
                     something: 'else'
                 });
 
@@ -122,9 +134,9 @@ experiment('Chapter 6', () => {
 
             setup('6.3.3', (err, child, stdout, stderr) => {
 
-                let payload = JSON.stringify({
-                    something: 'else'
-                });
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/people/1', (err, res, payload) => {
 
@@ -153,6 +165,10 @@ experiment('Chapter 6', () => {
 
             setup('6.3.4', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.post('http://localhost:4000/5', { headers: { test: 'something' } }, (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -170,6 +186,10 @@ experiment('Chapter 6', () => {
         test('6.4.3', (done) => {
 
             setup('6.4.3', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
@@ -193,6 +213,10 @@ experiment('Chapter 6', () => {
 
             setup('6.4.4', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -214,6 +238,10 @@ experiment('Chapter 6', () => {
         test('6.4.5', (done) => {
 
             setup('6.4.5', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
