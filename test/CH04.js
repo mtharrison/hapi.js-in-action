@@ -3,6 +3,7 @@
 // Load modules
 
 const Code = require('code');
+const FormData = require('form-data');
 const Fs = require('fs');
 const Lab = require('lab');
 const Path = require('path');
@@ -465,6 +466,80 @@ experiment('Chapter 4', () => {
                         expect(err).to.not.exist();
                         expect(res.statusCode).to.equal(200);
                         expect(Fs.readFileSync(Path.join(fpath, 'uploadedFile')).toString()).to.equal('abc');
+
+                        Fs.unlinkSync(Path.join(fpath, 'uploadedFile'));
+
+                        cleanup(child, done);
+                    });
+                });
+            });
+        });
+
+        test('4.5 - data', (done) => {
+
+            setup('4.5', 'file.js', (err, child, stdout, stderr, fpath) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const form = new FormData();
+                form.append('upload', 'A file', {
+                    filename: 'myfile.txt'
+                });
+
+                Wreck.read(form, null, function (err, body) {
+
+                    const options = {
+                        payload: body,
+                        headers: {
+                            'Content-type': 'multipart/form-data;boundary=' + form.getBoundary()
+                        }
+                    };
+
+                    Wreck.post('http://localhost:4000/upload', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(200);
+                        expect(Fs.readFileSync(Path.join(fpath, 'myfile.txt')).toString()).to.equal('A file');
+
+                        Fs.unlinkSync(Path.join(fpath, 'myfile.txt'));
+
+                        cleanup(child, done);
+                    });
+                });
+            });
+        });
+
+        test('4.5 - stream', (done) => {
+
+            setup('4.5', 'stream.js', (err, child, stdout, stderr, fpath) => {
+
+                if (err) {
+                    throw err;
+                }
+
+                const form = new FormData();
+                form.append('upload', 'A file', {
+                    filename: 'myfile.txt'
+                });
+
+                Wreck.read(form, null, function (err, body) {
+
+                    const options = {
+                        payload: body,
+                        headers: {
+                            'Content-type': 'multipart/form-data;boundary=' + form.getBoundary()
+                        }
+                    };
+
+                    Wreck.post('http://localhost:4000/upload', options, (err, res, payload) => {
+
+                        expect(err).to.not.exist();
+                        expect(res.statusCode).to.equal(200);
+                        expect(Fs.readFileSync(Path.join(fpath, 'uploads/myfile.txt')).toString()).to.equal('A file');
+
+                        Fs.unlinkSync(Path.join(fpath, 'uploads/myfile.txt'));
 
                         cleanup(child, done);
                     });
