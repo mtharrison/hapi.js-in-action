@@ -13,11 +13,9 @@ const lab = exports.lab = Lab.script();
 const experiment = lab.experiment;
 const test = lab.test;
 const expect = Code.expect;
-const beforeEach = lab.beforeEach;
 
 const setup = TestUtils.setup;
 const cleanup = TestUtils.cleanup;
-const getStreamBuffer = TestUtils.getStreamBuffer;
 
 
 experiment('Chapter 2', () => {
@@ -234,7 +232,7 @@ experiment('Chapter 2', () => {
                     serves: 16,
                     cuisine: 'Mongolian',
                     ingredients: 'Cheese',
-                    directions: 'Melt',
+                    directions: 'Melt'
                 };
 
                 const options = {
@@ -253,7 +251,7 @@ experiment('Chapter 2', () => {
 
                     // With authentication
 
-                    options.headers['Authorization'] = 'Bearer q8lrh5rzkrzdi4un8kfza5y3k1nn184x';
+                    options.headers.Authorization = 'Bearer q8lrh5rzkrzdi4un8kfza5y3k1nn184x';
 
                     Wreck.post('http://localhost:4000/api/recipes', options, (err, res, payload) => {
 

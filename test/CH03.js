@@ -13,11 +13,9 @@ const lab = exports.lab = Lab.script();
 const experiment = lab.experiment;
 const test = lab.test;
 const expect = Code.expect;
-const beforeEach = lab.beforeEach;
 
 const setup = TestUtils.setup;
 const cleanup = TestUtils.cleanup;
-const getStreamBuffer = TestUtils.getStreamBuffer;
 
 
 experiment('Chapter 3', () => {
@@ -250,7 +248,7 @@ experiment('Chapter 3', () => {
                                 serves: 16,
                                 cuisine: 'Mongolian',
                                 ingredients: 'Cheese',
-                                directions: 'Melt',
+                                directions: 'Melt'
                             })
                         };
 

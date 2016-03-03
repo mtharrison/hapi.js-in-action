@@ -16,7 +16,8 @@
     "lint-ch9": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH09 - Authentication and Security'",
     "lint-ch10": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'",
-    "test": "lab -m 20000",
+    "lint-tests": "eslint -c .eslintrc --ignore-pattern **/node_modules 'test'",
+    "test": "lab -m 20000 -L",
     "version-checker": "node scripts/version-checker"
   },
   "repository": {

@@ -15,7 +15,6 @@ const lab = exports.lab = Lab.script();
 const experiment = lab.experiment;
 const test = lab.test;
 const expect = Code.expect;
-const beforeEach = lab.beforeEach;
 
 const setup = TestUtils.setup;
 const cleanup = TestUtils.cleanup;
@@ -257,7 +256,7 @@ experiment('Chapter 4', () => {
                 }
 
                 const options = {
-                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                    payload: JSON.stringify({ values: [10, 20, 30, 45] })
                 };
 
                 Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
@@ -279,7 +278,7 @@ experiment('Chapter 4', () => {
                 }
 
                 const options = {
-                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                    payload: JSON.stringify({ values: [10, 20, 30, 45] })
                 };
 
                 Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
@@ -301,7 +300,7 @@ experiment('Chapter 4', () => {
                 }
 
                 const options = {
-                    payload: JSON.stringify({ values: [10, 20, 30, 45]})
+                    payload: JSON.stringify({ values: [10, 20, 30, 45] })
                 };
 
                 Wreck.post('http://localhost:4000/avg', options, (err, res, payload) => {
@@ -448,13 +447,17 @@ experiment('Chapter 4', () => {
 
             setup('4.5', 'data.js', (err, child, stdout, stderr, fpath) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
                     expect(err).to.not.exist();
                     expect(payload.toString()).to.include('<form action="/upload" method="post" enctype="multipart/form-data">');
 
                     const options = {
-                        payload: JSON.stringify({ upload: 'abc'})
+                        payload: JSON.stringify({ upload: 'abc' })
                     };
 
                     Wreck.post('http://localhost:4000/upload', options, (err, res, payload) => {

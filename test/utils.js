@@ -41,7 +41,7 @@ exports.setup = function (path, file, callback) {
             callback(null, child, stdout, stderr, fpath);
         });
     });
-}
+};
 
 exports.cleanup = function (child, callback) {
 
@@ -89,6 +89,7 @@ exports.run = internals.run = function (cwd, file, callback) {
     child.stderr.pipe(stderr);
 
     setTimeout(() => {
+
         callback(null, child, stdout, stderr);
     }, WAIT_FOR_PROC);
 };
@@ -97,6 +98,7 @@ exports.getStreamBuffer = function (stream) {
 
     let buff = '';
     stream._readableState.buffer.forEach((b) => {
+
         buff += b.toString();
     });
     return buff;

@@ -13,7 +13,6 @@ const lab = exports.lab = Lab.script();
 const experiment = lab.experiment;
 const test = lab.test;
 const expect = Code.expect;
-const beforeEach = lab.beforeEach;
 
 const setup = TestUtils.setup;
 const cleanup = TestUtils.cleanup;
