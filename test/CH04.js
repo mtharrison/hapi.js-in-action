@@ -488,7 +488,11 @@ experiment('Chapter 4', () => {
                     filename: 'myfile.txt'
                 });
 
-                Wreck.read(form, null, function (err, body) {
+                Wreck.read(form, null, (err, body) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     const options = {
                         payload: body,
@@ -524,7 +528,11 @@ experiment('Chapter 4', () => {
                     filename: 'myfile.txt'
                 });
 
-                Wreck.read(form, null, function (err, body) {
+                Wreck.read(form, null, (err, body) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     const options = {
                         payload: body,

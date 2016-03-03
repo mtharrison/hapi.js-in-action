@@ -11,7 +11,8 @@ const chapters = [
     'CH01 - Introducing hapi',
     'CH02 - Building an API',
     'CH03 - Building a Website',
-    'CH04 - Routes and Handlers in Depth'
+    'CH04 - Routes and Handlers in Depth',
+    'CH05 - Understanding Requests and Responses'
 ];
 
 const internals = {};
