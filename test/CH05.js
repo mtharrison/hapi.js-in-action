@@ -39,7 +39,6 @@ experiment('Chapter 5', () => {
                     expect(getStreamBuffer(stdout)).to.include('Blocking request from 127.0.0.1. Within blocked subnet 127.0.0.0/8');
                     cleanup(child, done);
                 });
-
             });
         });
     });

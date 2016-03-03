@@ -12,7 +12,8 @@ const chapters = [
     'CH02 - Building an API',
     'CH03 - Building a Website',
     'CH04 - Routes and Handlers in Depth',
-    'CH05 - Understanding Requests and Responses'
+    'CH05 - Understanding Requests and Responses',
+    'CH06 - Validation with Joi'
 ];
 
 const internals = {};

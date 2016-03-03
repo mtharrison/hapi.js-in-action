@@ -543,13 +543,16 @@ experiment('Chapter 4', () => {
 
                     Wreck.post('http://localhost:4000/upload', options, (err, res, payload) => {
 
-                        expect(err).to.not.exist();
-                        expect(res.statusCode).to.equal(200);
-                        expect(Fs.readFileSync(Path.join(fpath, 'uploads/myfile.txt')).toString()).to.equal('A file');
+                        setTimeout(() => {
 
-                        Fs.unlinkSync(Path.join(fpath, 'uploads/myfile.txt'));
+                            expect(err).to.not.exist();
+                            expect(res.statusCode).to.equal(200);
+                            expect(Fs.readFileSync(Path.join(fpath, 'uploads/myfile.txt')).toString()).to.equal('A file');
 
-                        cleanup(child, done);
+                            Fs.unlinkSync(Path.join(fpath, 'uploads/myfile.txt'));
+
+                            cleanup(child, done);
+                        }, 1000);
                     });
                 });
             });
