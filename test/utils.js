@@ -47,8 +47,21 @@ exports.setup = function (path, file, callback) {
 
 exports.cleanup = function (child, callback) {
 
+    child.once('exit', () => {
+
+        callback();
+    });
+
+    if (child.exitCode !== null) {
+
+        // Already dead
+        return process.nextTick(() => {
+
+            return callback();
+        });
+    }
+
     child.kill();
-    setTimeout(callback, WAIT_FOR_KILL);
 };
 
 exports.install = internals.install = function (path, callback) {

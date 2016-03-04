@@ -34,14 +34,14 @@
     "eslint": "^1.x.x",
     "eslint-config-hapi": "8.x.x",
     "eslint-plugin-hapi": "4.x.x",
-    "code": "^2.1.0",
-    "lab": "^10.0.0"
+    "code": "2.x.x",
+    "lab": "10.x.x"
   },
   "dependencies": {
     "form-data": "^0.2.0",
     "glob": "^7.0.0",
     "items": "^2.0.0",
-    "lodash": "^4.5.1",
+    "lodash": "^4.6.1",
     "wreck": "^7.0.0"
   }
 }
