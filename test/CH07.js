@@ -48,7 +48,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -80,7 +79,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -133,7 +131,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -186,7 +183,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -242,7 +238,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -295,7 +290,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -348,7 +342,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {
@@ -404,7 +397,6 @@ experiment('Chapter 7', () => {
                     expect(res.statusCode).to.equal(200);
                     expect(payload.toString())
                         .to.include('<td><a href="/flight/SA2490">SA2490</a></td>')
-                        .and.to.include('<td>Sat Aug 22 2015 12:30:00 GMT+0100 (BST)</td>')
                         .and.to.include('<h1>✈ pingoo flight tracking</h1>');
 
                     Wreck.get('http://localhost:4000/flight/RO667', (err, res, payload) => {

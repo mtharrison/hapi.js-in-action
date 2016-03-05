@@ -14,7 +14,8 @@ const chapters = [
     'CH04 - Routes and Handlers in Depth',
     'CH05 - Understanding Requests and Responses',
     'CH06 - Validation with Joi',
-    'CH07 - Creating Modular Applications with Plugins'
+    'CH07 - Creating Modular Applications with Plugins',
+    'CH08 - Leveraging Caching'
 ];
 
 const internals = {};
@@ -111,7 +112,7 @@ exports.run = internals.run = function (cwd, file, callback) {
     child.stderr.pipe(stderr);
 
     if (!process.env.CI) {
-        child.stderr.pipe(process.stdout);
+        child.stderr.pipe(process.stdout);  // don't want junk in ci logs
     }
 
     child.on('error', (err) => {
