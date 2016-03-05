@@ -7,7 +7,6 @@
   "private": true,
   "license": "BSD-3-Clause",
   "dependencies": {
-    "bcrypt": "^0.8.0",
     "hapi": "13.x.x",
     "hapi-auth-bearer-token": "4.x.x",
     "sqlite3": "^3.0.4"
