@@ -11,6 +11,7 @@
   "dependencies": {
     "boom": "^2.8.0",
     "handlebars": "^3.0.3",
+    "glue": "^2.3.0",
     "hapi": "10.x.x",
     "hoek": "^2.14.0",
     "joi": "^6.6.1",

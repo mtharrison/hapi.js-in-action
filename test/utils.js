@@ -110,6 +110,13 @@ exports.run = internals.run = function (cwd, file, callback) {
     child.stdout.pipe(stdout);
     child.stderr.pipe(stderr);
 
+    child.stderr.pipe(process.stdout);
+
+    child.on('error', (err) => {
+
+        console.log(err);
+    });
+
     setTimeout(() => {
 
         callback(null, child, stdout, stderr);
