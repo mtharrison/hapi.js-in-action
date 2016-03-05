@@ -5,9 +5,9 @@ const Fs = require('fs');
 const Path = require('path');
 
 const server = new Hapi.Server();
-server.connection({ port: 80 });
+server.connection({ port: process.env.HTTP_PORT || 80 });
 server.connection({
-    port: 443,
+    port: process.env.HTTPS_PORT || 443,
     tls: {
         key: Fs.readFileSync(Path.join(__dirname, 'server.key')),
         cert: Fs.readFileSync(Path.join(__dirname, 'server.crt'))

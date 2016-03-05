@@ -20,7 +20,8 @@ const chapters = [
     'CH07 - Creating Modular Applications with Plugins',
     'CH08 - Leveraging Caching',
     'CH09 - Authentication and Security',
-    'CH10 - Testing with Lab'
+    'CH10 - Testing with Lab',
+    'CH11 - hapi in Production'
 ];
 
 const internals = {};
