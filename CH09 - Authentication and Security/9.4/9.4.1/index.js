@@ -25,7 +25,7 @@ server.register([
     });
 
     server.auth.strategy('session', 'cookie', {
-        password: 'a51bq0LqVQRqM5y4',
+        password: '7d1428970228c4c2286a0fd6438e393a',
         isSecure: false
     });
 
@@ -42,7 +42,7 @@ server.register([
                 const message = request.auth.isAuthenticated ?
                     request.auth.credentials.message :
                     'Feeling great!';
-                request.auth.session.set({ message: message });
+                request.cookieAuth.set({ message: message });
                 reply.view('index', { message: message });
             }
         }
@@ -53,7 +53,7 @@ server.register([
             auth: 'session',
             handler: function (request, reply) {
 
-                request.auth.session.set({ message: request.payload.message });
+                request.cookieAuth.set({ message: request.payload.message });
                 reply.redirect('/');
             }
         }

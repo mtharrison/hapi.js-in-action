@@ -7,12 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "dependencies": {
-    "crumb": "^4.0.4",
-    "handlebars": "^4.0.3",
-    "hapi": "11.x.x",
-    "hapi-auth-cookie": "^3.1.0",
-    "vision": "^3.0.0"
+    "crumb": "6.x.x",
+    "handlebars": "4.x.x",
+    "hapi": "13.x.x",
+    "hapi-auth-cookie": "6.x.x",
+    "vision": "4.x.x"
   }
 }

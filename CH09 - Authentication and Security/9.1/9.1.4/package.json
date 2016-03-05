@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "dependencies": {
-    "hapi": "11.x.x",
-    "hapi-auth-basic": "^3.0.0"
+    "hapi": "13.x.x",
+    "hapi-auth-basic": "4.x.x"
   }
 }

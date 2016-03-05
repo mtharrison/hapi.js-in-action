@@ -9,7 +9,7 @@
   "author": "",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "hapi": "11.x.x",
+    "hapi": "13.x.x",
     "poop": "2.x.x"
   }
 }
