@@ -110,7 +110,9 @@ exports.run = internals.run = function (cwd, file, callback) {
     child.stdout.pipe(stdout);
     child.stderr.pipe(stderr);
 
-    child.stderr.pipe(process.stdout);
+    if (!process.env.CI) {
+        child.stderr.pipe(process.stdout);
+    }
 
     child.on('error', (err) => {
 
