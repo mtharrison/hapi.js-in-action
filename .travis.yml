@@ -8,16 +8,13 @@ node_js:
 env:
   - CXX=g++-4.8
 
-before_install:
- - echo "deb http://download.rethinkdb.com/apt trusty main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
- - wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
- - sudo apt-get update
- - sudo apt-get install rethinkdb
 
-before_script:
-  - sudo rethinkdb --io-threads 2048 --daemon
-  - ulimit -S -n 2048
-  - sleep 10
+before_install:
+  - source /etc/lsb-release && echo "deb http://download.rethinkdb.com/apt $DISTRIB_CODENAME main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
+  - wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
+  - sudo apt-get update -q
+  - sudo apt-get install rethinkdb -y
+  - sudo rethinkdb &
 
 addons:
   apt:
