@@ -8,8 +8,7 @@ const ChildProcess = require('child_process');
 const Path = require('path');
 const PassThrough = require('stream').PassThrough;
 
-const WAIT_FOR_PROC = 4000;
-const WAIT_FOR_KILL = 500;
+const WAIT_FOR_PROC = 5000;
 
 const chapters = [
     'CH01 - Introducing hapi',
