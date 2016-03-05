@@ -1,6 +1,8 @@
 'use strict';
 
-require('dotenv').config();
+if (!process.env.CI) {
+    require('dotenv').config();
+}
 
 const ChildProcess = require('child_process');
 const Path = require('path');
