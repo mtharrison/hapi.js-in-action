@@ -18,7 +18,8 @@ const chapters = [
     'CH05 - Understanding Requests and Responses',
     'CH06 - Validation with Joi',
     'CH07 - Creating Modular Applications with Plugins',
-    'CH08 - Leveraging Caching'
+    'CH08 - Leveraging Caching',
+    'CH09 - Authentication and Security'
 ];
 
 const internals = {};
