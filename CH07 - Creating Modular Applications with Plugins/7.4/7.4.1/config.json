@@ -25,17 +25,18 @@
             { "port": 4000 }
         ]
     },
-    "plugins": [
-        { 
-            "./plugins/database": [{
+    "registrations": [
+        {
+            "plugin": {
+                "register": "./plugins/database",
                 "options": {
                     "dbName": "pingoo",
                     "dbTable": "pings"
                 }
-            }] 
+            }
         },
-        { "./plugins/portal": null },
-        { "./plugins/receive": null },
-        { "vision": null }
+        { "plugin": "./plugins/portal" },
+        { "plugin": "./plugins/receive" },
+        { "plugin": "vision" }
     ]
 }

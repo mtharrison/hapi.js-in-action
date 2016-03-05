@@ -9,14 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "boom": "^2.8.0",
-    "confidence": "^1.4.2",
-    "glue": "^2.3.0",
-    "handlebars": "^3.0.3",
-    "hapi": "10.x.x",
-    "hoek": "^2.14.0",
-    "joi": "^6.6.1",
-    "rethinkdb": "^2.1.0",
-    "vision": "^3.0.0"
+    "boom": "3.x.x",
+    "confidence": "1.x.x",
+    "glue": "3.x.x",
+    "handlebars": "4.x.x",
+    "hapi": "13.x.x",
+    "hoek": "3.x.x",
+    "joi": "8.x.x",
+    "rethinkdb": "2.x.x",
+    "vision": "4.x.x"
   }
 }

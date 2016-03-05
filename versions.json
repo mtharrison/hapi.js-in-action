@@ -126,31 +126,31 @@
   "CH07 - Creating Modular Applications with Plugins": {
     "normal": {
       "boom": [
-        "^2.8.0"
+        "3.x.x"
       ],
       "handlebars": [
-        "^3.0.3"
+        "4.x.x"
       ],
       "hapi": [
-        "10.x.x"
+        "13.x.x"
       ],
       "hoek": [
-        "^2.14.0"
+        "3.x.x"
       ],
       "joi": [
-        "^6.6.1"
+        "8.x.x"
       ],
       "rethinkdb": [
-        "^2.1.0"
+        "2.x.x"
       ],
       "vision": [
-        "^3.0.0"
-      ],
-      "confidence": [
-        "^1.4.2"
+        "4.x.x"
       ],
       "glue": [
-        "^2.3.0"
+        "3.x.x"
+      ],
+      "confidence": [
+        "1.x.x"
       ]
     },
     "dev": {}
@@ -296,7 +296,6 @@
   "aggregate": {
     "hapi": [
       "13.x.x",
-      "10.x.x",
       "11.x.x"
     ],
     "good": [
@@ -325,13 +324,12 @@
     ],
     "handlebars": [
       "4.x.x",
-      "^3.0.3",
       "^4.0.3"
     ],
     "vision": [
       "4.x.x",
-      "^3.0.0",
-      "3.x.x"
+      "3.x.x",
+      "^3.0.0"
     ],
     "wreck": [
       "7.x.x",
@@ -345,30 +343,28 @@
       "2.x.x"
     ],
     "boom": [
-      "3.x.x",
-      "^2.8.0"
+      "3.x.x"
     ],
     "netmask": [
       "^1.0.5"
     ],
     "joi": [
       "8.x.x",
-      "^6.6.1",
       "^7.0.0",
       "7.x.x"
     ],
     "hoek": [
-      "^2.14.0",
+      "3.x.x",
       "^3.0.4"
     ],
     "rethinkdb": [
-      "^2.1.0"
-    ],
-    "confidence": [
-      "^1.4.2"
+      "2.x.x"
     ],
     "glue": [
-      "^2.3.0"
+      "3.x.x"
+    ],
+    "confidence": [
+      "1.x.x"
     ],
     "catbox": [
       "^6.0.0"
