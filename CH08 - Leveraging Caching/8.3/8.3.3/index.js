@@ -21,7 +21,7 @@ const searchReviews = function (query, callback) {
 
     const baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
     const queryObj = {
-        'api-key': '2d07d4c26378607c5e104ae3164327ff:18:72077307',
+        'api-key': process.env.NYT_MOVIE_API_KEY || 'YOUR_API_KEY',
         query: query
     };
     const queryUrl = baseUrl + '?' + Qs.stringify(queryObj);

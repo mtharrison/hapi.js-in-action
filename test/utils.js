@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const ChildProcess = require('child_process');
 const Path = require('path');
 const PassThrough = require('stream').PassThrough;
