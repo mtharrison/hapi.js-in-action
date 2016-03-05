@@ -9,7 +9,14 @@ env:
   - CXX=g++-4.8
 
 before_install:
-    - sudo add-apt-repository -y ppa:rethinkdb/ppa && sudo apt-get -y update && sudo apt-get install -y rethinkdb
+  - sudo add-apt-repository ppa:rethinkdb/ppa -y
+  - sudo apt-get update -qq
+  - sudo apt-get install rethinkdb -y
+  
+before_script:
+  - sudo rethinkdb --io-threads 2048 --daemon
+  - ulimit -S -n 2048
+  - sleep 10
 
 addons:
   apt:
