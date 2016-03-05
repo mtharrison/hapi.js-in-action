@@ -184,30 +184,28 @@
   "CH09 - Authentication and Security": {
     "normal": {
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "hapi-auth-basic": [
-        "^3.0.0"
+        "4.x.x"
       ],
       "bell": [
-        "5.x.x"
+        "7.x.x"
       ],
       "handlebars": [
-        "^4.0.3"
+        "4.x.x"
       ],
       "hapi-auth-cookie": [
-        "3.x.x",
-        "^3.1.0"
+        "6.x.x"
       ],
       "vision": [
-        "3.x.x",
-        "^3.0.0"
+        "4.x.x"
       ],
       "inert": [
-        "^3.1.0"
+        "3.x.x"
       ],
       "crumb": [
-        "^4.0.4"
+        "6.x.x"
       ]
     },
     "dev": {}
@@ -215,19 +213,19 @@
   "CH10 - Testing with Lab": {
     "normal": {
       "code": [
-        "^2.0.1"
+        "2.x.x"
       ],
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "inert": [
-        "^3.2.0"
+        "3.x.x"
       ],
       "joi": [
-        "^7.0.0"
+        "8.x.x"
       ],
       "hapi-auth-basic": [
-        "^4.1.0"
+        "4.x.x"
       ],
       "mongodb": [
         "^2.0.48"
@@ -248,7 +246,7 @@
   "CH11 - hapi in Production": {
     "normal": {
       "hapi": [
-        "11.x.x"
+        "13.x.x"
       ],
       "boom": [
         "3.x.x"
@@ -294,8 +292,7 @@
   },
   "aggregate": {
     "hapi": [
-      "13.x.x",
-      "11.x.x"
+      "13.x.x"
     ],
     "good": [
       "6.x.x"
@@ -316,18 +313,13 @@
       "2.x.x"
     ],
     "inert": [
-      "3.x.x",
-      "^3.1.0",
-      "^3.2.0"
+      "3.x.x"
     ],
     "handlebars": [
-      "4.x.x",
-      "^4.0.3"
+      "4.x.x"
     ],
     "vision": [
-      "4.x.x",
-      "3.x.x",
-      "^3.0.0"
+      "4.x.x"
     ],
     "wreck": [
       "7.x.x"
@@ -346,7 +338,6 @@
     ],
     "joi": [
       "8.x.x",
-      "^7.0.0",
       "7.x.x"
     ],
     "hoek": [
@@ -375,21 +366,19 @@
       "6.x.x"
     ],
     "hapi-auth-basic": [
-      "^3.0.0",
-      "^4.1.0"
+      "4.x.x"
     ],
     "bell": [
-      "5.x.x"
+      "7.x.x"
     ],
     "hapi-auth-cookie": [
-      "3.x.x",
-      "^3.1.0"
+      "6.x.x"
     ],
     "crumb": [
-      "^4.0.4"
+      "6.x.x"
     ],
     "code": [
-      "^2.0.1"
+      "2.x.x"
     ],
     "mongodb": [
       "^2.0.48"

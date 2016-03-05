@@ -11,8 +11,8 @@
   "dependencies": {
       "hapi": "13.x.x",
       "inert": "3.x.x",
-      "joi": "7.x.x",
-      "lout": "7.x.x",
+      "joi": "8.x.x",
+      "lout": "9.x.x",
       "vision": "4.x.x"
   }
 }
