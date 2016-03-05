@@ -16,7 +16,6 @@ const expect = Code.expect;
 
 const setup = TestUtils.setup;
 const cleanup = TestUtils.cleanup;
-const getStreamBuffer = TestUtils.getStreamBuffer;
 
 
 experiment('Chapter 9', () => {
@@ -136,6 +135,10 @@ experiment('Chapter 9', () => {
 
             setup('9.3.1', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 const options = {
                     headers: {
                         origin: 'http://other-domain.com'
@@ -143,6 +146,10 @@ experiment('Chapter 9', () => {
                 };
 
                 Wreck.get('http://localhost:4000/resource', options, (err, res, payload) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     expect(res.headers['access-control-allow-origin']).to.equal('http://other-domain.com');
                     cleanup(child, done);
@@ -154,6 +161,10 @@ experiment('Chapter 9', () => {
 
             setup('9.3.2', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 const options = {
                     headers: {
                         origin: 'http://other-domain.com'
@@ -162,11 +173,19 @@ experiment('Chapter 9', () => {
 
                 Wreck.get('http://localhost:4000/resource', options, (err, res, payload) => {
 
+                    if (err) {
+                        throw err;
+                    }
+
                     expect(res.headers['access-control-allow-origin']).to.not.exist();
 
-                    options.headers.origin = 'http://localhost:4000'
+                    options.headers.origin = 'http://localhost:4000';
 
                     Wreck.get('http://localhost:4000/resource', options, (err, res, payload) => {
+
+                        if (err) {
+                            throw err;
+                        }
 
                         expect(res.headers['access-control-allow-origin']).to.equal('http://localhost:4000');
                         cleanup(child, done);
@@ -178,6 +197,10 @@ experiment('Chapter 9', () => {
         test('9.3.3', (done) => {
 
             setup('9.3.3', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 const options = {
                     headers: {
@@ -214,6 +237,10 @@ experiment('Chapter 9', () => {
 
             setup('9.3.4', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 const options = {
                     headers: {
                         origin: 'http://other-domain.com'
@@ -221,6 +248,10 @@ experiment('Chapter 9', () => {
                 };
 
                 Wreck.get('http://localhost:4000/resource', options, (err, res, payload) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     expect(res.headers['access-control-allow-origin']).to.equal('http://other-domain.com');
                     expect(res.headers['access-control-allow-credentials']).to.equal('true');
@@ -233,6 +264,10 @@ experiment('Chapter 9', () => {
 
             setup('9.3.5', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 const options = {
                     headers: {
                         origin: 'http://other-domain.com'
@@ -240,6 +275,10 @@ experiment('Chapter 9', () => {
                 };
 
                 Wreck.get('http://localhost:4000/resource', options, (err, res, payload) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     expect(res.headers['access-control-allow-origin']).to.equal('http://other-domain.com');
                     cleanup(child, done);
@@ -292,6 +331,10 @@ experiment('Chapter 9', () => {
 
                         Wreck.get('http://localhost:4000/', options, (err, res, payload) => {
 
+                            if (err) {
+                                throw err;
+                            }
+
                             expect(payload.toString()).to.include('Something else');
                             cleanup(child, done);
                         });
@@ -314,11 +357,11 @@ experiment('Chapter 9', () => {
                         throw err;
                     }
 
-                    let sessc = res.headers['set-cookie'][1].split(';')[0];
+                    const sessc = res.headers['set-cookie'][1].split(';')[0];
 
                     expect(payload.toString()).to.include('Feeling great!');
 
-                    let options = {
+                    const options = {
                         headers: {
                             cookie: sessc
                         },
@@ -354,12 +397,12 @@ experiment('Chapter 9', () => {
                         throw err;
                     }
 
-                    let crumb = res.headers['set-cookie'][0].split(';')[0];
-                    let sessc = res.headers['set-cookie'][1].split(';')[0];
+                    const crumb = res.headers['set-cookie'][0].split(';')[0];
+                    const sessc = res.headers['set-cookie'][1].split(';')[0];
 
                     expect(payload.toString()).to.include('Feeling great!');
 
-                    let options = {
+                    const options = {
                         headers: {
                             cookie: sessc + '; ' + crumb,
                             'content-type': 'application/json'
@@ -397,12 +440,12 @@ experiment('Chapter 9', () => {
                         throw err;
                     }
 
-                    let crumb = res.headers['set-cookie'][0].split(';')[0];
-                    let sessc = res.headers['set-cookie'][1].split(';')[0];
+                    const crumb = res.headers['set-cookie'][0].split(';')[0];
+                    const sessc = res.headers['set-cookie'][1].split(';')[0];
 
                     expect(payload.toString()).to.include('Feeling great!');
 
-                    let options = {
+                    const options = {
                         headers: {
                             cookie: sessc + '; ' + crumb,
                             'content-type': 'application/json',
@@ -432,6 +475,10 @@ experiment('Chapter 9', () => {
         test('9.5', (done) => {
 
             setup('9.5', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
