@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wreck": "^6.0.0"
+    "wreck": "7.x.x"
   }
 }

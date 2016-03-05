@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "catbox": "^6.0.0",
-    "catbox-memory": "^1.1.2",
-    "wreck": "^6.0.0"
+    "catbox": "7.x.x",
+    "catbox-memory": "2.x.x",
+    "wreck": "7.x.x"
   }
 }

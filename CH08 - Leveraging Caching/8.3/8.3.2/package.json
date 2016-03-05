@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "catbox-redis": "1.x.x",
-    "hapi": "11.x.x",
-    "qs": "4.x.x",
-    "wreck": "6.x.x"
+    "hapi": "13.x.x",
+    "qs": "6.x.x",
+    "wreck": "7.x.x"
   }
 }
