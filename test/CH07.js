@@ -2,7 +2,6 @@
 
 // Load modules
 
-const ChildProcess = require('child_process');
 const Code = require('code');
 const Lab = require('lab');
 const TestUtils = require('./utils');
@@ -25,6 +24,10 @@ before((done) => {
     // Setup the database
 
     setup('7', 'db-setup.js', (err, child) => {
+
+        if (err) {
+            throw err;
+        }
 
         cleanup(child, done, true);
     });
@@ -107,6 +110,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -159,6 +163,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -211,6 +216,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -266,6 +272,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -318,6 +325,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -370,6 +378,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -425,6 +434,7 @@ experiment('Chapter 7', () => {
 
                             Wreck.get('http://localhost:4000/flight/ABCDEF', (err, res, payload) => {
 
+                                expect(err).to.not.exist();
                                 expect(res.statusCode).to.equal(200);
                                 expect(payload.toString()).to.include('<td><a href="/flight/ABCDEF">ABCDEF</a></td>');
                                 cleanup(child, done);
@@ -444,8 +454,14 @@ experiment('Chapter 7', () => {
                 }
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                    expect(err).to.not.exist();
                     Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                        expect(err).to.not.exist();
                         Wreck.get('http://localhost:4000/', (err, res, payload) => {
+
+                            expect(err).to.not.exist();
 
                             setTimeout(() => {
 

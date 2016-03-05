@@ -2,7 +2,6 @@
 
 // Load modules
 
-const ChildProcess = require('child_process');
 const Code = require('code');
 const Lab = require('lab');
 const Redis = require('redis');
@@ -12,7 +11,6 @@ const Wreck = require('wreck');
 // Test shortcuts
 
 const lab = exports.lab = Lab.script();
-const before = lab.before;
 const experiment = lab.experiment;
 const test = lab.test;
 const expect = Code.expect;
@@ -31,6 +29,10 @@ experiment('Chapter 8', () => {
 
             setup('8.1.1', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/image.png', (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -45,6 +47,10 @@ experiment('Chapter 8', () => {
         test('8.1.2', (done) => {
 
             setup('8.1.2', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/image.png', (err, res, payload) => {
 
@@ -61,6 +67,10 @@ experiment('Chapter 8', () => {
 
             setup('8.1.3', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/image.png', (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -76,6 +86,10 @@ experiment('Chapter 8', () => {
         test('8.1.4', (done) => {
 
             setup('8.1.4', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/users', (err, res, payload) => {
 
@@ -94,7 +108,12 @@ experiment('Chapter 8', () => {
 
             setup('8.2.1', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 setTimeout(() => {
+
                     expect(getStreamBuffer(stdout)).to.include('Found').and.to.include('articles in');
                     cleanup(child, done);
                 }, 2000);
@@ -105,7 +124,12 @@ experiment('Chapter 8', () => {
 
             setup('8.2.2', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 setTimeout(() => {
+
                     const lines = getStreamBuffer(stdout).split('\n');
                     expect(lines[0]).to.not.include('CACHED');
                     expect(lines[1]).to.include('CACHED');
@@ -119,7 +143,12 @@ experiment('Chapter 8', () => {
 
             setup('8.2.3', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 setTimeout(() => {
+
                     const lines = getStreamBuffer(stdout).split('\n');
                     expect(lines[0]).to.not.include('CACHED').and.to.not.include('STALE');
                     expect(lines[1]).to.include('CACHED').and.to.not.include('STALE');
@@ -136,17 +165,29 @@ experiment('Chapter 8', () => {
 
             setup('8.3.2', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 let now = Date.now();
 
                 Wreck.get('http://localhost:4000/movies/manhattan', (err, res, payload) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     const t1 = Date.now() - now;
                     now = Date.now();
 
                     Wreck.get('http://localhost:4000/movies/manhattan', (err, res, payload) => {
 
+                        if (err) {
+                            throw err;
+                        }
+
                         const t2 = Date.now() - now;
-                        expect(t1/t2).to.be.greaterThan(5); // at least 5 times faster (really a lot more)
+                        expect(t1 / t2).to.be.greaterThan(5); // at least 5 times faster (really a lot more)
 
                         client.del('hapi-cache:movies:manhattan', (err) => {
 
@@ -164,17 +205,29 @@ experiment('Chapter 8', () => {
 
             setup('8.3.3', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 let now = Date.now();
 
                 Wreck.get('http://localhost:4000/movies/lebowski', (err, res, payload) => {
+
+                    if (err) {
+                        throw err;
+                    }
 
                     const t1 = Date.now() - now;
                     now = Date.now();
 
                     Wreck.get('http://localhost:4000/movies/lebowski', (err, res, payload) => {
 
+                        if (err) {
+                            throw err;
+                        }
+
                         const t2 = Date.now() - now;
-                        expect(t1/t2).to.be.greaterThan(5); // at least 5 times faster (really a lot more)
+                        expect(t1 / t2).to.be.greaterThan(5); // at least 5 times faster (really a lot more)
 
                         client.del('hapi-cache:movies:lebowski', (err) => {
 
