@@ -13,7 +13,8 @@ const chapters = [
     'CH03 - Building a Website',
     'CH04 - Routes and Handlers in Depth',
     'CH05 - Understanding Requests and Responses',
-    'CH06 - Validation with Joi'
+    'CH06 - Validation with Joi',
+    'CH07 - Creating Modular Applications with Plugins'
 ];
 
 const internals = {};
@@ -45,7 +46,7 @@ exports.setup = function (path, file, callback) {
     });
 };
 
-exports.cleanup = function (child, callback) {
+exports.cleanup = function (child, callback, natural) {
 
     child.once('exit', () => {
 
@@ -61,7 +62,9 @@ exports.cleanup = function (child, callback) {
         });
     }
 
-    child.kill();
+    if (!natural) {
+        child.kill();
+    }
 };
 
 exports.install = internals.install = function (path, callback) {
@@ -70,6 +73,10 @@ exports.install = internals.install = function (path, callback) {
     const splitPath = path.split('.');
     const chapNum = parseInt(splitPath[0]);
     const basePath = Path.join(__dirname, '..');
+
+    if (splitPath.length === 1) {
+        fPath = Path.join(basePath, chapters[chapNum - 1]);
+    }
 
     if (splitPath.length === 2) {
         fPath = Path.join(basePath, chapters[chapNum - 1], chapNum + '.' + splitPath[1]);
