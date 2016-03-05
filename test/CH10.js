@@ -32,6 +32,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('addition should add two numbers together')
                         .and.to.include('Failed tests')
                         .and.to.include('1 of 1 tests failed');
@@ -50,6 +51,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('1 tests complete');
                     cleanup(child, done);
                 });
@@ -66,6 +68,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('3 tests complete');
                     cleanup(child, done);
                 });
@@ -82,6 +85,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('1 tests complete');
                     cleanup(child, done);
                 });
@@ -101,6 +105,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('ensure headers is correct format')
                         .and.to.include('ensure headers is correct format')
                         .and.to.include('2 of 2 tests failed');
@@ -122,6 +127,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('1 tests complete');
                     cleanup(child, done);
                 });
@@ -138,6 +144,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('2 tests complete');
                     cleanup(child, done);
                 });
@@ -154,6 +161,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('3 tests complete');
                     cleanup(child, done);
                 });
@@ -173,6 +181,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('1 tests complete');
                     cleanup(child, done);
                 });
@@ -189,6 +198,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('Starting test 1\nFinishing test 1')
                         .and.to.include('Starting test 2\nFinishing test 2');
                     cleanup(child, done);
@@ -209,6 +219,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('2 tests complete');
                     cleanup(child, done);
                 });
@@ -225,6 +236,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('2 tests complete');
                     cleanup(child, done);
                 });
@@ -241,6 +253,7 @@ experiment('Chapter 10', () => {
 
                 Wreck.read(child.stdout, null, (err, body) => {
 
+                    expect(err).to.not.exist();
                     expect(body.toString()).to.include('1 tests complete');
                     cleanup(child, done);
                 });
