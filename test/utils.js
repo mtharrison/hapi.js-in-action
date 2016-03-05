@@ -19,7 +19,8 @@ const chapters = [
     'CH06 - Validation with Joi',
     'CH07 - Creating Modular Applications with Plugins',
     'CH08 - Leveraging Caching',
-    'CH09 - Authentication and Security'
+    'CH09 - Authentication and Security',
+    'CH10 - Testing with Lab'
 ];
 
 const internals = {};
@@ -40,6 +41,31 @@ exports.setup = function (path, file, callback) {
         }
 
         internals.run(fpath, file, (err, child, stdout, stderr) => {
+
+            if (err) {
+                return callback(err);
+            }
+
+            procs.push(child);
+            callback(null, child, stdout, stderr, fpath);
+        });
+    });
+};
+
+exports.setupTest = function (path, file, callback) {
+
+    if (arguments.length === 2) {
+        callback = file;
+        file = null;
+    }
+
+    internals.install(path, (err, fpath) => {
+
+        if (err) {
+            return callback(err);
+        }
+
+        internals.test(fpath, file, (err, child, stdout, stderr) => {
 
             if (err) {
                 return callback(err);
@@ -128,6 +154,18 @@ exports.run = internals.run = function (cwd, file, callback) {
 
         callback(null, child, stdout, stderr);
     }, WAIT_FOR_PROC);
+};
+
+exports.test = internals.test = function (cwd, file, callback) {
+
+    const child = ChildProcess.spawn('lab', file ? [file] : [], { cwd });
+
+    child.on('error', (err) => {
+
+        console.log(err);
+    });
+
+    callback(null, child);
 };
 
 exports.getStreamBuffer = function (stream) {
