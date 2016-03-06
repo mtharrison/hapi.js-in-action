@@ -2,6 +2,7 @@
 
 const Code = require('code');
 const Lab = require('lab');
+const MongoDb = require('mongodb');
 
 const expect = Code.expect;
 const lab = exports.lab = Lab.script();
@@ -12,6 +13,24 @@ const beforeEach = lab.beforeEach;
 let server;
 
 beforeEach((done) => {
+
+    const db = {
+        collection: function () {
+
+            return {
+                insertOne: function (doc, callback) {
+
+                    doc._id = 'abcdef';
+                    callback(null, { ops: [doc] });
+                }
+            };
+        }
+    };
+
+    MongoDb.MongoClient.connect = function (url, callback) {
+
+        callback(null, db);
+    };
 
     require('..')((err, srv) => {
 
@@ -27,17 +46,6 @@ beforeEach((done) => {
 experiment('Test POST /user', () => {
 
     test('creates a user object', (done) => {
-
-        server.app.db.collection = function () {
-
-            return {
-                insertOne: function (doc, callback) {
-
-                    doc._id = 'abcdef';
-                    callback(null, { ops: [doc] });
-                }
-            };
-        };
 
         const user = {
             name: {

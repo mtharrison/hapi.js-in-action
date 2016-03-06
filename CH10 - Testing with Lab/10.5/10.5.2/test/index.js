@@ -3,6 +3,7 @@
 const Code = require('code');
 const Lab = require('lab');
 const Sinon = require('sinon');
+const MongoDb = require('mongodb');
 
 const expect = Code.expect;
 const lab = exports.lab = Lab.script();
@@ -15,6 +16,24 @@ let server;
 beforeEach((done) => {
 
     // Get a fresh server object for each test
+
+    const db = {
+        collection: function () {
+
+            return {
+                insertOne: function (doc, callback) {
+
+                    doc._id = 'abcdef';
+                    callback(null, { ops: [doc] });
+                }
+            };
+        }
+    };
+
+    MongoDb.MongoClient.connect = function (url, callback) {
+
+        callback(null, db);
+    };
 
     require('..')((err, srv) => {
 
@@ -30,17 +49,6 @@ beforeEach((done) => {
 experiment('Test POST /user', () => {
 
     test('creates a user object (spy)', (done) => {
-
-        server.app.db.collection = function () {
-
-            return {
-                insertOne: function (doc, callback) {
-
-                    doc._id = 'abcdef';
-                    callback(null, { ops: [doc] });
-                }
-            };
-        };
 
         const spy = Sinon.spy(server.app.db, 'collection');
 
@@ -76,7 +84,7 @@ experiment('Test POST /user', () => {
             return {
                 insertOne: function (doc2, cb) {
 
-                    doc2._id = 'abcdef';
+                    doc2._id = 'ghijkl';
                     cb(null, { ops: [doc2] });
                 }
             };
@@ -98,6 +106,7 @@ experiment('Test POST /user', () => {
 
         server.inject(options, (res) => {
 
+            expect(res.result._id).to.equal('ghijkl');
             expect(stub.calledOnce).to.be.true();
             expect(stub.calledWith('users')).to.be.true();
 
