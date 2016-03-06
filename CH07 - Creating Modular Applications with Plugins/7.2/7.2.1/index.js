@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Hoek = require('hoek');
 const R = require('rethinkdb');
 
 const server = new Hapi.Server({
@@ -15,11 +14,15 @@ server.connection({ port: 4000 });
 
 server.register(require('vision'), (err) => {
 
-    Hoek.assert(!err, err);
+    if (err) {
+        throw err;
+    }
 
     const setup = function (err, conn) {
 
-        Hoek.assert(!err, err);
+        if (err) {
+            throw err;
+        }
 
         // Database
 
@@ -131,10 +134,14 @@ server.register(require('vision'), (err) => {
             }
         });
 
-        Hoek.assert(!err, err);
+        if (err) {
+            throw err;
+        }
         server.start((err) => {
 
-            Hoek.assert(!err, err);
+            if (err) {
+                throw err;
+            }
             console.log('Server started at: ' + server.info.uri);
         });
     };

@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Hoek = require('hoek');
 
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
@@ -50,10 +49,14 @@ server.register({
     }
 }, (err) => {
 
-    Hoek.assert(!err, err);
+    if (err) {
+        throw err;
+    }
     server.start((err) => {
 
-        Hoek.assert(!err, err);
+        if (err) {
+            throw err;
+        }
         server.log(['my-log-tag'], 'Wohoo, the server has started!');
     });
 });

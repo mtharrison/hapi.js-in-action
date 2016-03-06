@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Hoek = require('hoek');
 
 const server = new Hapi.Server({
     debug: {
@@ -19,10 +18,14 @@ server.register([
     { register: require('./plugins/receive') }
 ], (err) => {
 
-    Hoek.assert(!err, err);
+    if (err) {
+        throw err;
+    }
     server.start((err) => {
 
-        Hoek.assert(!err, err);
+        if (err) {
+            throw err;
+        }
         console.log('Server started at: ' + server.info.uri);
     });
 });

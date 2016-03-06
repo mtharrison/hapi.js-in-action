@@ -14,7 +14,6 @@
     "glue": "3.x.x",
     "handlebars": "4.x.x",
     "hapi": "13.x.x",
-    "hoek": "3.x.x",
     "joi": "8.x.x",
     "rethinkdb": "2.x.x",
     "vision": "4.x.x"

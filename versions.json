@@ -25,9 +25,6 @@
       "sqlite3": [
         "^3.0.4"
       ],
-      "bcrypt": [
-        "^0.8.0"
-      ],
       "hapi-auth-bearer-token": [
         "4.x.x"
       ]
@@ -133,9 +130,6 @@
       ],
       "hapi": [
         "13.x.x"
-      ],
-      "hoek": [
-        "3.x.x"
       ],
       "joi": [
         "8.x.x"
@@ -257,9 +251,6 @@
       "good-console": [
         "5.x.x"
       ],
-      "hoek": [
-        "3.x.x"
-      ],
       "good-file": [
         "5.x.x"
       ],
@@ -303,9 +294,6 @@
     "sqlite3": [
       "^3.0.4"
     ],
-    "bcrypt": [
-      "^0.8.0"
-    ],
     "hapi-auth-bearer-token": [
       "4.x.x"
     ],
@@ -338,9 +326,6 @@
     ],
     "joi": [
       "8.x.x"
-    ],
-    "hoek": [
-      "3.x.x"
     ],
     "rethinkdb": [
       "2.x.x"

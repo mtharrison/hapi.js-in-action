@@ -2,7 +2,6 @@
 
 const Confidence = require('confidence');
 const Glue = require('glue');
-const Hoek = require('hoek');
 
 const manifest = new Confidence.Store(require('./config')).get('/', {
     env: process.env.NODE_ENV
@@ -18,10 +17,14 @@ Glue.compose(manifest, options, (err, server) => {
         console.log('homepage has been viewed %d times', views);
     }, 1000);
 
-    Hoek.assert(!err, err);
+    if (err) {
+        throw err;
+    }
     server.start((err) => {
 
-        Hoek.assert(!err, err);
+        if (err) {
+            throw err;
+        }
         console.log('Server started at: ' + server.info.uri);
     });
 });
