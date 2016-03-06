@@ -48,6 +48,7 @@ experiment('Chapter 11', () => {
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
+                    expect(err).to.not.exist();
                     expect(getStreamBuffer(stderr)).to.include('Debug: my-log-tag')
                         .and.to.include('Wohoo, the server has started!')
                         .and.to.include('Debug: my-request-tag')
@@ -68,6 +69,7 @@ experiment('Chapter 11', () => {
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
+                    expect(err).to.not.exist();
                     expect(getStreamBuffer(stdout)).to.include('[log,my-log-tag], data: Wohoo, the server has started!')
                         .and.to.include('[request,my-request-tag], data: Got a request');
 
@@ -95,12 +97,16 @@ experiment('Chapter 11', () => {
 
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
+                    expect(err).to.not.exist();
+
                     setTimeout(() => {
 
                         expect(Fs.readFileSync(debug).toString().split('\n').length).to.equal(4);
                         expect(Fs.readFileSync(error).toString().split('\n').length).to.equal(1);
 
                         Wreck.get('http://localhost:4000/error', (err, res, payload) => {
+
+                            expect(err).to.not.exist();
 
                             setTimeout(() => {
 
@@ -121,6 +127,10 @@ experiment('Chapter 11', () => {
 
             setup('11.2.1', (err, child, stdout, stderr) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -139,6 +149,10 @@ experiment('Chapter 11', () => {
         test('11.2.2', (done) => {
 
             setup('11.2.2', (err, child, stdout, stderr) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/docs', (err, res, payload) => {
 
@@ -159,6 +173,10 @@ experiment('Chapter 11', () => {
 
             setup('11.4.4', (err, child, stdout, stderr, fpath) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 setTimeout(() => {
 
                     expect(JSON.stringify(Fs.readdirSync(fpath))).to.include('.heapsnapshot');
@@ -170,6 +188,10 @@ experiment('Chapter 11', () => {
         test('11.4.5', (done) => {
 
             setup('11.4.5', (err, child, stdout, stderr, fpath) => {
+
+                if (err) {
+                    throw err;
+                }
 
                 Wreck.get('http://localhost:4000/debug/console', (err, res, payload) => {
 
@@ -188,6 +210,10 @@ experiment('Chapter 11', () => {
 
             setup('11.6.4', (err, child, stdout, stderr, fpath) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
                     expect(err).to.not.exist();
@@ -196,7 +222,7 @@ experiment('Chapter 11', () => {
                     Wreck.get('https://localhost:4001/', (err, res, payload) => {
 
                         expect(err).to.exist();
-                        expect(err.message).to.equal('Client request error: self signed certificate')
+                        expect(err.message).to.equal('Client request error: self signed certificate');
 
                         Wreck.get('https://localhost:4001/', { rejectUnauthorized: false }, (err, res, payload) => {
 
@@ -214,11 +240,15 @@ experiment('Chapter 11', () => {
 
             setup('11.6.5', (err, child, stdout, stderr, fpath) => {
 
+                if (err) {
+                    throw err;
+                }
+
                 Wreck.get('http://localhost:4000/', (err, res, payload) => {
 
                     expect(err).to.not.exist();
                     expect(res.statusCode).to.equal(302);
-                    expect(res.headers['location']).to.equal('https://localhost:4000/');
+                    expect(res.headers.location).to.equal('https://localhost:4000/');
                     expect(res.headers['strict-transport-security']).to.equal('max-age=15768000');
 
                     cleanup(child, done);
