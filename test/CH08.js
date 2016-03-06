@@ -56,6 +56,7 @@ experiment('Chapter 8', () => {
 
                     expect(err).to.not.exist();
                     expect(res.statusCode).to.equal(200);
+                    expect(res.headers.etag).to.equal('"4a78cc14b09008bcdbed3be01178c2452f7ae177"');
                     expect(res.headers['content-type']).to.include('image/png');
                     expect(res.headers['cache-control']).to.equal('max-age=86400, must-revalidate, private');
                     cleanup(child, done);
@@ -66,26 +67,6 @@ experiment('Chapter 8', () => {
         test('8.1.3', (done) => {
 
             setup('8.1.3', (err, child, stdout, stderr) => {
-
-                if (err) {
-                    throw err;
-                }
-
-                Wreck.get('http://localhost:4000/image.png', (err, res, payload) => {
-
-                    expect(err).to.not.exist();
-                    expect(res.statusCode).to.equal(200);
-                    expect(res.headers.etag).to.equal('"4a78cc14b09008bcdbed3be01178c2452f7ae177"');
-                    expect(res.headers['content-type']).to.include('image/png');
-                    expect(res.headers['cache-control']).to.equal('max-age=86400, must-revalidate, private');
-                    cleanup(child, done);
-                });
-            });
-        });
-
-        test('8.1.4', (done) => {
-
-            setup('8.1.4', (err, child, stdout, stderr) => {
 
                 if (err) {
                     throw err;

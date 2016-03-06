@@ -1,17 +1,40 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Path = require('path');
+const Crypto = require('crypto');
 
 const server = new Hapi.Server();
 server.connection({ port: 4000 });
 
 server.route({
     method: 'GET',
-    path: '/image.png',
+    path: '/users',
     handler: function (request, reply) {
 
-        reply.file(Path.join(__dirname, 'image.png'));
+        const users = [
+            {
+                gender: 'female',
+                name: {
+                    title: 'ms',
+                    first: 'manuela',
+                    last: 'velasco'
+                },
+                location: {
+                    street: '1969 calle de alberto aguilera',
+                    city: 'la coruña',
+                    state: 'asturias',
+                    zip: '56298'
+                }
+            }
+        ];
+
+        const hash = Crypto.createHash('sha1');
+        hash.update(JSON.stringify(users));
+        const etag = hash.digest('base64');
+
+        const response = reply(users);
+
+        response.etag(etag);
     },
     config: {
         cache: {
@@ -21,17 +44,10 @@ server.route({
     }
 });
 
-server.register(require('inert'), (err) => {
+server.start((err) => {
 
     if (err) {
         throw err;
     }
-
-    server.start((err) => {
-
-        if (err) {
-            throw err;
-        }
-        console.log('Server listening at:', server.info.uri);
-    });
+    console.log('Server running at:', server.info.uri);
 });
