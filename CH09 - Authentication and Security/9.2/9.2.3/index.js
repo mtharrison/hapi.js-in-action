@@ -13,10 +13,10 @@ server.register([
             isSecure: false,
             clientId: 'Your Facebook App ID goes here',
             clientSecret: 'Your Facebook App Secret goes here',
-            password: 'hapi-auth-cookie'
+            password: '39d2f1909b5d5b3d844f53edb2bd3148'
         },
         cookies: {
-            password: 'secret',
+            password: '29722a61c66192738abac340662f1b07',
             cookie: 'session',
             isSecure: false
         }

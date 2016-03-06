@@ -17,7 +17,7 @@ exports.register = function (server, options, next) {
 
                 if (request.auth.isAuthenticated) {
                     const credentials = request.auth.credentials;
-                    request.auth.session.set({ account: credentials });
+                    request.cookieAuth.set({ account: credentials });
                 }
 
                 return reply.redirect('/');
@@ -32,7 +32,7 @@ exports.register = function (server, options, next) {
             },
             handler: function (request, reply) {
 
-                request.auth.session.clear();
+                request.cookieAuth.clear();
                 reply.redirect('/');
             }
         });
