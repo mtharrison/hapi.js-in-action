@@ -28,4 +28,6 @@ exports.register = function (server, options, next) {
     next();
 };
 
-exports.register.attributes = require('./package');
+exports.register.attributes = {
+    pkg: require('./package')
+};

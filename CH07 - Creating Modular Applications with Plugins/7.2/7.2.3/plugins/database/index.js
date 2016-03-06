@@ -4,8 +4,6 @@ const R = require('rethinkdb');
 
 exports.register = function (server, options, next) {
 
-    let conn;
-
     server.method({
         name: 'database.getRecent',
         method: function (callback) {
@@ -13,7 +11,7 @@ exports.register = function (server, options, next) {
             R
             .table('pings')
             .orderBy(R.desc('timestamp'))
-            .run(conn, (err, cursor) => {
+            .run(server.app.db, (err, cursor) => {
 
                 if (err) {
                     throw err;
@@ -32,7 +30,7 @@ exports.register = function (server, options, next) {
             .table('pings')
             .filter({ code: code })
             .orderBy(R.desc('timestamp'))
-            .run(conn, (err, cursor) => {
+            .run(server.app.db, (err, cursor) => {
 
                 if (err) {
                     throw err;
@@ -50,7 +48,7 @@ exports.register = function (server, options, next) {
             R
             .table('pings')
             .insert(payload)
-            .run(conn, (err) => {
+            .run(server.app.db, (err) => {
 
                 if (err) {
                     throw err;
@@ -61,15 +59,17 @@ exports.register = function (server, options, next) {
         }
     });
 
-    R.connect({ db: 'pingoo' }, (err, connection) => {
+    R.connect({ db: 'pingoo' }, (err, conn) => {
 
         if (err) {
             return next(err);
         }
 
-        conn = connection;
+        server.app.db = conn;
         next();
     });
 };
 
-exports.register.attributes = require('./package');
+exports.register.attributes = {
+    pkg: require('./package')
+};
