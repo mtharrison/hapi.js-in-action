@@ -51,8 +51,8 @@
       "wreck": [
         "7.x.x"
       ],
-      "yar": [
-        "7.x.x"
+      "hapi-auth-cookie": [
+        "6.x.x"
       ]
     },
     "dev": {}
@@ -312,8 +312,8 @@
     "wreck": [
       "7.x.x"
     ],
-    "yar": [
-      "7.x.x"
+    "hapi-auth-cookie": [
+      "6.x.x"
     ],
     "accept": [
       "2.x.x"
@@ -353,9 +353,6 @@
     ],
     "bell": [
       "7.x.x"
-    ],
-    "hapi-auth-cookie": [
-      "6.x.x"
     ],
     "crumb": [
       "6.x.x"

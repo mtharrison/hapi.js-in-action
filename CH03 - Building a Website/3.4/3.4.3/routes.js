@@ -15,15 +15,10 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/login',
-    handler: Pages.login
+    handler: Pages.login,
 }, {
     method: 'POST',
     path: '/login',
-    config: {
-        payload: {
-            output: 'data'
-        }
-    },
     handler: Actions.login
 }, {
     method: 'GET',

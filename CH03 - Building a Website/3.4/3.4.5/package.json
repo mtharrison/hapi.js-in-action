@@ -15,6 +15,6 @@
     "inert": "3.x.x",
     "vision": "4.x.x",
     "wreck": "7.x.x",
-    "yar": "7.x.x"
+    "hapi-auth-cookie": "6.x.x"
   }
 }

@@ -14,15 +14,7 @@ server.register([
     require('dindin-api'),
     require('inert'),
     require('vision'),
-    {
-        register: require('yar'),
-        options: {
-            cookieOptions: {
-                password: 'a9e084b6b48f7d6ea90e2ddc2f62cb09',
-                isSecure: false
-            }
-        }
-    }
+    require('hapi-auth-cookie')
 ], (err) => {
 
     if (err) {
@@ -40,6 +32,11 @@ server.register([
         isCached: false,
         helpersPath: './views/helpers',
         partialsPath: './views/partials'
+    });
+
+    server.auth.strategy('session', 'cookie', 'try', {
+        password: '70fe4f26ff9bcb5aab079875cadeec09',
+        isSecure: false
     });
 
     server.route(require('./routes'));

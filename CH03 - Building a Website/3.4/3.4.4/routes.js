@@ -19,25 +19,25 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/create',
-    handler: Pages.createRecipe
+    handler: Pages.createRecipe,
+    config: {
+        auth: {
+            mode: 'required'
+        }
+    }
 }, {
     method: 'POST',
     path: '/login',
-    config: {
-        payload: {
-            output: 'data'
-        }
-    },
     handler: Actions.login
 }, {
     method: 'POST',
     path: '/create',
+    handler: Actions.createRecipe,
     config: {
-        payload: {
-            output: 'data'
+        auth: {
+            mode: 'required'
         }
-    },
-    handler: Actions.createRecipe
+    }
 }, {
     method: 'GET',
     path: '/{param*}',

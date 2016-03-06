@@ -19,8 +19,7 @@ exports.login = function (request, reply) {
             return reply.redirect(this.webBaseUrl + '/login');
         }
 
-        request.yar.set('user', {
-            loggedIn: true,
+        request.cookieAuth.set({
             token: payload.token
         });
         reply.redirect(this.webBaseUrl);
@@ -30,7 +29,7 @@ exports.login = function (request, reply) {
 exports.createRecipe = function (request, reply) {
 
     const apiUrl = this.apiBaseUrl + '/recipes';
-    const token = request.yar.get('user').token;
+    const token = request.auth.credentials.token;
 
     Wreck.post(apiUrl, {
         payload: JSON.stringify(request.payload),

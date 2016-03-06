@@ -11,7 +11,7 @@
 <body>
     <header>
         <a href="/" id="logo"><img alt="DinDin" src="/images/logo.png"></a>
-        {{#if user.loggedIn}}
+        {{#if user}}
             <a class="header-button" href="/logout">Logout</a>
             <a class="header-button" href="/create">Create +</a>
         {{else}}
@@ -19,7 +19,7 @@
         {{/if}}
     </header>
 
-    {{{content}}}  
+    {{{content}}}
 
     <footer><p>&copy; 2015 DinDin</p></footer>
 </body>

@@ -197,7 +197,7 @@ experiment('Chapter 3', () => {
 
                         const options = {
                             headers: {
-                                cookie: res.headers['set-cookie']
+                                cookie: res.headers['set-cookie'][0].split(';')[0]
                             }
                         };
 
@@ -239,7 +239,7 @@ experiment('Chapter 3', () => {
 
                         const options = {
                             headers: {
-                                cookie: res.headers['set-cookie']
+                                cookie: res.headers['set-cookie'][0].split(';')[0]
                             },
                             payload: JSON.stringify({
                                 name: 'Web test',
@@ -293,7 +293,7 @@ experiment('Chapter 3', () => {
 
                     const options = {
                         headers: {
-                            cookie: res.headers['set-cookie']
+                            cookie: res.headers['set-cookie'][0].split(';')[0]
                         }
                     };
 

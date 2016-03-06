@@ -14,7 +14,7 @@ exports.home = function (request, reply) {
 
         reply.view('index', {
             recipes: payload,
-            user: request.yar.get('user')
+            user: request.auth.credentials
         });
     });
 };
@@ -31,7 +31,7 @@ exports.viewRecipe = function (request, reply) {
 
         reply.view('recipe', {
             recipe: payload,
-            user: request.yar.get('user')
+            user: request.auth.credentials
         });
     });
 };
@@ -39,7 +39,7 @@ exports.viewRecipe = function (request, reply) {
 exports.createRecipe = function (request, reply) {
 
     reply.view('create', {
-        user: request.yar.get('user')
+        user: request.auth.credentials
     });
 };
 

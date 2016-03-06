@@ -19,7 +19,7 @@ exports.login = function (request, reply) {
             return reply.redirect(this.webBaseUrl + '/login');
         }
 
-        request.yar.set('user', {
+        request.cookieAuth.set({
             loggedIn: true,
             token: payload.token
         });
