@@ -19,7 +19,7 @@ server.register(require('inert'), (err) => {
         handler: function (request, reply) {
 
             const upload = request.payload.upload;
-            const uploadName = request.payload.upload.hapi.filename;
+            const uploadName = Path.basename(request.payload.upload.hapi.filename);
             const destination = Path.join(__dirname, 'uploads', uploadName);
 
             upload.pipe(Fs.createWriteStream(destination));

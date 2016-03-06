@@ -18,7 +18,7 @@ server.register(require('inert'), (err) => {
         path: '/upload',
         handler: function (request, reply) {
 
-            const targetPath = Path.join(__dirname, request.payload.upload.filename);
+            const targetPath = Path.join(__dirname, Path.basename(request.payload.upload.filename));
             const tempPath = request.payload.upload.path;
 
             Fs.rename(tempPath, targetPath, (err) => {
