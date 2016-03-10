@@ -14,10 +14,7 @@ module.exports = [{
     method: 'POST',
     path: '/api/recipes',
     config: {
-        auth: 'api',
-        payload: {
-            output: 'data'
-        }
+        auth: 'api'
     },
     handler: Recipes.create
 }];
