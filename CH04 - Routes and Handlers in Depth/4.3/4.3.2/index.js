@@ -7,12 +7,7 @@ server.connection({ port: 4000 });
 
 const mean = function (values, next) {
 
-    let sum = 0;
-
-    for (let i = 0; i < values.length; ++i) {
-        sum += values[i];
-    }
-
+    const sum = values.reduce((a, b) => a + b);
     return next(null, sum / values.length);
 };
 

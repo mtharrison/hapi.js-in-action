@@ -11,14 +11,9 @@ server.route({
     handler: function (request, reply) {
 
         const values = request.payload.values;
-        let sum = 0;
+        const sum = values.reduce((a, b) => a + b);
 
-        for (let i = 0; i < values.length; ++i) {
-            sum += values[i];
-        }
-
-        const mean = sum / values.length;
-        reply({ mean: mean });
+        reply({ mean: sum / values.length });
     }
 });
 
