@@ -12,6 +12,6 @@
     "code": "2.x.x",
     "hapi": "13.x.x",
     "inert": "3.x.x",
-    "proxyquire": "^1.7.3"
+    "proxyquire": "1.7.x"
   }
 }

@@ -10,7 +10,7 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "crumb": "6.x.x",
-    "handlebars": "4.x.x",
+    "handlebars": "4.0.x",
     "hapi": "13.x.x",
     "hapi-auth-cookie": "6.x.x",
     "vision": "4.x.x"

@@ -10,11 +10,11 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "boom": "3.x.x",
-    "handlebars": "4.x.x",
+    "handlebars": "4.0.x",
     "glue": "3.x.x",
     "hapi": "13.x.x",
     "joi": "8.x.x",
-    "rethinkdb": "2.x.x",
+    "rethinkdb": "2.2.x",
     "vision": "4.x.x"
   }
 }

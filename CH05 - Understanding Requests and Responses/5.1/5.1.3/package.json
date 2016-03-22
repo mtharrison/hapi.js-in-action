@@ -11,6 +11,6 @@
   "dependencies": {
     "boom": "3.x.x",
     "hapi": "13.x.x",
-    "netmask": "^1.0.5"
+    "netmask": "1.0.x"
   }
 }

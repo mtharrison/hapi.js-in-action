@@ -12,7 +12,7 @@
     "code": "2.x.x",
     "hapi": "13.x.x",
     "joi": "8.x.x",
-    "mongodb": "^2.0.48",
-    "sinon": "^1.17.3"
+    "mongodb": "2.1.x",
+    "sinon": "1.17.x"
   }
 }

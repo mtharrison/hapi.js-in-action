@@ -13,6 +13,6 @@
     "hapi": "13.x.x",
     "inert": "3.x.x",
     "joi": "8.x.x",
-    "mongodb": "^2.0.48"
+    "mongodb": "2.1.x"
   }
 }
