@@ -17,7 +17,8 @@
     "lint-ch10": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH10 - Testing with Lab'",
     "lint-ch11": "eslint -c .eslintrc --ignore-pattern **/node_modules 'CH11 - hapi in Production'",
     "lint-tests": "eslint -c .eslintrc --ignore-pattern **/node_modules 'test'",
-    "test": "lab -m 60000 && npm run lint;",
+    "test-ci": "npm run lint && npm test",
+    "test": "lab -m 60000",
     "version-checker": "node scripts/version-checker"
   },
   "repository": {
