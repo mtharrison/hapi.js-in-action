@@ -131,6 +131,9 @@ experiment('Chapter 8', () => {
                 setTimeout(() => {
 
                     const lines = getStreamBuffer(stdout).split('\n');
+
+                    console.log(lines);
+
                     expect(lines[0]).to.not.include('CACHED').and.to.not.include('STALE');
                     expect(lines[1]).to.include('CACHED').and.to.not.include('STALE');
                     expect(lines[2]).to.include('CACHED').and.to.include('STALE');
