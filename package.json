@@ -41,7 +41,7 @@
     "redis": "^2.4.2",
     "form-data": "^0.2.0",
     "glob": "7.x.x",
-    "items": "2.x.x",
+    "items": "2.1.0",
     "lodash": "4.x.x",
     "rethinkdb": "2.3.x",
     "wreck": "7.x.x"
