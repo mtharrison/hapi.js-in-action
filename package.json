@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/mtharrison/hapi.js-in-action#readme",
   "devDependencies": {
-    "code": "2.x.x",
+    "code": "3.0.2",
     "dotenv": "2.x.x",
     "eslint": "2.x.x",
     "eslint-config-hapi": "9.x.x",
