@@ -34,7 +34,7 @@
   "devDependencies": {
     "code": "2.x.x",
     "dotenv": "2.x.x",
-    "eslint": "2.x.x",
+    "eslint": "3.3.1",
     "eslint-config-hapi": "9.x.x",
     "eslint-plugin-hapi": "4.x.x",
     "lab": "10.x.x",
