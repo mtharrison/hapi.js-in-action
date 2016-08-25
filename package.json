@@ -40,7 +40,7 @@
     "lab": "10.x.x",
     "redis": "^2.4.2",
     "form-data": "^0.2.0",
-    "glob": "7.x.x",
+    "glob": "7.0.6",
     "items": "2.x.x",
     "lodash": "4.x.x",
     "rethinkdb": "2.3.x",
