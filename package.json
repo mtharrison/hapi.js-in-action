@@ -43,7 +43,7 @@
     "glob": "7.x.x",
     "items": "2.x.x",
     "lodash": "4.x.x",
-    "rethinkdb": "2.3.x",
+    "rethinkdb": "2.3.3",
     "wreck": "7.x.x"
   }
 }
