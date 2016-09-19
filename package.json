@@ -42,7 +42,7 @@
     "form-data": "^0.2.0",
     "glob": "7.x.x",
     "items": "2.x.x",
-    "lodash": "4.x.x",
+    "lodash": "4.16.0",
     "rethinkdb": "2.3.x",
     "wreck": "7.x.x"
   }
