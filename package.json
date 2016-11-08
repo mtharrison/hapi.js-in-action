@@ -39,7 +39,7 @@
     "eslint-plugin-hapi": "4.x.x",
     "lab": "10.x.x",
     "redis": "^2.4.2",
-    "form-data": "^0.2.0",
+    "form-data": "^2.1.2",
     "glob": "7.x.x",
     "items": "2.x.x",
     "lodash": "4.x.x",
