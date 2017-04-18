@@ -4,7 +4,7 @@ const Wreck = require('wreck');
 
 const search = function (id, next) {
 
-    const baseUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch';
+    const baseUrl = 'http://api-beta.nytimes.com/svc/search/v2/articlesearch';
     const apiKey = process.env.NYT_ARTICLE_API_KEY || 'YOUR_API_KEY';
     const query = 'Node.js';
 

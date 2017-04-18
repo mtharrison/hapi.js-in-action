@@ -19,7 +19,7 @@ server.connection({ port: 4000 });
 
 const searchReviews = function (query, callback) {
 
-    const baseUrl = 'http://api.nytimes.com/svc/movies/v2/reviews/search.json';
+    const baseUrl = 'http://api-beta.nytimes.com/svc/movies/v2/reviews/search.json';
     const queryObj = {
         'api-key': process.env.NYT_MOVIE_API_KEY || 'YOUR_API_KEY',
         query: query
