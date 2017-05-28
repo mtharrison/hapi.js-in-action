@@ -44,6 +44,6 @@
     "items": "2.x.x",
     "lodash": "4.x.x",
     "rethinkdb": "2.3.x",
-    "wreck": "7.x.x"
+    "wreck": "12.2.2"
   }
 }
